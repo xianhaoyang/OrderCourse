@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  XHWantOrderCourseController.h
 //  OrderCourse
 //
 //  Created by 杨先豪 on 16/9/2.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface XHWantOrderCourseController : UIViewController
 
 @end
-

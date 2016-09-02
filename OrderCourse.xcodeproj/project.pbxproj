@@ -9,12 +9,15 @@
 /* Begin PBXBuildFile section */
 		197350131D79BE0A00524F9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 197350121D79BE0A00524F9A /* main.m */; };
 		197350161D79BE0A00524F9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 197350151D79BE0A00524F9A /* AppDelegate.m */; };
-		197350191D79BE0A00524F9A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 197350181D79BE0A00524F9A /* ViewController.m */; };
-		1973501C1D79BE0A00524F9A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1973501A1D79BE0A00524F9A /* Main.storyboard */; };
 		1973501E1D79BE0A00524F9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1973501D1D79BE0A00524F9A /* Assets.xcassets */; };
 		197350211D79BE0A00524F9A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1973501F1D79BE0A00524F9A /* LaunchScreen.storyboard */; };
 		1973502C1D79BE0A00524F9A /* OrderCourseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1973502B1D79BE0A00524F9A /* OrderCourseTests.m */; };
 		197350371D79BE0A00524F9A /* OrderCourseUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 197350361D79BE0A00524F9A /* OrderCourseUITests.m */; };
+		197350511D79C17F00524F9A /* XHWantOrderCourseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1973504F1D79C17F00524F9A /* XHWantOrderCourseController.m */; };
+		197350521D79C17F00524F9A /* XHWantOrderCourseController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 197350501D79C17F00524F9A /* XHWantOrderCourseController.xib */; };
+		197350561D79C19C00524F9A /* XHOrderRecordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 197350541D79C19C00524F9A /* XHOrderRecordController.m */; };
+		197350571D79C19C00524F9A /* XHOrderRecordController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 197350551D79C19C00524F9A /* XHOrderRecordController.xib */; };
+		1973505E1D79C4EF00524F9A /* XHNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1973505D1D79C4EF00524F9A /* XHNavigationController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,11 +40,8 @@
 /* Begin PBXFileReference section */
 		1973500E1D79BE0900524F9A /* OrderCourse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrderCourse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		197350121D79BE0A00524F9A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		197350141D79BE0A00524F9A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		197350151D79BE0A00524F9A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		197350171D79BE0A00524F9A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		197350181D79BE0A00524F9A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		1973501B1D79BE0A00524F9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		197350141D79BE0A00524F9A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../AppDelegate.h; sourceTree = "<group>"; };
+		197350151D79BE0A00524F9A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = ../AppDelegate.m; sourceTree = "<group>"; };
 		1973501D1D79BE0A00524F9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		197350201D79BE0A00524F9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		197350221D79BE0A00524F9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -51,6 +51,14 @@
 		197350321D79BE0A00524F9A /* OrderCourseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OrderCourseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		197350361D79BE0A00524F9A /* OrderCourseUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderCourseUITests.m; sourceTree = "<group>"; };
 		197350381D79BE0A00524F9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1973504E1D79C17F00524F9A /* XHWantOrderCourseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHWantOrderCourseController.h; sourceTree = "<group>"; };
+		1973504F1D79C17F00524F9A /* XHWantOrderCourseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHWantOrderCourseController.m; sourceTree = "<group>"; };
+		197350501D79C17F00524F9A /* XHWantOrderCourseController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XHWantOrderCourseController.xib; sourceTree = "<group>"; };
+		197350531D79C19C00524F9A /* XHOrderRecordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHOrderRecordController.h; sourceTree = "<group>"; };
+		197350541D79C19C00524F9A /* XHOrderRecordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHOrderRecordController.m; sourceTree = "<group>"; };
+		197350551D79C19C00524F9A /* XHOrderRecordController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XHOrderRecordController.xib; sourceTree = "<group>"; };
+		1973505C1D79C4EF00524F9A /* XHNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHNavigationController.h; sourceTree = "<group>"; };
+		1973505D1D79C4EF00524F9A /* XHNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHNavigationController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,14 +109,11 @@
 		197350101D79BE0A00524F9A /* OrderCourse */ = {
 			isa = PBXGroup;
 			children = (
-				197350141D79BE0A00524F9A /* AppDelegate.h */,
-				197350151D79BE0A00524F9A /* AppDelegate.m */,
-				197350171D79BE0A00524F9A /* ViewController.h */,
-				197350181D79BE0A00524F9A /* ViewController.m */,
-				1973501A1D79BE0A00524F9A /* Main.storyboard */,
-				1973501D1D79BE0A00524F9A /* Assets.xcassets */,
-				1973501F1D79BE0A00524F9A /* LaunchScreen.storyboard */,
-				197350221D79BE0A00524F9A /* Info.plist */,
+				197350481D79BF6700524F9A /* WantOrder */,
+				197350441D79BF6700524F9A /* OrderRecord */,
+				1973504C1D79BF7F00524F9A /* Lib */,
+				1973504D1D79BF7F00524F9A /* Other */,
+				197350581D79C4C800524F9A /* Main */,
 				197350111D79BE0A00524F9A /* Supporting Files */,
 			);
 			path = OrderCourse;
@@ -117,6 +122,9 @@
 		197350111D79BE0A00524F9A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1973501D1D79BE0A00524F9A /* Assets.xcassets */,
+				1973501F1D79BE0A00524F9A /* LaunchScreen.storyboard */,
+				197350221D79BE0A00524F9A /* Info.plist */,
 				197350121D79BE0A00524F9A /* main.m */,
 			);
 			name = "Supporting Files";
@@ -138,6 +146,123 @@
 				197350381D79BE0A00524F9A /* Info.plist */,
 			);
 			path = OrderCourseUITests;
+			sourceTree = "<group>";
+		};
+		197350441D79BF6700524F9A /* OrderRecord */ = {
+			isa = PBXGroup;
+			children = (
+				197350451D79BF6700524F9A /* Controller */,
+				197350461D79BF6700524F9A /* Model */,
+				197350471D79BF6700524F9A /* View */,
+			);
+			path = OrderRecord;
+			sourceTree = "<group>";
+		};
+		197350451D79BF6700524F9A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				197350531D79C19C00524F9A /* XHOrderRecordController.h */,
+				197350541D79C19C00524F9A /* XHOrderRecordController.m */,
+				197350551D79C19C00524F9A /* XHOrderRecordController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		197350461D79BF6700524F9A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		197350471D79BF6700524F9A /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		197350481D79BF6700524F9A /* WantOrder */ = {
+			isa = PBXGroup;
+			children = (
+				197350491D79BF6700524F9A /* Controller */,
+				1973504A1D79BF6700524F9A /* Model */,
+				1973504B1D79BF6700524F9A /* View */,
+			);
+			path = WantOrder;
+			sourceTree = "<group>";
+		};
+		197350491D79BF6700524F9A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1973504E1D79C17F00524F9A /* XHWantOrderCourseController.h */,
+				1973504F1D79C17F00524F9A /* XHWantOrderCourseController.m */,
+				197350501D79C17F00524F9A /* XHWantOrderCourseController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1973504A1D79BF6700524F9A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1973504B1D79BF6700524F9A /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1973504C1D79BF7F00524F9A /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		1973504D1D79BF7F00524F9A /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				197350141D79BE0A00524F9A /* AppDelegate.h */,
+				197350151D79BE0A00524F9A /* AppDelegate.m */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		197350581D79C4C800524F9A /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				197350591D79C4C800524F9A /* Controller */,
+				1973505A1D79C4C800524F9A /* Model */,
+				1973505B1D79C4C800524F9A /* View */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		197350591D79C4C800524F9A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1973505C1D79C4EF00524F9A /* XHNavigationController.h */,
+				1973505D1D79C4EF00524F9A /* XHNavigationController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1973505A1D79C4C800524F9A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1973505B1D79C4C800524F9A /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,6 +327,7 @@
 		197350061D79BE0900524F9A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = XH;
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = yangxianhao;
 				TargetAttributes = {
@@ -246,9 +372,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				197350521D79C17F00524F9A /* XHWantOrderCourseController.xib in Resources */,
 				197350211D79BE0A00524F9A /* LaunchScreen.storyboard in Resources */,
 				1973501E1D79BE0A00524F9A /* Assets.xcassets in Resources */,
-				1973501C1D79BE0A00524F9A /* Main.storyboard in Resources */,
+				197350571D79C19C00524F9A /* XHOrderRecordController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,9 +400,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				197350191D79BE0A00524F9A /* ViewController.m in Sources */,
 				197350161D79BE0A00524F9A /* AppDelegate.m in Sources */,
+				1973505E1D79C4EF00524F9A /* XHNavigationController.m in Sources */,
 				197350131D79BE0A00524F9A /* main.m in Sources */,
+				197350511D79C17F00524F9A /* XHWantOrderCourseController.m in Sources */,
+				197350561D79C19C00524F9A /* XHOrderRecordController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,14 +440,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		1973501A1D79BE0A00524F9A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1973501B1D79BE0A00524F9A /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		1973501F1D79BE0A00524F9A /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -417,6 +538,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = OrderCourse/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xianhao.yang.OrderCourse;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -428,6 +550,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = OrderCourse/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xianhao.yang.OrderCourse;
 				PRODUCT_NAME = "$(TARGET_NAME)";
