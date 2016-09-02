@@ -26,12 +26,12 @@
     // 创建我要订课控制器
     XHWantOrderCourseController *orderController = [[XHWantOrderCourseController alloc] init];
     XHNavigationController *orderNavController = [[XHNavigationController alloc] initWithRootViewController:orderController];
-    orderController.view.backgroundColor = [UIColor yellowColor];
+//    orderController.view.backgroundColor = [UIColor yellowColor];
     orderController.title = @"我要订课";
     // 创建订课记录控制器
     XHOrderRecordController *recordController = [[XHOrderRecordController alloc] init];
     XHNavigationController *recordNavController = [[XHNavigationController alloc] initWithRootViewController:recordController];
-    recordController.view.backgroundColor = [UIColor greenColor];
+//    recordController.view.backgroundColor = [UIColor greenColor];
     recordController.title = @"订课记录";
     // 将两个主控制器添加到tabBarController中
     tabBarController.viewControllers = @[orderNavController, recordNavController];

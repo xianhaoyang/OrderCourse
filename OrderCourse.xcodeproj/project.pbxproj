@@ -18,6 +18,17 @@
 		197350561D79C19C00524F9A /* XHOrderRecordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 197350541D79C19C00524F9A /* XHOrderRecordController.m */; };
 		197350571D79C19C00524F9A /* XHOrderRecordController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 197350551D79C19C00524F9A /* XHOrderRecordController.xib */; };
 		1973505E1D79C4EF00524F9A /* XHNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1973505D1D79C4EF00524F9A /* XHNavigationController.m */; };
+		197350611D79D14900524F9A /* XHCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = 197350601D79D14900524F9A /* XHCourse.m */; };
+		197350781D79D7E900524F9A /* MJExtensionConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 197350651D79D7E900524F9A /* MJExtensionConst.m */; };
+		197350791D79D7E900524F9A /* MJFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = 197350671D79D7E900524F9A /* MJFoundation.m */; };
+		1973507A1D79D7E900524F9A /* MJProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 197350691D79D7E900524F9A /* MJProperty.m */; };
+		1973507B1D79D7E900524F9A /* MJPropertyKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 1973506B1D79D7E900524F9A /* MJPropertyKey.m */; };
+		1973507C1D79D7E900524F9A /* MJPropertyType.m in Sources */ = {isa = PBXBuildFile; fileRef = 1973506D1D79D7E900524F9A /* MJPropertyType.m */; };
+		1973507D1D79D7E900524F9A /* NSObject+MJClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 1973506F1D79D7E900524F9A /* NSObject+MJClass.m */; };
+		1973507E1D79D7E900524F9A /* NSObject+MJCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 197350711D79D7E900524F9A /* NSObject+MJCoding.m */; };
+		1973507F1D79D7E900524F9A /* NSObject+MJKeyValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 197350731D79D7E900524F9A /* NSObject+MJKeyValue.m */; };
+		197350801D79D7E900524F9A /* NSObject+MJProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 197350751D79D7E900524F9A /* NSObject+MJProperty.m */; };
+		197350811D79D7E900524F9A /* NSString+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 197350771D79D7E900524F9A /* NSString+MJExtension.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +70,29 @@
 		197350551D79C19C00524F9A /* XHOrderRecordController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XHOrderRecordController.xib; sourceTree = "<group>"; };
 		1973505C1D79C4EF00524F9A /* XHNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHNavigationController.h; sourceTree = "<group>"; };
 		1973505D1D79C4EF00524F9A /* XHNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHNavigationController.m; sourceTree = "<group>"; };
+		1973505F1D79D14900524F9A /* XHCourse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHCourse.h; sourceTree = "<group>"; };
+		197350601D79D14900524F9A /* XHCourse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHCourse.m; sourceTree = "<group>"; };
+		197350631D79D7E900524F9A /* MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJExtension.h; sourceTree = "<group>"; };
+		197350641D79D7E900524F9A /* MJExtensionConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJExtensionConst.h; sourceTree = "<group>"; };
+		197350651D79D7E900524F9A /* MJExtensionConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJExtensionConst.m; sourceTree = "<group>"; };
+		197350661D79D7E900524F9A /* MJFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJFoundation.h; sourceTree = "<group>"; };
+		197350671D79D7E900524F9A /* MJFoundation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJFoundation.m; sourceTree = "<group>"; };
+		197350681D79D7E900524F9A /* MJProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJProperty.h; sourceTree = "<group>"; };
+		197350691D79D7E900524F9A /* MJProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJProperty.m; sourceTree = "<group>"; };
+		1973506A1D79D7E900524F9A /* MJPropertyKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPropertyKey.h; sourceTree = "<group>"; };
+		1973506B1D79D7E900524F9A /* MJPropertyKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPropertyKey.m; sourceTree = "<group>"; };
+		1973506C1D79D7E900524F9A /* MJPropertyType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPropertyType.h; sourceTree = "<group>"; };
+		1973506D1D79D7E900524F9A /* MJPropertyType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPropertyType.m; sourceTree = "<group>"; };
+		1973506E1D79D7E900524F9A /* NSObject+MJClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJClass.h"; sourceTree = "<group>"; };
+		1973506F1D79D7E900524F9A /* NSObject+MJClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJClass.m"; sourceTree = "<group>"; };
+		197350701D79D7E900524F9A /* NSObject+MJCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJCoding.h"; sourceTree = "<group>"; };
+		197350711D79D7E900524F9A /* NSObject+MJCoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJCoding.m"; sourceTree = "<group>"; };
+		197350721D79D7E900524F9A /* NSObject+MJKeyValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJKeyValue.h"; sourceTree = "<group>"; };
+		197350731D79D7E900524F9A /* NSObject+MJKeyValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJKeyValue.m"; sourceTree = "<group>"; };
+		197350741D79D7E900524F9A /* NSObject+MJProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJProperty.h"; sourceTree = "<group>"; };
+		197350751D79D7E900524F9A /* NSObject+MJProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJProperty.m"; sourceTree = "<group>"; };
+		197350761D79D7E900524F9A /* NSString+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MJExtension.h"; sourceTree = "<group>"; };
+		197350771D79D7E900524F9A /* NSString+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MJExtension.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,6 +239,8 @@
 		1973504A1D79BF6700524F9A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1973505F1D79D14900524F9A /* XHCourse.h */,
+				197350601D79D14900524F9A /* XHCourse.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -219,6 +255,7 @@
 		1973504C1D79BF7F00524F9A /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				197350621D79D7E900524F9A /* MJExtension */,
 			);
 			path = Lib;
 			sourceTree = "<group>";
@@ -263,6 +300,34 @@
 			children = (
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		197350621D79D7E900524F9A /* MJExtension */ = {
+			isa = PBXGroup;
+			children = (
+				197350631D79D7E900524F9A /* MJExtension.h */,
+				197350641D79D7E900524F9A /* MJExtensionConst.h */,
+				197350651D79D7E900524F9A /* MJExtensionConst.m */,
+				197350661D79D7E900524F9A /* MJFoundation.h */,
+				197350671D79D7E900524F9A /* MJFoundation.m */,
+				197350681D79D7E900524F9A /* MJProperty.h */,
+				197350691D79D7E900524F9A /* MJProperty.m */,
+				1973506A1D79D7E900524F9A /* MJPropertyKey.h */,
+				1973506B1D79D7E900524F9A /* MJPropertyKey.m */,
+				1973506C1D79D7E900524F9A /* MJPropertyType.h */,
+				1973506D1D79D7E900524F9A /* MJPropertyType.m */,
+				1973506E1D79D7E900524F9A /* NSObject+MJClass.h */,
+				1973506F1D79D7E900524F9A /* NSObject+MJClass.m */,
+				197350701D79D7E900524F9A /* NSObject+MJCoding.h */,
+				197350711D79D7E900524F9A /* NSObject+MJCoding.m */,
+				197350721D79D7E900524F9A /* NSObject+MJKeyValue.h */,
+				197350731D79D7E900524F9A /* NSObject+MJKeyValue.m */,
+				197350741D79D7E900524F9A /* NSObject+MJProperty.h */,
+				197350751D79D7E900524F9A /* NSObject+MJProperty.m */,
+				197350761D79D7E900524F9A /* NSString+MJExtension.h */,
+				197350771D79D7E900524F9A /* NSString+MJExtension.m */,
+			);
+			path = MJExtension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -402,9 +467,20 @@
 			files = (
 				197350161D79BE0A00524F9A /* AppDelegate.m in Sources */,
 				1973505E1D79C4EF00524F9A /* XHNavigationController.m in Sources */,
+				197350781D79D7E900524F9A /* MJExtensionConst.m in Sources */,
 				197350131D79BE0A00524F9A /* main.m in Sources */,
+				1973507A1D79D7E900524F9A /* MJProperty.m in Sources */,
+				1973507C1D79D7E900524F9A /* MJPropertyType.m in Sources */,
 				197350511D79C17F00524F9A /* XHWantOrderCourseController.m in Sources */,
+				197350801D79D7E900524F9A /* NSObject+MJProperty.m in Sources */,
+				197350811D79D7E900524F9A /* NSString+MJExtension.m in Sources */,
+				1973507E1D79D7E900524F9A /* NSObject+MJCoding.m in Sources */,
+				197350611D79D14900524F9A /* XHCourse.m in Sources */,
+				1973507B1D79D7E900524F9A /* MJPropertyKey.m in Sources */,
+				1973507F1D79D7E900524F9A /* NSObject+MJKeyValue.m in Sources */,
+				1973507D1D79D7E900524F9A /* NSObject+MJClass.m in Sources */,
 				197350561D79C19C00524F9A /* XHOrderRecordController.m in Sources */,
+				197350791D79D7E900524F9A /* MJFoundation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
