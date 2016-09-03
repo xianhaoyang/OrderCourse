@@ -10,13 +10,14 @@
 #import "MJExtension.h"
 #import "XHCourse.h"
 #import "XHConstant.h"
+#import "XHOrderCourseCell.h"
 
 #define kBtnW 80
 #define kBtnH 50
 #define kIncrease 10
-#define kTopMargin 84
+#define kTopMargin 74
 
-@interface XHWantOrderCourseController () <UIWebViewDelegate>
+@interface XHWantOrderCourseController () <UIWebViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UIButton *privateClassBtn;
 @property (weak, nonatomic) IBOutlet UIButton *solonClassBtn;
@@ -32,6 +33,8 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *applicationBtnW;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *applicationBtnH;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *btnTop;
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic, strong) UIButton *selectedBtn;
 
@@ -69,9 +72,37 @@
     [webView loadRequest:request];
 }
 
+#pragma mark - UIWebViewDelegate
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    NSLog(@"%s", __func__);
+    NSString *lJs = @"document.documentElement.innerHTML";//获取当前网页的html
+    NSString *jsCodeStr = [webView stringByEvaluatingJavaScriptFromString:lJs];
+    [self handleDataWithTargetStr:jsCodeStr];
+}
+
+- (void)handleDataWithTargetStr:(NSString *)targetStr
+{
+    NSString *str1 = @"var centerCourseListJson = JSON.parse('";
+    NSString *str2 = @"var othercenterCourseListJson = JSON.parse('[]');";
+    NSRange range1 = [targetStr rangeOfString:str1];
+    NSRange range2 = [targetStr rangeOfString:str2];
+    NSString *jsonStr = [targetStr substringWithRange:NSMakeRange(range1.location + range1.length, range2.location - (range1.location + range1.length))];
+    jsonStr = [jsonStr stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    jsonStr = [jsonStr substringToIndex:jsonStr.length - 3];
+    NSData *data = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
+    NSArray *dictList = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+    NSArray *courseList = [XHCourse mj_objectArrayWithKeyValuesArray:dictList];
+    NSLog(@"======%@", courseList);
+}
+
 #pragma mark - 初始化UI
 - (void)setupUI
 {
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.backgroundView = nil;
+    self.tableView.backgroundColor = [UIColor clearColor];
     // 按钮设置圆角
     [self cornerRadiusWithBtn:self.privateClassBtn];
     [self cornerRadiusWithBtn:self.solonClassBtn];
@@ -136,28 +167,21 @@
     }];
 }
 
-#pragma mark - UIWebViewDelegate
-- (void)webViewDidFinishLoad:(UIWebView *)webView
+#pragma mark - UITableViewDelegate & UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"%s", __func__);
-    NSString *lJs = @"document.documentElement.innerHTML";//获取当前网页的html
-    NSString *jsCodeStr = [webView stringByEvaluatingJavaScriptFromString:lJs];
-    [self handleDataWithTargetStr:jsCodeStr];
+    return 20;
 }
 
-- (void)handleDataWithTargetStr:(NSString *)targetStr
-{
-    NSString *str1 = @"var centerCourseListJson = JSON.parse('";
-    NSString *str2 = @"var othercenterCourseListJson = JSON.parse('[]');";
-    NSRange range1 = [targetStr rangeOfString:str1];
-    NSRange range2 = [targetStr rangeOfString:str2];
-    NSString *jsonStr = [targetStr substringWithRange:NSMakeRange(range1.location + range1.length, range2.location - (range1.location + range1.length))];
-    jsonStr = [jsonStr stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    jsonStr = [jsonStr substringToIndex:jsonStr.length - 3];
-    NSData *data = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
-    NSArray *dictList = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-    NSArray *courseList = [XHCourse mj_objectArrayWithKeyValuesArray:dictList];
-    NSLog(@"======%@", courseList);
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    XHOrderCourseCell *cell = [XHOrderCourseCell cellWithTableView:tableView];
+    return cell;
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 150;
+}
+
 
 @end

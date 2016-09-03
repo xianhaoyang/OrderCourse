@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		196E86D21D7AE59A00132BEA /* XHConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = 196E86D11D7AE59A00132BEA /* XHConstant.m */; };
+		196E86D61D7AFE9400132BEA /* XHOrderCourseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 196E86D41D7AFE9400132BEA /* XHOrderCourseCell.m */; };
+		196E86D71D7AFE9400132BEA /* XHOrderCourseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 196E86D51D7AFE9400132BEA /* XHOrderCourseCell.xib */; };
 		197350131D79BE0A00524F9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 197350121D79BE0A00524F9A /* main.m */; };
 		197350161D79BE0A00524F9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 197350151D79BE0A00524F9A /* AppDelegate.m */; };
 		1973501E1D79BE0A00524F9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1973501D1D79BE0A00524F9A /* Assets.xcassets */; };
@@ -52,6 +54,9 @@
 /* Begin PBXFileReference section */
 		196E86D01D7AE59A00132BEA /* XHConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHConstant.h; sourceTree = "<group>"; };
 		196E86D11D7AE59A00132BEA /* XHConstant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHConstant.m; sourceTree = "<group>"; };
+		196E86D31D7AFE9400132BEA /* XHOrderCourseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHOrderCourseCell.h; sourceTree = "<group>"; };
+		196E86D41D7AFE9400132BEA /* XHOrderCourseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHOrderCourseCell.m; sourceTree = "<group>"; };
+		196E86D51D7AFE9400132BEA /* XHOrderCourseCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XHOrderCourseCell.xib; sourceTree = "<group>"; };
 		1973500E1D79BE0900524F9A /* OrderCourse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrderCourse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		197350121D79BE0A00524F9A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		197350141D79BE0A00524F9A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../AppDelegate.h; sourceTree = "<group>"; };
@@ -251,6 +256,9 @@
 		1973504B1D79BF6700524F9A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				196E86D31D7AFE9400132BEA /* XHOrderCourseCell.h */,
+				196E86D41D7AFE9400132BEA /* XHOrderCourseCell.m */,
+				196E86D51D7AFE9400132BEA /* XHOrderCourseCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -444,6 +452,7 @@
 			files = (
 				197350521D79C17F00524F9A /* XHWantOrderCourseController.xib in Resources */,
 				197350211D79BE0A00524F9A /* LaunchScreen.storyboard in Resources */,
+				196E86D71D7AFE9400132BEA /* XHOrderCourseCell.xib in Resources */,
 				1973501E1D79BE0A00524F9A /* Assets.xcassets in Resources */,
 				197350571D79C19C00524F9A /* XHOrderRecordController.xib in Resources */,
 			);
@@ -477,6 +486,7 @@
 				197350131D79BE0A00524F9A /* main.m in Sources */,
 				1973507A1D79D7E900524F9A /* MJProperty.m in Sources */,
 				1973507C1D79D7E900524F9A /* MJPropertyType.m in Sources */,
+				196E86D61D7AFE9400132BEA /* XHOrderCourseCell.m in Sources */,
 				197350511D79C17F00524F9A /* XHWantOrderCourseController.m in Sources */,
 				197350801D79D7E900524F9A /* NSObject+MJProperty.m in Sources */,
 				197350811D79D7E900524F9A /* NSString+MJExtension.m in Sources */,
