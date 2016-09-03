@@ -172,6 +172,7 @@
     }];
     self.dataList = self.privateList;
     [self.tableView reloadData];
+    [self.tableView setContentOffset:CGPointZero animated:YES];
 }
 
 - (IBAction)clickSolonClassBtn {
@@ -190,6 +191,7 @@
     }];
     self.dataList = self.solonList;
     [self.tableView reloadData];
+    [self.tableView setContentOffset:CGPointZero animated:YES];
 }
 
 - (IBAction)clickAppClassBtn {
@@ -208,6 +210,7 @@
     }];
     self.dataList = self.appList;
     [self.tableView reloadData];
+    [self.tableView setContentOffset:CGPointZero animated:YES];
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource

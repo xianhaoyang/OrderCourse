@@ -76,7 +76,7 @@
 }
 
 - (IBAction)clickBtn {
-    
+    NSLog(@"%s--%@", __func__, self.btn.currentTitle);
 }
 
 + (instancetype)cellWithTableView:(UITableView *)tableView
