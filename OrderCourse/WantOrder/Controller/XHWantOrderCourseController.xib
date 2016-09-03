@@ -87,7 +87,7 @@
                     </constraints>
                 </imageView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="N1f-Mf-224">
-                    <rect key="frame" x="0.0" y="134" width="600" height="466"/>
+                    <rect key="frame" x="0.0" y="134" width="600" height="417"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
             </subviews>
@@ -101,7 +101,7 @@
                 <constraint firstItem="N1f-Mf-224" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="LfN-l7-pqD"/>
                 <constraint firstItem="ZpA-0M-80t" firstAttribute="trailing" secondItem="Ju1-qf-ryB" secondAttribute="trailing" id="NCy-70-wWx"/>
                 <constraint firstItem="Ne6-ab-VBF" firstAttribute="centerY" secondItem="bJO-CN-cz9" secondAttribute="centerY" id="QQg-B2-feO"/>
-                <constraint firstAttribute="bottom" secondItem="N1f-Mf-224" secondAttribute="bottom" id="R1u-AM-ycV"/>
+                <constraint firstAttribute="bottom" secondItem="N1f-Mf-224" secondAttribute="bottom" constant="49" id="R1u-AM-ycV"/>
                 <constraint firstItem="1oC-u2-YbH" firstAttribute="trailing" secondItem="Ne6-ab-VBF" secondAttribute="trailing" id="YsM-ks-3rr"/>
                 <constraint firstItem="Ju1-qf-ryB" firstAttribute="leading" secondItem="Ne6-ab-VBF" secondAttribute="trailing" constant="10" id="aTi-PD-qWy"/>
                 <constraint firstItem="Ju1-qf-ryB" firstAttribute="centerY" secondItem="Ne6-ab-VBF" secondAttribute="centerY" id="dp3-Ma-p8R"/>

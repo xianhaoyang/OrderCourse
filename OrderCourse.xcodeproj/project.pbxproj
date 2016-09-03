@@ -10,6 +10,10 @@
 		196E86D21D7AE59A00132BEA /* XHConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = 196E86D11D7AE59A00132BEA /* XHConstant.m */; };
 		196E86D61D7AFE9400132BEA /* XHOrderCourseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 196E86D41D7AFE9400132BEA /* XHOrderCourseCell.m */; };
 		196E86D71D7AFE9400132BEA /* XHOrderCourseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 196E86D51D7AFE9400132BEA /* XHOrderCourseCell.xib */; };
+		196E87051D7B266E00132BEA /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 196E86F41D7B266E00132BEA /* Foundation+Log.m */; };
+		196E87061D7B266E00132BEA /* NSDate+Calculations.m in Sources */ = {isa = PBXBuildFile; fileRef = 196E86F61D7B266E00132BEA /* NSDate+Calculations.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		196E870B1D7B266E00132BEA /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 196E87001D7B266E00132BEA /* UIView+AutoLayout.m */; };
+		196E870C1D7B266E00132BEA /* UIView+YXH.m in Sources */ = {isa = PBXBuildFile; fileRef = 196E87021D7B266E00132BEA /* UIView+YXH.m */; };
 		197350131D79BE0A00524F9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 197350121D79BE0A00524F9A /* main.m */; };
 		197350161D79BE0A00524F9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 197350151D79BE0A00524F9A /* AppDelegate.m */; };
 		1973501E1D79BE0A00524F9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1973501D1D79BE0A00524F9A /* Assets.xcassets */; };
@@ -57,6 +61,13 @@
 		196E86D31D7AFE9400132BEA /* XHOrderCourseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHOrderCourseCell.h; sourceTree = "<group>"; };
 		196E86D41D7AFE9400132BEA /* XHOrderCourseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHOrderCourseCell.m; sourceTree = "<group>"; };
 		196E86D51D7AFE9400132BEA /* XHOrderCourseCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XHOrderCourseCell.xib; sourceTree = "<group>"; };
+		196E86F41D7B266E00132BEA /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
+		196E86F51D7B266E00132BEA /* NSDate+Calculations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Calculations.h"; sourceTree = "<group>"; };
+		196E86F61D7B266E00132BEA /* NSDate+Calculations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Calculations.m"; sourceTree = "<group>"; };
+		196E86FF1D7B266E00132BEA /* UIView+AutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AutoLayout.h"; sourceTree = "<group>"; };
+		196E87001D7B266E00132BEA /* UIView+AutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AutoLayout.m"; sourceTree = "<group>"; };
+		196E87011D7B266E00132BEA /* UIView+YXH.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+YXH.h"; sourceTree = "<group>"; };
+		196E87021D7B266E00132BEA /* UIView+YXH.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+YXH.m"; sourceTree = "<group>"; };
 		1973500E1D79BE0900524F9A /* OrderCourse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrderCourse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		197350121D79BE0A00524F9A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		197350141D79BE0A00524F9A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../AppDelegate.h; sourceTree = "<group>"; };
@@ -128,6 +139,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		196E86F31D7B266E00132BEA /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				196E86F41D7B266E00132BEA /* Foundation+Log.m */,
+				196E86F51D7B266E00132BEA /* NSDate+Calculations.h */,
+				196E86F61D7B266E00132BEA /* NSDate+Calculations.m */,
+				196E86FF1D7B266E00132BEA /* UIView+AutoLayout.h */,
+				196E87001D7B266E00132BEA /* UIView+AutoLayout.m */,
+				196E87011D7B266E00132BEA /* UIView+YXH.h */,
+				196E87021D7B266E00132BEA /* UIView+YXH.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
 		197350051D79BE0900524F9A = {
 			isa = PBXGroup;
 			children = (
@@ -285,6 +310,7 @@
 			children = (
 				196E86D01D7AE59A00132BEA /* XHConstant.h */,
 				196E86D11D7AE59A00132BEA /* XHConstant.m */,
+				196E86F31D7B266E00132BEA /* Category */,
 				197350591D79C4C800524F9A /* Controller */,
 				1973505A1D79C4C800524F9A /* Model */,
 				1973505B1D79C4C800524F9A /* View */,
@@ -479,10 +505,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				196E87051D7B266E00132BEA /* Foundation+Log.m in Sources */,
 				196E86D21D7AE59A00132BEA /* XHConstant.m in Sources */,
 				197350161D79BE0A00524F9A /* AppDelegate.m in Sources */,
 				1973505E1D79C4EF00524F9A /* XHNavigationController.m in Sources */,
 				197350781D79D7E900524F9A /* MJExtensionConst.m in Sources */,
+				196E870B1D7B266E00132BEA /* UIView+AutoLayout.m in Sources */,
 				197350131D79BE0A00524F9A /* main.m in Sources */,
 				1973507A1D79D7E900524F9A /* MJProperty.m in Sources */,
 				1973507C1D79D7E900524F9A /* MJPropertyType.m in Sources */,
@@ -490,8 +518,10 @@
 				197350511D79C17F00524F9A /* XHWantOrderCourseController.m in Sources */,
 				197350801D79D7E900524F9A /* NSObject+MJProperty.m in Sources */,
 				197350811D79D7E900524F9A /* NSString+MJExtension.m in Sources */,
+				196E87061D7B266E00132BEA /* NSDate+Calculations.m in Sources */,
 				1973507E1D79D7E900524F9A /* NSObject+MJCoding.m in Sources */,
 				197350611D79D14900524F9A /* XHCourse.m in Sources */,
+				196E870C1D7B266E00132BEA /* UIView+YXH.m in Sources */,
 				1973507B1D79D7E900524F9A /* MJPropertyKey.m in Sources */,
 				1973507F1D79D7E900524F9A /* NSObject+MJKeyValue.m in Sources */,
 				1973507D1D79D7E900524F9A /* NSObject+MJClass.m in Sources */,

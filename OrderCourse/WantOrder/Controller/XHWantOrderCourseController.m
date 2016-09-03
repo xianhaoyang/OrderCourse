@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *checkImage1;
 @property (weak, nonatomic) IBOutlet UIImageView *checkImage2;
 @property (weak, nonatomic) IBOutlet UIImageView *checkImage3;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *privateBtnW;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *privateBtnH;
@@ -34,24 +35,50 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *applicationBtnH;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *btnTop;
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic, strong) UIButton *selectedBtn;
+@property (nonatomic, strong) NSMutableArray *privateList;
+@property (nonatomic, strong) NSMutableArray *solonList;
+@property (nonatomic, strong) NSMutableArray *appList;
 
-//@property (nonatomic, strong) NSMutableArray *dataList;
+@property (nonatomic, strong) NSArray *dataList;
 
 @end
 
 @implementation XHWantOrderCourseController
 
 #pragma mark - lazy load
-//- (NSMutableArray *)dataList
-//{
-//    if (!_dataList) {
-//        _dataList = [NSMutableArray array];
-//    }
-//    return _dataList;
-//}
+- (NSMutableArray *)privateList
+{
+    if (!_privateList) {
+        _privateList = [NSMutableArray array];
+    }
+    return _privateList;
+}
+
+- (NSMutableArray *)solonList
+{
+    if (!_solonList) {
+        _solonList = [NSMutableArray array];
+    }
+    return _solonList;
+}
+
+- (NSMutableArray *)appList
+{
+    if (!_appList) {
+        _appList = [NSMutableArray array];
+    }
+    return _appList;
+}
+
+- (NSArray *)dataList
+{
+    if (!_dataList) {
+        _dataList = [NSArray array];
+    }
+    return _dataList;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -93,6 +120,16 @@
     NSData *data = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
     NSArray *dictList = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
     NSArray *courseList = [XHCourse mj_objectArrayWithKeyValuesArray:dictList];
+    for (XHCourse *course in courseList) {
+        if ([course.CourseType isEqualToString:@"小班课"]) {
+            [self.privateList addObject:course];
+        } else if ([course.CourseType isEqualToString:@"沙龙课"]) {
+            [self.solonList addObject:course];
+        } else {
+            [self.appList addObject:course];
+        }
+    }
+    [self clickPrivateClassBtn];
     NSLog(@"======%@", courseList);
 }
 
@@ -133,6 +170,8 @@
     [UIView animateWithDuration:0.25 animations:^{
         [self.view layoutIfNeeded];
     }];
+    self.dataList = self.privateList;
+    [self.tableView reloadData];
 }
 
 - (IBAction)clickSolonClassBtn {
@@ -149,6 +188,8 @@
     [UIView animateWithDuration:0.25 animations:^{
         [self.view layoutIfNeeded];
     }];
+    self.dataList = self.solonList;
+    [self.tableView reloadData];
 }
 
 - (IBAction)clickAppClassBtn {
@@ -165,22 +206,30 @@
     [UIView animateWithDuration:0.25 animations:^{
         [self.view layoutIfNeeded];
     }];
+    self.dataList = self.appList;
+    [self.tableView reloadData];
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 20;
+    return self.dataList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     XHOrderCourseCell *cell = [XHOrderCourseCell cellWithTableView:tableView];
+    cell.course = self.dataList[indexPath.row];
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 150;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"%s", __func__);
 }
 
 

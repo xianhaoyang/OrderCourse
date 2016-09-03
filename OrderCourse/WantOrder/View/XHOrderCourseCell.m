@@ -7,6 +7,10 @@
 //
 
 #import "XHOrderCourseCell.h"
+#import "NSDate+Calculations.h"
+#import "XHCourse.h"
+
+#define kRBGColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
 
 @interface XHOrderCourseCell ()
 
@@ -30,7 +34,7 @@
     self.timeBgView.clipsToBounds = YES;
     self.topicBgView.layer.cornerRadius = 5.0f;
     self.topicBgView.clipsToBounds = YES;
-    self.btn.layer.cornerRadius = 10.0f;
+    self.btn.layer.cornerRadius = 15.0f;
     self.btn.clipsToBounds = YES;
     self.backgroundView = nil;
     self.backgroundColor = [UIColor clearColor];
@@ -39,7 +43,36 @@
 - (void)setCourse:(XHCourse *)course
 {
     _course = course;
-    
+    self.courseNameLabel.text = course.CourseName;
+    NSString *dateStr = [course.BeginTime substringWithRange:NSMakeRange(5, 5)];
+    dateStr = [[dateStr stringByReplacingOccurrencesOfString:@"-" withString:@"月"] stringByAppendingString:@"日"];
+    NSString *weekStr = [course.BeginTime substringToIndex:10];
+    NSDate *date = [NSDate dateFromString:weekStr withFormatter:@"yyyy-MM-dd"];
+    NSString *weekDay = [NSDate weekdayStringFromDate:date];
+    NSString *timeStr = [course.BeginTime substringWithRange:NSMakeRange(11, 5)];
+    self.startTimeLabel.text = [NSString stringWithFormat:@"%@\n%@ %@", dateStr, weekDay, timeStr];
+    // 白天黑夜
+    if ([[course.BeginTime substringWithRange:NSMakeRange(11, 2)] integerValue] < 18) {
+        [self.statusImg setImage:[UIImage imageNamed:@"sun"]];
+    } else {
+        [self.statusImg setImage:[UIImage imageNamed:@"moon"]];
+    }
+    // 订课人数
+    if ([course.OrderNumber integerValue] < [course.Capacity integerValue]) {
+        self.orderNumLabel.text = [NSString stringWithFormat:@"%@/%@", course.OrderNumber, course.Capacity];
+        self.orderNumLabel.textColor = kRBGColor(125, 208, 32);
+        self.btn.backgroundColor = kRBGColor(67, 219, 212);
+        [self.btn setTitle:@"预定" forState:UIControlStateNormal];
+    } else {
+        self.orderNumLabel.text = @"已满";
+        self.orderNumLabel.textColor = kRBGColor(253, 109, 127);
+        self.btn.backgroundColor = kRBGColor(243, 165, 54);
+        [self.btn setTitle:@"排队" forState:UIControlStateNormal];
+    }
+    // 级别
+    self.levelLabel.text = course.CourseLevel;
+    // 主题
+    self.topicLabel.text = [NSString stringWithFormat:@"Topic:%@", course.Topic];
 }
 
 - (IBAction)clickBtn {
