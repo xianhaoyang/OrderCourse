@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		196E86D21D7AE59A00132BEA /* XHConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = 196E86D11D7AE59A00132BEA /* XHConstant.m */; };
 		197350131D79BE0A00524F9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 197350121D79BE0A00524F9A /* main.m */; };
 		197350161D79BE0A00524F9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 197350151D79BE0A00524F9A /* AppDelegate.m */; };
 		1973501E1D79BE0A00524F9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1973501D1D79BE0A00524F9A /* Assets.xcassets */; };
@@ -49,6 +50,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		196E86D01D7AE59A00132BEA /* XHConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHConstant.h; sourceTree = "<group>"; };
+		196E86D11D7AE59A00132BEA /* XHConstant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHConstant.m; sourceTree = "<group>"; };
 		1973500E1D79BE0900524F9A /* OrderCourse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrderCourse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		197350121D79BE0A00524F9A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		197350141D79BE0A00524F9A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../AppDelegate.h; sourceTree = "<group>"; };
@@ -272,6 +275,8 @@
 		197350581D79C4C800524F9A /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				196E86D01D7AE59A00132BEA /* XHConstant.h */,
+				196E86D11D7AE59A00132BEA /* XHConstant.m */,
 				197350591D79C4C800524F9A /* Controller */,
 				1973505A1D79C4C800524F9A /* Model */,
 				1973505B1D79C4C800524F9A /* View */,
@@ -465,6 +470,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				196E86D21D7AE59A00132BEA /* XHConstant.m in Sources */,
 				197350161D79BE0A00524F9A /* AppDelegate.m in Sources */,
 				1973505E1D79C4EF00524F9A /* XHNavigationController.m in Sources */,
 				197350781D79D7E900524F9A /* MJExtensionConst.m in Sources */,
@@ -698,6 +704,7 @@
 				1973503D1D79BE0A00524F9A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1973503E1D79BE0A00524F9A /* Build configuration list for PBXNativeTarget "OrderCourseTests" */ = {
 			isa = XCConfigurationList;
@@ -706,6 +713,7 @@
 				197350401D79BE0A00524F9A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		197350411D79BE0A00524F9A /* Build configuration list for PBXNativeTarget "OrderCourseUITests" */ = {
 			isa = XCConfigurationList;
@@ -714,6 +722,7 @@
 				197350431D79BE0A00524F9A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

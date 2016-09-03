@@ -9,8 +9,31 @@
 #import "XHWantOrderCourseController.h"
 #import "MJExtension.h"
 #import "XHCourse.h"
+#import "XHConstant.h"
+
+#define kBtnW 80
+#define kBtnH 50
+#define kIncrease 10
+#define kTopMargin 84
 
 @interface XHWantOrderCourseController () <UIWebViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UIButton *privateClassBtn;
+@property (weak, nonatomic) IBOutlet UIButton *solonClassBtn;
+@property (weak, nonatomic) IBOutlet UIButton *applicationClassBtn;
+@property (weak, nonatomic) IBOutlet UIImageView *checkImage1;
+@property (weak, nonatomic) IBOutlet UIImageView *checkImage2;
+@property (weak, nonatomic) IBOutlet UIImageView *checkImage3;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *privateBtnW;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *privateBtnH;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *solonBtnW;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *solonBtnH;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *applicationBtnW;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *applicationBtnH;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *btnTop;
+
+@property (nonatomic, strong) UIButton *selectedBtn;
 
 //@property (nonatomic, strong) NSMutableArray *dataList;
 
@@ -29,12 +52,88 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self loadData];
+    
+    [self setupUI];
+}
+
+- (void)loadData
+{
     UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
     [self.view addSubview:webView];
     webView.delegate = self;
-    NSURL *url = [NSURL URLWithString:@"http://ols.webi.com.cn/wap/course/index/wid=1!openid=oXoOjt9tI9bAOy0TVyt4CvZLDwDQ"];
+    NSString *urlStr = [NSString stringWithFormat:@"http://ols.webi.com.cn/wap/course/index/wid=1!openid=%@",openid];
+    NSURL *url = [NSURL URLWithString:urlStr];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];
+}
+
+#pragma mark - 初始化UI
+- (void)setupUI
+{
+    // 按钮设置圆角
+    [self cornerRadiusWithBtn:self.privateClassBtn];
+    [self cornerRadiusWithBtn:self.solonClassBtn];
+    [self cornerRadiusWithBtn:self.applicationClassBtn];
+    // 隐藏勾选
+    self.checkImage1.hidden = YES;
+    self.checkImage2.hidden = YES;
+    self.checkImage3.hidden = YES;
+}
+
+- (void)cornerRadiusWithBtn:(UIButton *)btn
+{
+    btn.layer.cornerRadius = 5.0f;
+    btn.clipsToBounds = YES;
+}
+
+- (IBAction)clickPrivateClassBtn {
+    self.checkImage1.hidden = NO;
+    self.checkImage2.hidden = YES;
+    self.checkImage3.hidden = YES;
+    self.privateBtnW.constant += kIncrease;
+    self.privateBtnH.constant += kIncrease;
+    self.solonBtnW.constant = kBtnW;
+    self.solonBtnH.constant = kBtnH;
+    self.applicationBtnW.constant = kBtnW;
+    self.applicationBtnH.constant = kBtnH;
+    self.btnTop.constant = kTopMargin;
+    [UIView animateWithDuration:0.25 animations:^{
+        [self.view layoutIfNeeded];
+    }];
+}
+
+- (IBAction)clickSolonClassBtn {
+    self.checkImage1.hidden = YES;
+    self.checkImage2.hidden = NO;
+    self.checkImage3.hidden = YES;
+    self.privateBtnW.constant = kBtnW;
+    self.privateBtnH.constant = kBtnH;
+    self.solonBtnW.constant += kIncrease;
+    self.solonBtnH.constant += kIncrease;
+    self.applicationBtnW.constant = kBtnW;
+    self.applicationBtnH.constant = kBtnH;
+    self.btnTop.constant = kTopMargin - kIncrease * 0.5;
+    [UIView animateWithDuration:0.25 animations:^{
+        [self.view layoutIfNeeded];
+    }];
+}
+
+- (IBAction)clickAppClassBtn {
+    self.checkImage1.hidden = YES;
+    self.checkImage2.hidden = YES;
+    self.checkImage3.hidden = NO;
+    self.privateBtnW.constant = kBtnW;
+    self.privateBtnH.constant = kBtnH;
+    self.solonBtnW.constant = kBtnW;
+    self.solonBtnH.constant = kBtnH;
+    self.applicationBtnW.constant += kIncrease;
+    self.applicationBtnH.constant += kIncrease;
+    self.btnTop.constant = kTopMargin;
+    [UIView animateWithDuration:0.25 animations:^{
+        [self.view layoutIfNeeded];
+    }];
 }
 
 #pragma mark - UIWebViewDelegate
