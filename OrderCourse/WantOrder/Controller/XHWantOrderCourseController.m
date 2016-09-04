@@ -89,6 +89,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self setupUI];
+    
     UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
     webView.delegate = self;
     [self.view addSubview:webView];
@@ -96,8 +98,6 @@
     
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshHomeData)];
     [self.tableView.mj_header beginRefreshing];
-    
-    [self setupUI];
 }
 
 - (void)refreshHomeData
@@ -143,7 +143,15 @@
         }
     }
     [self.tableView.mj_header endRefreshing];
-    [self clickPrivateClassBtn];
+    if (!self.checkImage1.isHidden) {
+        [self clickPrivateClassBtn];
+    } else if (!self.checkImage2.isHidden) {
+        [self clickSolonClassBtn];
+    } else if (!self.checkImage3.isHidden) {
+        [self clickAppClassBtn];
+    } else {
+        [self clickPrivateClassBtn];
+    }
 }
 
 #pragma mark - 初始化UI
