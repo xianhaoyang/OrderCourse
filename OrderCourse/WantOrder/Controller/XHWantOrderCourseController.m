@@ -100,6 +100,7 @@
     NSURL *url = [NSURL URLWithString:urlStr];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];
+    [MBProgressHUD showMessage:@"加载数据中..." toView:self.view];
 }
 
 #pragma mark - UIWebViewDelegate
@@ -132,6 +133,7 @@
             [self.appList addObject:course];
         }
     }
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self clickPrivateClassBtn];
 //    //NSLog(@"======%@", courseList);
 }
@@ -340,6 +342,5 @@
         }
     }
 }
-
 
 @end
