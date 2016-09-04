@@ -102,7 +102,7 @@
 #pragma mark - UIWebViewDelegate
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    NSLog(@"%s", __func__);
+    //NSLog(@"%s", __func__);
     NSString *lJs = @"document.documentElement.innerHTML";//获取当前网页的html
     NSString *jsCodeStr = [webView stringByEvaluatingJavaScriptFromString:lJs];
     [self handleDataWithTargetStr:jsCodeStr];
@@ -130,7 +130,7 @@
         }
     }
     [self clickPrivateClassBtn];
-    NSLog(@"======%@", courseList);
+//    //NSLog(@"======%@", courseList);
 }
 
 #pragma mark - 初始化UI
@@ -157,6 +157,7 @@
 }
 
 - (IBAction)clickPrivateClassBtn {
+    //NSLog(@"%s", __func__);
     self.checkImage1.hidden = NO;
     self.checkImage2.hidden = YES;
     self.checkImage3.hidden = YES;
@@ -216,10 +217,12 @@
 #pragma mark - UITableViewDelegate & UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    //NSLog(@"%s", __func__);
     return self.dataList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    //NSLog(@"%s", __func__);
     XHOrderCourseCell *cell = [XHOrderCourseCell cellWithTableView:tableView];
     cell.course = self.dataList[indexPath.row];
     return cell;
@@ -227,12 +230,13 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 150;
+    //NSLog(@"%s", __func__);
+    return self.checkImage1.isHidden == NO ? 105 : 150;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"%s", __func__);
+    //NSLog(@"%s", __func__);
 }
 
 

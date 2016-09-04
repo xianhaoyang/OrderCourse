@@ -161,6 +161,8 @@
                 <outlet property="startTimeLabel" destination="bFC-bq-6pf" id="wIU-mg-790"/>
                 <outlet property="statusImg" destination="wvF-zc-d8y" id="WDh-2o-qXC"/>
                 <outlet property="timeBgView" destination="5gi-rG-ObT" id="cyY-fu-aeE"/>
+                <outlet property="timeTopicMargin" destination="MkM-6l-y3F" id="cBC-24-Eu3"/>
+                <outlet property="topicBgH" destination="wEj-M2-2ZZ" id="cOJ-Ae-gEM"/>
                 <outlet property="topicBgView" destination="II2-r2-A9n" id="ToS-yB-5h5"/>
                 <outlet property="topicLabel" destination="O5Y-Ab-scQ" id="Ux7-Ix-49b"/>
             </connections>

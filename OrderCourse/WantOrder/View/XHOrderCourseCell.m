@@ -24,6 +24,9 @@
 @property (weak, nonatomic) IBOutlet UIView *timeBgView;
 @property (weak, nonatomic) IBOutlet UIView *topicBgView;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topicBgH;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *timeTopicMargin;
+
 @end
 
 @implementation XHOrderCourseCell
@@ -72,7 +75,13 @@
     // 级别
     self.levelLabel.text = course.CourseLevel;
     // 主题
-    self.topicLabel.text = [NSString stringWithFormat:@"Topic:%@", course.Topic];
+    if (course.Topic.length == 0) {
+        self.topicBgH.constant = self.timeTopicMargin.constant = 0;
+    } else {
+        self.topicBgH.constant = 35;
+        self.timeTopicMargin.constant = 10;
+        self.topicLabel.text = [NSString stringWithFormat:@"Topic:%@", course.Topic];
+    }
 }
 
 - (IBAction)clickBtn {
