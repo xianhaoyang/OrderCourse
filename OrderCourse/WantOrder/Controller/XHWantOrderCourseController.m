@@ -14,6 +14,7 @@
 #import "XHOrderCourseCell.h"
 #import "NSDate+Escort.h"
 #import "MBProgressHUD+XMG.h"
+#import "MJRefresh.h"
 
 #define kBtnW 80
 #define kBtnH 50
@@ -44,7 +45,9 @@
 @property (nonatomic, strong) NSArray *dataList;
 
 @property (nonatomic, strong) UIButton *btn;
+@property (nonatomic, strong) UIButton *selectedBtn;
 @property (nonatomic, strong) XHCourse *course;
+@property (nonatomic, weak) UIWebView *webView;
 
 @end
 
@@ -86,20 +89,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self loadData];
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
+    webView.delegate = self;
+    [self.view addSubview:webView];
+    self.webView = webView;
+    [self refreshHomeData];
+//    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshHomeData)];
+//    [self.tableView.mj_header beginRefreshing];
     
     [self setupUI];
 }
 
-- (void)loadData
+- (void)refreshHomeData
 {
-    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
-    [self.view addSubview:webView];
-    webView.delegate = self;
     NSString *urlStr = [NSString stringWithFormat:@"%@/wap/course/index/wid=1!openid=%@", baseURL, openid];
     NSURL *url = [NSURL URLWithString:urlStr];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [webView loadRequest:request];
+    [self.webView loadRequest:request];
     [MBProgressHUD showMessage:@"加载数据中..." toView:self.view];
 }
 
@@ -108,8 +114,8 @@
 {
     NSString *lJs = @"document.documentElement.innerHTML";//获取当前网页的html
     NSString *jsCodeStr = [webView stringByEvaluatingJavaScriptFromString:lJs];
-//    NSLog(@"%@", jsCodeStr);
     [self handleDataWithTargetStr:jsCodeStr];
+//    [self.tableView.mj_header endRefreshing];
 }
 
 - (void)handleDataWithTargetStr:(NSString *)targetStr
@@ -162,7 +168,7 @@
 }
 
 - (IBAction)clickPrivateClassBtn {
-    //NSLog(@"%s", __func__);
+    [self changeTypeBtnEnable:self.privateClassBtn];
     self.checkImage1.hidden = NO;
     self.checkImage2.hidden = YES;
     self.checkImage3.hidden = YES;
@@ -182,6 +188,7 @@
 }
 
 - (IBAction)clickSolonClassBtn {
+    [self changeTypeBtnEnable:self.solonClassBtn];
     self.checkImage1.hidden = YES;
     self.checkImage2.hidden = NO;
     self.checkImage3.hidden = YES;
@@ -201,6 +208,7 @@
 }
 
 - (IBAction)clickAppClassBtn {
+    [self changeTypeBtnEnable:self.applicationClassBtn];
     self.checkImage1.hidden = YES;
     self.checkImage2.hidden = YES;
     self.checkImage3.hidden = NO;
@@ -217,6 +225,13 @@
     self.dataList = self.appList;
     [self.tableView reloadData];
     [self.tableView setContentOffset:CGPointZero animated:YES];
+}
+
+- (void)changeTypeBtnEnable:(UIButton *)typeBtn
+{
+    self.selectedBtn.enabled = YES;
+    typeBtn.enabled = NO;
+    self.selectedBtn = typeBtn;
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
