@@ -93,9 +93,9 @@
     webView.delegate = self;
     [self.view addSubview:webView];
     self.webView = webView;
-    [self refreshHomeData];
-//    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshHomeData)];
-//    [self.tableView.mj_header beginRefreshing];
+    
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshHomeData)];
+    [self.tableView.mj_header beginRefreshing];
     
     [self setupUI];
 }
@@ -106,7 +106,6 @@
     NSURL *url = [NSURL URLWithString:urlStr];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self.webView loadRequest:request];
-    [MBProgressHUD showMessage:@"加载数据中..." toView:self.view];
 }
 
 #pragma mark - UIWebViewDelegate
@@ -115,11 +114,15 @@
     NSString *lJs = @"document.documentElement.innerHTML";//获取当前网页的html
     NSString *jsCodeStr = [webView stringByEvaluatingJavaScriptFromString:lJs];
     [self handleDataWithTargetStr:jsCodeStr];
-//    [self.tableView.mj_header endRefreshing];
 }
 
 - (void)handleDataWithTargetStr:(NSString *)targetStr
 {
+    // 先清除旧数据
+    [self.privateList removeAllObjects];
+    [self.solonList removeAllObjects];
+    [self.appList removeAllObjects];
+    // 再加载新数据
     NSString *str1 = @"var centerCourseListJson = JSON.parse('";
     NSString *str2 = @"var othercenterCourseListJson = JSON.parse('[]');";
     NSRange range1 = [targetStr rangeOfString:str1];
@@ -139,9 +142,8 @@
             [self.appList addObject:course];
         }
     }
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [self.tableView.mj_header endRefreshing];
     [self clickPrivateClassBtn];
-//    //NSLog(@"======%@", courseList);
 }
 
 #pragma mark - 初始化UI
@@ -168,12 +170,13 @@
 }
 
 - (IBAction)clickPrivateClassBtn {
-    [self changeTypeBtnEnable:self.privateClassBtn];
     self.checkImage1.hidden = NO;
     self.checkImage2.hidden = YES;
     self.checkImage3.hidden = YES;
-    self.privateBtnW.constant += kIncrease;
-    self.privateBtnH.constant += kIncrease;
+    if (self.privateClassBtn.isEnabled) {
+        self.privateBtnW.constant += kIncrease;
+        self.privateBtnH.constant += kIncrease;
+    }
     self.solonBtnW.constant = kBtnW;
     self.solonBtnH.constant = kBtnH;
     self.applicationBtnW.constant = kBtnW;
@@ -182,33 +185,35 @@
     [UIView animateWithDuration:0.25 animations:^{
         [self.view layoutIfNeeded];
     }];
+    [self changeTypeBtnEnable:self.privateClassBtn];
     self.dataList = self.privateList;
     [self.tableView reloadData];
-    [self.tableView setContentOffset:CGPointZero animated:YES];
+//    [self.tableView setContentOffset:CGPointZero animated:YES];
 }
 
 - (IBAction)clickSolonClassBtn {
-    [self changeTypeBtnEnable:self.solonClassBtn];
     self.checkImage1.hidden = YES;
     self.checkImage2.hidden = NO;
     self.checkImage3.hidden = YES;
     self.privateBtnW.constant = kBtnW;
     self.privateBtnH.constant = kBtnH;
-    self.solonBtnW.constant += kIncrease;
-    self.solonBtnH.constant += kIncrease;
+    if (self.solonClassBtn.isEnabled) {
+        self.solonBtnW.constant += kIncrease;
+        self.solonBtnH.constant += kIncrease;
+    }
     self.applicationBtnW.constant = kBtnW;
     self.applicationBtnH.constant = kBtnH;
     self.btnTop.constant = kTopMargin - kIncrease * 0.5;
     [UIView animateWithDuration:0.25 animations:^{
         [self.view layoutIfNeeded];
     }];
+    [self changeTypeBtnEnable:self.solonClassBtn];
     self.dataList = self.solonList;
     [self.tableView reloadData];
-    [self.tableView setContentOffset:CGPointZero animated:YES];
+//    [self.tableView setContentOffset:CGPointZero animated:YES];
 }
 
 - (IBAction)clickAppClassBtn {
-    [self changeTypeBtnEnable:self.applicationClassBtn];
     self.checkImage1.hidden = YES;
     self.checkImage2.hidden = YES;
     self.checkImage3.hidden = NO;
@@ -216,15 +221,18 @@
     self.privateBtnH.constant = kBtnH;
     self.solonBtnW.constant = kBtnW;
     self.solonBtnH.constant = kBtnH;
-    self.applicationBtnW.constant += kIncrease;
-    self.applicationBtnH.constant += kIncrease;
+    if (self.applicationClassBtn.isEnabled) {
+        self.applicationBtnW.constant += kIncrease;
+        self.applicationBtnH.constant += kIncrease;
+    }
     self.btnTop.constant = kTopMargin;
     [UIView animateWithDuration:0.25 animations:^{
         [self.view layoutIfNeeded];
     }];
+    [self changeTypeBtnEnable:self.applicationClassBtn];
     self.dataList = self.appList;
     [self.tableView reloadData];
-    [self.tableView setContentOffset:CGPointZero animated:YES];
+//    [self.tableView setContentOffset:CGPointZero animated:YES];
 }
 
 - (void)changeTypeBtnEnable:(UIButton *)typeBtn
