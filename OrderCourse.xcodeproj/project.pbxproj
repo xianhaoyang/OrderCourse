@@ -68,6 +68,18 @@
 		198CF00B1D7BEFFA005DF362 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 198CEFF71D7BEFFA005DF362 /* UIView+MJExtension.m */; };
 		198CF00F1D7C04C5005DF362 /* XHCourseDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 198CF00D1D7C04C5005DF362 /* XHCourseDetailController.m */; };
 		198CF0101D7C04C5005DF362 /* XHCourseDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 198CF00E1D7C04C5005DF362 /* XHCourseDetailController.xib */; };
+		19CC87551D7C70FF004BC7D6 /* Circle张媛.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 19CC87491D7C70FF004BC7D6 /* Circle张媛.JPG */; };
+		19CC87561D7C70FF004BC7D6 /* Circle张媛2.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 19CC874A1D7C70FF004BC7D6 /* Circle张媛2.JPG */; };
+		19CC87571D7C70FF004BC7D6 /* enya李璟妍.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 19CC874B1D7C70FF004BC7D6 /* enya李璟妍.JPG */; };
+		19CC87581D7C70FF004BC7D6 /* enya李璟妍2.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 19CC874C1D7C70FF004BC7D6 /* enya李璟妍2.JPG */; };
+		19CC87591D7C70FF004BC7D6 /* Julia.LunevaJulia.Luneva.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 19CC874D1D7C70FF004BC7D6 /* Julia.LunevaJulia.Luneva.JPG */; };
+		19CC875A1D7C70FF004BC7D6 /* Julia.LunevaJulia.Luneva2.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 19CC874E1D7C70FF004BC7D6 /* Julia.LunevaJulia.Luneva2.JPG */; };
+		19CC875B1D7C70FF004BC7D6 /* Megan.li李耀明.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 19CC874F1D7C70FF004BC7D6 /* Megan.li李耀明.JPG */; };
+		19CC875C1D7C70FF004BC7D6 /* Megan.li李耀明2.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 19CC87501D7C70FF004BC7D6 /* Megan.li李耀明2.JPG */; };
+		19CC875D1D7C70FF004BC7D6 /* Rachel陈畅.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 19CC87511D7C70FF004BC7D6 /* Rachel陈畅.JPG */; };
+		19CC875E1D7C70FF004BC7D6 /* Rachel陈畅2.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 19CC87521D7C70FF004BC7D6 /* Rachel陈畅2.JPG */; };
+		19CC875F1D7C70FF004BC7D6 /* William.HaytonWilliam Hayton.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 19CC87531D7C70FF004BC7D6 /* William.HaytonWilliam Hayton.JPG */; };
+		19CC87601D7C70FF004BC7D6 /* William.HaytonWilliam Hayton2.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 19CC87541D7C70FF004BC7D6 /* William.HaytonWilliam Hayton2.JPG */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -207,6 +219,18 @@
 		198CF00C1D7C04C5005DF362 /* XHCourseDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHCourseDetailController.h; sourceTree = "<group>"; };
 		198CF00D1D7C04C5005DF362 /* XHCourseDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHCourseDetailController.m; sourceTree = "<group>"; };
 		198CF00E1D7C04C5005DF362 /* XHCourseDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XHCourseDetailController.xib; sourceTree = "<group>"; };
+		19CC87491D7C70FF004BC7D6 /* Circle张媛.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Circle张媛.JPG"; sourceTree = "<group>"; };
+		19CC874A1D7C70FF004BC7D6 /* Circle张媛2.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Circle张媛2.JPG"; sourceTree = "<group>"; };
+		19CC874B1D7C70FF004BC7D6 /* enya李璟妍.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "enya李璟妍.JPG"; sourceTree = "<group>"; };
+		19CC874C1D7C70FF004BC7D6 /* enya李璟妍2.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "enya李璟妍2.JPG"; sourceTree = "<group>"; };
+		19CC874D1D7C70FF004BC7D6 /* Julia.LunevaJulia.Luneva.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Julia.LunevaJulia.Luneva.JPG; sourceTree = "<group>"; };
+		19CC874E1D7C70FF004BC7D6 /* Julia.LunevaJulia.Luneva2.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Julia.LunevaJulia.Luneva2.JPG; sourceTree = "<group>"; };
+		19CC874F1D7C70FF004BC7D6 /* Megan.li李耀明.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Megan.li李耀明.JPG"; sourceTree = "<group>"; };
+		19CC87501D7C70FF004BC7D6 /* Megan.li李耀明2.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Megan.li李耀明2.JPG"; sourceTree = "<group>"; };
+		19CC87511D7C70FF004BC7D6 /* Rachel陈畅.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Rachel陈畅.JPG"; sourceTree = "<group>"; };
+		19CC87521D7C70FF004BC7D6 /* Rachel陈畅2.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Rachel陈畅2.JPG"; sourceTree = "<group>"; };
+		19CC87531D7C70FF004BC7D6 /* William.HaytonWilliam Hayton.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "William.HaytonWilliam Hayton.JPG"; sourceTree = "<group>"; };
+		19CC87541D7C70FF004BC7D6 /* William.HaytonWilliam Hayton2.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "William.HaytonWilliam Hayton2.JPG"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -285,6 +309,7 @@
 			isa = PBXGroup;
 			children = (
 				1973501D1D79BE0A00524F9A /* Assets.xcassets */,
+				19CC87481D7C70FF004BC7D6 /* TeacherImage */,
 				1973501F1D79BE0A00524F9A /* LaunchScreen.storyboard */,
 				197350221D79BE0A00524F9A /* Info.plist */,
 				197350121D79BE0A00524F9A /* main.m */,
@@ -607,6 +632,25 @@
 			path = Header;
 			sourceTree = "<group>";
 		};
+		19CC87481D7C70FF004BC7D6 /* TeacherImage */ = {
+			isa = PBXGroup;
+			children = (
+				19CC87491D7C70FF004BC7D6 /* Circle张媛.JPG */,
+				19CC874A1D7C70FF004BC7D6 /* Circle张媛2.JPG */,
+				19CC874B1D7C70FF004BC7D6 /* enya李璟妍.JPG */,
+				19CC874C1D7C70FF004BC7D6 /* enya李璟妍2.JPG */,
+				19CC874D1D7C70FF004BC7D6 /* Julia.LunevaJulia.Luneva.JPG */,
+				19CC874E1D7C70FF004BC7D6 /* Julia.LunevaJulia.Luneva2.JPG */,
+				19CC874F1D7C70FF004BC7D6 /* Megan.li李耀明.JPG */,
+				19CC87501D7C70FF004BC7D6 /* Megan.li李耀明2.JPG */,
+				19CC87511D7C70FF004BC7D6 /* Rachel陈畅.JPG */,
+				19CC87521D7C70FF004BC7D6 /* Rachel陈畅2.JPG */,
+				19CC87531D7C70FF004BC7D6 /* William.HaytonWilliam Hayton.JPG */,
+				19CC87541D7C70FF004BC7D6 /* William.HaytonWilliam Hayton2.JPG */,
+			);
+			path = TeacherImage;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -714,13 +758,25 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19CC875F1D7C70FF004BC7D6 /* William.HaytonWilliam Hayton.JPG in Resources */,
+				19CC87571D7C70FF004BC7D6 /* enya李璟妍.JPG in Resources */,
 				197350521D79C17F00524F9A /* XHWantOrderCourseController.xib in Resources */,
 				197350211D79BE0A00524F9A /* LaunchScreen.storyboard in Resources */,
+				19CC87591D7C70FF004BC7D6 /* Julia.LunevaJulia.Luneva.JPG in Resources */,
 				198CF0061D7BEFFA005DF362 /* MJRefresh.bundle in Resources */,
 				196E86D71D7AFE9400132BEA /* XHOrderCourseCell.xib in Resources */,
 				1973501E1D79BE0A00524F9A /* Assets.xcassets in Resources */,
+				19CC87601D7C70FF004BC7D6 /* William.HaytonWilliam Hayton2.JPG in Resources */,
+				19CC875D1D7C70FF004BC7D6 /* Rachel陈畅.JPG in Resources */,
+				19CC875E1D7C70FF004BC7D6 /* Rachel陈畅2.JPG in Resources */,
+				19CC87561D7C70FF004BC7D6 /* Circle张媛2.JPG in Resources */,
+				19CC875C1D7C70FF004BC7D6 /* Megan.li李耀明2.JPG in Resources */,
+				19CC875B1D7C70FF004BC7D6 /* Megan.li李耀明.JPG in Resources */,
 				198CF0101D7C04C5005DF362 /* XHCourseDetailController.xib in Resources */,
+				19CC87581D7C70FF004BC7D6 /* enya李璟妍2.JPG in Resources */,
 				197350571D79C19C00524F9A /* XHOrderRecordController.xib in Resources */,
+				19CC87551D7C70FF004BC7D6 /* Circle张媛.JPG in Resources */,
+				19CC875A1D7C70FF004BC7D6 /* Julia.LunevaJulia.Luneva2.JPG in Resources */,
 				198CEFC71D7BDF89005DF362 /* MBProgressHUD.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class XHCourse;
 
 @interface XHCourseDetailController : UIViewController
+
+@property (nonatomic, strong) XHCourse *course;
 
 @end

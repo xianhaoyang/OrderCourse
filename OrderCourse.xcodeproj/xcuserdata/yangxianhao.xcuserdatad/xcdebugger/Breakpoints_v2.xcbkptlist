@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OrderCourse/WantOrder/Controller/XHWantOrderCourseController.m"
-            timestampString = "494667110.591678"
+            timestampString = "494693839.765062"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "348"
-            endingLineNumber = "348"
+            startingLineNumber = "357"
+            endingLineNumber = "357"
             landmarkName = "-alertView:clickedButtonAtIndex:"
             landmarkType = "5">
          </BreakpointContent>
@@ -32,22 +32,6 @@
             startingLineNumber = "210"
             endingLineNumber = "210"
             landmarkName = "-clickSolonClassBtn"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "OrderCourse/WantOrder/Controller/XHWantOrderCourseController.m"
-            timestampString = "494667110.591678"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "249"
-            endingLineNumber = "249"
-            landmarkName = "-changeTypeBtnEnable:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -112,6 +96,22 @@
             startingLineNumber = "154"
             endingLineNumber = "154"
             landmarkName = "-handleDataWithTargetStr:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OrderCourse/WantOrder/Controller/XHCourseDetailController.m"
+            timestampString = "494696910.021355"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "-setCourse:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -275,6 +275,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     XHCourseDetailController *detailController = [[XHCourseDetailController alloc] init];
+    XHCourse *course = nil;
+    if (!self.checkImage1.isHidden) {
+        course = self.privateList[indexPath.row];
+    } else if (!self.checkImage2.isHidden) {
+        course = self.solonList[indexPath.row];
+    } else {
+        course = self.appList[indexPath.row];
+    }
+    detailController.course = course;
     [self.navigationController pushViewController:detailController animated:YES];
 }
 
