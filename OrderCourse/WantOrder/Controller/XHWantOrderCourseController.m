@@ -196,7 +196,7 @@
     [self changeTypeBtnEnable:self.privateClassBtn];
     self.dataList = self.privateList;
     [self.tableView reloadData];
-//    [self.tableView setContentOffset:CGPointZero animated:YES];
+    [self.tableView  scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
 }
 
 - (IBAction)clickSolonClassBtn {
@@ -218,7 +218,7 @@
     [self changeTypeBtnEnable:self.solonClassBtn];
     self.dataList = self.solonList;
     [self.tableView reloadData];
-//    [self.tableView setContentOffset:CGPointZero animated:YES];
+    [self.tableView  scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
 }
 
 - (IBAction)clickAppClassBtn {
@@ -240,7 +240,7 @@
     [self changeTypeBtnEnable:self.applicationClassBtn];
     self.dataList = self.appList;
     [self.tableView reloadData];
-//    [self.tableView setContentOffset:CGPointZero animated:YES];
+    [self.tableView  scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
 }
 
 - (void)changeTypeBtnEnable:(UIButton *)typeBtn
