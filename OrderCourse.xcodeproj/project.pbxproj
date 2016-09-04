@@ -66,6 +66,8 @@
 		198CF0091D7BEFFA005DF362 /* UIScrollView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 198CEFF31D7BEFFA005DF362 /* UIScrollView+MJExtension.m */; };
 		198CF00A1D7BEFFA005DF362 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 198CEFF51D7BEFFA005DF362 /* UIScrollView+MJRefresh.m */; };
 		198CF00B1D7BEFFA005DF362 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 198CEFF71D7BEFFA005DF362 /* UIView+MJExtension.m */; };
+		198CF00F1D7C04C5005DF362 /* XHCourseDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 198CF00D1D7C04C5005DF362 /* XHCourseDetailController.m */; };
+		198CF0101D7C04C5005DF362 /* XHCourseDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 198CF00E1D7C04C5005DF362 /* XHCourseDetailController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -202,6 +204,9 @@
 		198CEFF51D7BEFFA005DF362 /* UIScrollView+MJRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJRefresh.m"; sourceTree = "<group>"; };
 		198CEFF61D7BEFFA005DF362 /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
 		198CEFF71D7BEFFA005DF362 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
+		198CF00C1D7C04C5005DF362 /* XHCourseDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHCourseDetailController.h; sourceTree = "<group>"; };
+		198CF00D1D7C04C5005DF362 /* XHCourseDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHCourseDetailController.m; sourceTree = "<group>"; };
+		198CF00E1D7C04C5005DF362 /* XHCourseDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XHCourseDetailController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -355,6 +360,9 @@
 				1973504E1D79C17F00524F9A /* XHWantOrderCourseController.h */,
 				1973504F1D79C17F00524F9A /* XHWantOrderCourseController.m */,
 				197350501D79C17F00524F9A /* XHWantOrderCourseController.xib */,
+				198CF00C1D7C04C5005DF362 /* XHCourseDetailController.h */,
+				198CF00D1D7C04C5005DF362 /* XHCourseDetailController.m */,
+				198CF00E1D7C04C5005DF362 /* XHCourseDetailController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -711,6 +719,7 @@
 				198CF0061D7BEFFA005DF362 /* MJRefresh.bundle in Resources */,
 				196E86D71D7AFE9400132BEA /* XHOrderCourseCell.xib in Resources */,
 				1973501E1D79BE0A00524F9A /* Assets.xcassets in Resources */,
+				198CF0101D7C04C5005DF362 /* XHCourseDetailController.xib in Resources */,
 				197350571D79C19C00524F9A /* XHOrderRecordController.xib in Resources */,
 				198CEFC71D7BDF89005DF362 /* MBProgressHUD.bundle in Resources */,
 			);
@@ -753,6 +762,7 @@
 				198CF0091D7BEFFA005DF362 /* UIScrollView+MJExtension.m in Sources */,
 				198CEFB51D7BBF41005DF362 /* AFSecurityPolicy.m in Sources */,
 				197350131D79BE0A00524F9A /* main.m in Sources */,
+				198CF00F1D7C04C5005DF362 /* XHCourseDetailController.m in Sources */,
 				1973507A1D79D7E900524F9A /* MJProperty.m in Sources */,
 				1973507C1D79D7E900524F9A /* MJPropertyType.m in Sources */,
 				196E86D61D7AFE9400132BEA /* XHOrderCourseCell.m in Sources */,

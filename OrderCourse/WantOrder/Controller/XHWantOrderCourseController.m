@@ -7,6 +7,7 @@
 //
 
 #import "XHWantOrderCourseController.h"
+#import "XHCourseDetailController.h"
 #import "AFNetworking.h"
 #import "MJExtension.h"
 #import "XHCourse.h"
@@ -273,7 +274,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //NSLog(@"%s", __func__);
+    XHCourseDetailController *detailController = [[XHCourseDetailController alloc] init];
+    [self.navigationController pushViewController:detailController animated:YES];
 }
 
 #pragma mark - XHOrderCourseCellDelegate
