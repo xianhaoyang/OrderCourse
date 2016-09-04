@@ -7,7 +7,6 @@
 //
 
 #import "XHOrderCourseCell.h"
-#import "NSDate+Calculations.h"
 #import "XHCourse.h"
 
 #define kRBGColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
@@ -86,6 +85,9 @@
 
 - (IBAction)clickBtn {
     NSLog(@"%s--%@", __func__, self.btn.currentTitle);
+    if ([self.delegate respondsToSelector:@selector(orderCourseCell:didClickBtn:)]) {
+        [self.delegate orderCourseCell:self didClickBtn:self.btn];
+    }
 }
 
 + (instancetype)cellWithTableView:(UITableView *)tableView

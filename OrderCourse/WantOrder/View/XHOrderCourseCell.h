@@ -7,11 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
-@class XHCourse;
+#import "NSDate+Calculations.h"
+@class XHCourse, XHOrderCourseCell;
+
+@protocol XHOrderCourseCellDelegate <NSObject>
+
+@optional
+- (void)orderCourseCell:(XHOrderCourseCell *)cell didClickBtn:(UIButton *)btn;
+
+@end
 
 @interface XHOrderCourseCell : UITableViewCell
 
 @property (nonatomic, strong) XHCourse *course;
+@property (nonatomic, weak) id<XHOrderCourseCellDelegate> delegate;
 
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 

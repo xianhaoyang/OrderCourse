@@ -7,17 +7,20 @@
 //
 
 #import "XHWantOrderCourseController.h"
+#import "AFNetworking.h"
 #import "MJExtension.h"
 #import "XHCourse.h"
 #import "XHConstant.h"
 #import "XHOrderCourseCell.h"
+#import "NSDate+Escort.h"
+#import "MBProgressHUD+XMG.h"
 
 #define kBtnW 80
 #define kBtnH 50
 #define kIncrease 10
 #define kTopMargin 74
 
-@interface XHWantOrderCourseController () <UIWebViewDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface XHWantOrderCourseController () <UIWebViewDelegate, UITableViewDelegate, UITableViewDataSource, XHOrderCourseCellDelegate, UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *privateClassBtn;
 @property (weak, nonatomic) IBOutlet UIButton *solonClassBtn;
@@ -35,13 +38,13 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *applicationBtnH;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *btnTop;
 
-
-@property (nonatomic, strong) UIButton *selectedBtn;
 @property (nonatomic, strong) NSMutableArray *privateList;
 @property (nonatomic, strong) NSMutableArray *solonList;
 @property (nonatomic, strong) NSMutableArray *appList;
-
 @property (nonatomic, strong) NSArray *dataList;
+
+@property (nonatomic, strong) UIButton *btn;
+@property (nonatomic, strong) XHCourse *course;
 
 @end
 
@@ -93,7 +96,7 @@
     UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
     [self.view addSubview:webView];
     webView.delegate = self;
-    NSString *urlStr = [NSString stringWithFormat:@"http://ols.webi.com.cn/wap/course/index/wid=1!openid=%@",openid];
+    NSString *urlStr = [NSString stringWithFormat:@"%@/wap/course/index/wid=1!openid=%@", baseURL, openid];
     NSURL *url = [NSURL URLWithString:urlStr];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];
@@ -102,9 +105,9 @@
 #pragma mark - UIWebViewDelegate
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    //NSLog(@"%s", __func__);
     NSString *lJs = @"document.documentElement.innerHTML";//获取当前网页的html
     NSString *jsCodeStr = [webView stringByEvaluatingJavaScriptFromString:lJs];
+//    NSLog(@"%@", jsCodeStr);
     [self handleDataWithTargetStr:jsCodeStr];
 }
 
@@ -224,6 +227,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     //NSLog(@"%s", __func__);
     XHOrderCourseCell *cell = [XHOrderCourseCell cellWithTableView:tableView];
+    cell.delegate = self;
     cell.course = self.dataList[indexPath.row];
     return cell;
 }
@@ -237,6 +241,90 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //NSLog(@"%s", __func__);
+}
+
+#pragma mark - XHOrderCourseCellDelegate
+- (void)orderCourseCell:(XHOrderCourseCell *)cell didClickBtn:(UIButton *)btn
+{
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    XHCourse *course = nil;
+    if (!self.checkImage1.isHidden) {
+        NSLog(@"private");
+        course = self.privateList[indexPath.row];
+    } else if (!self.checkImage2.isHidden) {
+        NSLog(@"solon");
+        course = self.solonList[indexPath.row];
+    } else {
+        NSLog(@"application");
+        course = self.appList[indexPath.row];
+    }
+    // 存储btn和course，alertview的代理里会用到
+    self.btn = btn;
+    self.course = course;
+    // 显示会话框
+    UIAlertView *alertView = [[UIAlertView alloc] init];
+    alertView.delegate = self;
+    [alertView addButtonWithTitle:@"取消"];
+    [alertView addButtonWithTitle:@"确定"];
+    if ([btn.currentTitle isEqualToString:@"预定"]) {
+        // 显示预定会话框
+        NSString *alertTitle = @"您要预订该课程吗？";
+        NSString *alertMsg = @"预订后可提前6小时取消";
+        // 处理时间
+        NSString *beginTimeStr = [course.BeginTime stringByReplacingOccurrencesOfString:@"T" withString:@" "];
+        NSDate *beginTimeDate = [NSDate dateFromString:beginTimeStr withFormatter:@"yyyy-MM-dd HH:mm:ss"];
+        NSInteger timeDiff = [[NSDate date] minutesBeforeDate:beginTimeDate];
+        if (timeDiff < 60 * 6) {
+            alertMsg = @"6小时内即将开始的课程\n预订后不可取消";
+        }
+        alertView.title = alertTitle;
+        alertView.message = alertMsg;
+    } else {
+        // 显示排队会话框
+        alertView.title = @"你要加入排队队列吗？";
+        alertView.message = @"加入排队队列后，如有人取消预订，我们会第一时间通知您。";
+    }
+    [alertView show];
+}
+
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"%zd--%@", buttonIndex, self.btn.currentTitle);
+    if (buttonIndex == 1) {
+        [MBProgressHUD showMessage:@"预定中，请稍等..."];
+        if ([self.btn.currentTitle isEqualToString:@"预定"]) {
+            // 发送预定请求
+            AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+            [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+            manager.requestSerializer.timeoutInterval = 3.0f;
+            [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+            manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+            NSString *urlStr = [NSString stringWithFormat:@"%@%@", baseURL, orderCourseURL];
+            NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+            parameters[@"appUserId"] = userId;
+            parameters[@"openId"] = openid;
+            parameters[@"courseGuid"] = self.course.CourseGuid;
+            parameters[@"contractGuid"] = contractGuid;
+            [manager POST:urlStr parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                NSLog(@"订课成功:%@", responseObject);
+                [MBProgressHUD hideHUD];
+                if ([responseObject[@"state"] integerValue] == 1) {
+                    [MBProgressHUD showSuccess:@"预定成功!"];
+                    // TODO:此处还可以查看订课详情
+                } else {
+                    [MBProgressHUD showError:responseObject[@"message"]];
+                }
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                NSLog(@"订课失败:%@", error);
+                [MBProgressHUD hideHUD];
+                [MBProgressHUD showError:@"当前网络不好，请检查网络"];
+            }];
+        } else {
+            // 发送排队请求
+            
+        }
+    }
 }
 
 
