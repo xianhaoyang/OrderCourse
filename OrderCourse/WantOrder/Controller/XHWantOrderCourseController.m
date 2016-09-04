@@ -293,18 +293,19 @@
     NSLog(@"%zd--%@", buttonIndex, self.btn.currentTitle);
     if (buttonIndex == 1) {
         [MBProgressHUD showMessage:@"预定中，请稍等..."];
+        // 发送预定请求
+        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+        [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+        manager.requestSerializer.timeoutInterval = 3.0f;
+        [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+        manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+        NSString *urlStr = nil;
+        NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+        parameters[@"appUserId"] = userId;
+        parameters[@"courseGuid"] = self.course.CourseGuid;
         if ([self.btn.currentTitle isEqualToString:@"预定"]) {
-            // 发送预定请求
-            AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-            [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
-            manager.requestSerializer.timeoutInterval = 3.0f;
-            [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
-            manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-            NSString *urlStr = [NSString stringWithFormat:@"%@%@", baseURL, orderCourseURL];
-            NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-            parameters[@"appUserId"] = userId;
+            urlStr = [NSString stringWithFormat:@"%@%@", baseURL, orderCourseURL];
             parameters[@"openId"] = openid;
-            parameters[@"courseGuid"] = self.course.CourseGuid;
             parameters[@"contractGuid"] = contractGuid;
             [manager POST:urlStr parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 NSLog(@"订课成功:%@", responseObject);
@@ -322,7 +323,20 @@
             }];
         } else {
             // 发送排队请求
-            
+            urlStr = [NSString stringWithFormat:@"%@%@", baseURL, reminderQueueURL];
+            [manager POST:urlStr parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                NSLog(@"排队成功:%@", responseObject);
+                [MBProgressHUD hideHUD];
+                if ([responseObject[@"state"] integerValue] == 1) {
+                    [MBProgressHUD showSuccess:@"排队成功!"];
+                } else {
+                    [MBProgressHUD showError:responseObject[@"message"]];
+                }
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                NSLog(@"排队失败:%@", error);
+                [MBProgressHUD hideHUD];
+                [MBProgressHUD showError:@"当前网络不好，请检查网络"];
+            }];
         }
     }
 }

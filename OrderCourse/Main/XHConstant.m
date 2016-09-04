@@ -19,3 +19,4 @@ NSString *const contractGuid = @"ad36003e-5b52-e611-80d1-02bf0a00005b";
 // 不变常量
 NSString *const baseURL = @"http://ols.webi.com.cn";
 NSString *const orderCourseURL = @"/api/course/confirm_order";
+NSString *const reminderQueueURL = @"/api/course/add_reminder_queue";

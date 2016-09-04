@@ -17,3 +17,4 @@ extern NSString *const userId;
 extern NSString *const contractGuid;
 extern NSString *const baseURL;
 extern NSString *const orderCourseURL;
+extern NSString *const reminderQueueURL;
