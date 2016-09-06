@@ -27,7 +27,7 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kpG-aR-z5Y">
+                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Person" translatesAutoresizingMaskIntoConstraints="NO" id="kpG-aR-z5Y">
                     <rect key="frame" x="201" y="44" width="198" height="354"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="kpG-aR-z5Y" secondAttribute="height" multiplier="0.56" id="iJ3-cF-OBp"/>
@@ -118,4 +118,7 @@
             </constraints>
         </view>
     </objects>
+    <resources>
+        <image name="Person" width="47" height="47"/>
+    </resources>
 </document>
