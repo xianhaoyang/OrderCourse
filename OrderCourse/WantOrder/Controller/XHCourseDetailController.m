@@ -11,8 +11,11 @@
 #import "UIView+YXH.h"
 #import "XHCourse.h"
 #import "XHConstant.h"
+#import "NSDate+Escort.h"
+#import "MBProgressHUD+XMG.h"
+#import "AFNetworking.h"
 
-@interface XHCourseDetailController ()
+@interface XHCourseDetailController () <UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *teacherImageView;
 @property (weak, nonatomic) IBOutlet UIButton *actionBtn;
@@ -150,6 +153,84 @@
 
 - (IBAction)clickActionBtn {
     NSLog(@"%s", __func__);
+    // 显示会话框
+    UIAlertView *alertView = [[UIAlertView alloc] init];
+    alertView.delegate = self;
+    [alertView addButtonWithTitle:@"取消"];
+    [alertView addButtonWithTitle:@"确定"];
+    if ([self.actionBtn.currentTitle isEqualToString:@"预定"]) {
+        // 显示预定会话框
+        NSString *alertTitle = @"您要预订该课程吗？";
+        NSString *alertMsg = @"预订后可提前6小时取消";
+        // 处理时间
+        NSString *beginTimeStr = [self.course.BeginTime stringByReplacingOccurrencesOfString:@"T" withString:@" "];
+        NSDate *beginTimeDate = [NSDate dateFromString:beginTimeStr withFormatter:@"yyyy-MM-dd HH:mm:ss"];
+        NSInteger timeDiff = [[NSDate date] minutesBeforeDate:beginTimeDate];
+        if (timeDiff < 60 * 6) {
+            alertMsg = @"6小时内即将开始的课程\n预订后不可取消";
+        }
+        alertView.title = alertTitle;
+        alertView.message = alertMsg;
+    } else {
+        // 显示排队会话框
+        alertView.title = @"你要加入排队队列吗？";
+        alertView.message = @"加入排队队列后，如有人取消预订，我们会第一时间通知您。";
+    }
+    [alertView show];
+}
+
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"%zd--%@", buttonIndex, self.actionBtn.currentTitle);
+    if (buttonIndex == 1) {
+        [MBProgressHUD showMessage:@"预定中，请稍等..."];
+        // 发送预定请求
+        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+        [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+        manager.requestSerializer.timeoutInterval = 3.0f;
+        [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+        manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+        NSString *urlStr = nil;
+        NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+        parameters[@"appUserId"] = userId;
+        parameters[@"courseGuid"] = self.course.CourseGuid;
+        if ([self.actionBtn.currentTitle isEqualToString:@"预定"]) {
+            urlStr = [NSString stringWithFormat:@"%@%@", baseURL, orderCourseURL];
+            parameters[@"openId"] = openid;
+            parameters[@"contractGuid"] = contractGuid;
+            [manager POST:urlStr parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                NSLog(@"订课成功:%@", responseObject);
+                [MBProgressHUD hideHUD];
+                if ([responseObject[@"state"] integerValue] == 1) {
+                    [MBProgressHUD showSuccess:@"预定成功!"];
+                    // TODO:此处还可以查看订课详情
+                } else {
+                    [MBProgressHUD showError:responseObject[@"message"]];
+                }
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                NSLog(@"订课失败:%@", error);
+                [MBProgressHUD hideHUD];
+                [MBProgressHUD showError:@"当前网络不好，请检查网络"];
+            }];
+        } else {
+            // 发送排队请求
+            urlStr = [NSString stringWithFormat:@"%@%@", baseURL, reminderQueueURL];
+            [manager POST:urlStr parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                NSLog(@"排队成功:%@", responseObject);
+                [MBProgressHUD hideHUD];
+                if ([responseObject[@"state"] integerValue] == 1) {
+                    [MBProgressHUD showSuccess:@"排队成功!"];
+                } else {
+                    [MBProgressHUD showError:responseObject[@"message"]];
+                }
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                NSLog(@"排队失败:%@", error);
+                [MBProgressHUD hideHUD];
+                [MBProgressHUD showError:@"当前网络不好，请检查网络"];
+            }];
+        }
+    }
 }
 
 - (void)setCourse:(XHCourse *)course
