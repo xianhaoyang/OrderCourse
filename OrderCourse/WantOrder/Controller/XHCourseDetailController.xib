@@ -34,61 +34,64 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="授课老师:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dzr-4a-wc0">
-                    <rect key="frame" x="151" y="378" width="65" height="18"/>
+                    <rect key="frame" x="131" y="378" width="65" height="18"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="课程类型:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FhW-zW-nHW">
-                    <rect key="frame" x="151" y="406" width="65" height="18"/>
+                    <rect key="frame" x="131" y="406" width="65" height="18"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="课程名称:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Np-Gp-fmZ">
-                    <rect key="frame" x="151" y="434" width="65" height="18"/>
+                    <rect key="frame" x="131" y="434" width="65" height="18"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上课地点:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UVV-OL-7Mi">
-                    <rect key="frame" x="151" y="490" width="65" height="18"/>
+                    <rect key="frame" x="131" y="490" width="65" height="18"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="开始时间:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qad-Ey-tfF">
-                    <rect key="frame" x="151" y="518" width="65" height="18"/>
+                    <rect key="frame" x="131" y="518" width="65" height="18"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="课程主题:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vsH-Xi-89S">
-                    <rect key="frame" x="151" y="462" width="65" height="18"/>
+                    <rect key="frame" x="131" y="462" width="65" height="18"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="订课人数:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EpK-v0-rS9">
-                    <rect key="frame" x="151" y="546" width="65" height="18"/>
+                    <rect key="frame" x="131" y="546" width="65" height="18"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="适用级别:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="buV-Tu-4pn">
-                    <rect key="frame" x="151" y="574" width="65" height="18"/>
+                    <rect key="frame" x="131" y="574" width="65" height="18"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jRO-9e-hsy">
-                    <rect key="frame" x="10" y="562" width="580" height="30"/>
+                    <rect key="frame" x="10" y="552" width="580" height="40"/>
                     <color key="backgroundColor" red="0.58134129079999997" green="1" blue="0.2197323853" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="30" id="Kpf-pk-Y4i"/>
+                        <constraint firstAttribute="height" constant="40" id="Kpf-pk-Y4i"/>
                     </constraints>
                     <state key="normal" title="预定">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="clickActionBtn" destination="-1" eventType="touchUpInside" id="58k-JI-wTh"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -104,9 +107,9 @@
                 <constraint firstItem="vsH-Xi-89S" firstAttribute="leading" secondItem="3Np-Gp-fmZ" secondAttribute="leading" id="bgs-fk-0eE"/>
                 <constraint firstItem="qad-Ey-tfF" firstAttribute="leading" secondItem="UVV-OL-7Mi" secondAttribute="leading" id="cvn-Qg-xzp"/>
                 <constraint firstItem="kpG-aR-z5Y" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.33" id="du8-AA-sBe"/>
-                <constraint firstItem="FhW-zW-nHW" firstAttribute="leading" secondItem="kpG-aR-z5Y" secondAttribute="leading" constant="-50" id="khz-NZ-hfy"/>
+                <constraint firstItem="FhW-zW-nHW" firstAttribute="leading" secondItem="kpG-aR-z5Y" secondAttribute="leading" constant="-70" id="khz-NZ-hfy"/>
                 <constraint firstItem="vsH-Xi-89S" firstAttribute="top" secondItem="3Np-Gp-fmZ" secondAttribute="bottom" constant="10" id="kiG-gl-MKS"/>
-                <constraint firstItem="Dzr-4a-wc0" firstAttribute="leading" secondItem="kpG-aR-z5Y" secondAttribute="leading" constant="-50" id="lGu-hN-3e6"/>
+                <constraint firstItem="Dzr-4a-wc0" firstAttribute="leading" secondItem="kpG-aR-z5Y" secondAttribute="leading" constant="-70" id="lGu-hN-3e6"/>
                 <constraint firstItem="EpK-v0-rS9" firstAttribute="top" secondItem="qad-Ey-tfF" secondAttribute="bottom" constant="10" id="m38-q0-dg6"/>
                 <constraint firstItem="jRO-9e-hsy" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="mYd-Ml-ofM"/>
                 <constraint firstItem="buV-Tu-4pn" firstAttribute="leading" secondItem="EpK-v0-rS9" secondAttribute="leading" id="pRf-rU-HM3"/>

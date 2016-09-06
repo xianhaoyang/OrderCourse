@@ -8,8 +8,7 @@
 
 #import "XHOrderCourseCell.h"
 #import "XHCourse.h"
-
-#define kRBGColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
+#import "XHConstant.h"
 
 @interface XHOrderCourseCell ()
 
@@ -45,7 +44,9 @@
 - (void)setCourse:(XHCourse *)course
 {
     _course = course;
+    // 课程名
     self.courseNameLabel.text = course.CourseName;
+    // 开始时间
     NSString *dateStr = [course.BeginTime substringWithRange:NSMakeRange(5, 5)];
     dateStr = [[dateStr stringByReplacingOccurrencesOfString:@"-" withString:@"月"] stringByAppendingString:@"日"];
     NSString *weekStr = [course.BeginTime substringToIndex:10];

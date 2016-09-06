@@ -7,8 +7,10 @@
 //
 
 #import "XHCourseDetailController.h"
+#import "NSDate+Calculations.h"
 #import "UIView+YXH.h"
 #import "XHCourse.h"
+#import "XHConstant.h"
 
 @interface XHCourseDetailController ()
 
@@ -52,11 +54,33 @@
     if (img) {
         self.teacherImageView.image = img;
     }
-    self.teacherLabel.text = [NSString stringWithFormat:@"授课老师:%@", self.course.Teacher];
-    self.courseTypeLabel.text = [NSString stringWithFormat:@"课程类型:%@", self.course.CourseType];
-    self.courseNameLabel.text = [NSString stringWithFormat:@"课程名称:%@", self.course.CourseName];
-    self.courseTopicLabel.text = [NSString stringWithFormat:@"课程主题:%@", self.course.Topic];
-    self.classRoomLabel.text = [NSString stringWithFormat:@"上课地点:%@", self.course.ClassRoom];
+    self.teacherLabel.text = [NSString stringWithFormat:@"授课老师: %@", self.course.Teacher];
+    self.courseTypeLabel.text = [NSString stringWithFormat:@"课程类型: %@", self.course.CourseType];
+    self.courseNameLabel.text = [NSString stringWithFormat:@"课程名称: %@", self.course.CourseName];
+    self.courseTopicLabel.text = [NSString stringWithFormat:@"课程主题: %@", self.course.Topic];
+    self.classRoomLabel.text = [NSString stringWithFormat:@"上课地点: %@", self.course.ClassRoom];
+    // 开始时间
+    NSString *dateStr = [self.course.BeginTime substringWithRange:NSMakeRange(5, 5)];
+    dateStr = [[dateStr stringByReplacingOccurrencesOfString:@"-" withString:@"月"] stringByAppendingString:@"日"];
+    NSString *weekStr = [self.course.BeginTime substringToIndex:10];
+    NSDate *date = [NSDate dateFromString:weekStr withFormatter:@"yyyy-MM-dd"];
+    NSString *weekDay = [NSDate weekdayStringFromDate:date];
+    NSString *timeStr = [self.course.BeginTime substringWithRange:NSMakeRange(11, 5)];
+    self.startTimeLabel.text = [NSString stringWithFormat:@"开始时间: %@ %@ %@", dateStr, weekDay, timeStr];
+    // 订课人数
+    if ([self.course.OrderNumber integerValue] < [self.course.Capacity integerValue]) {
+        self.orderNumLabel.text = [NSString stringWithFormat:@"订课人数: %@/%@", self.course.OrderNumber, self.course.Capacity];
+//        self.orderNumLabel.textColor = kRBGColor(125, 208, 32);
+        self.actionBtn.backgroundColor = kRBGColor(67, 219, 212);
+        [self.actionBtn setTitle:@"预定" forState:UIControlStateNormal];
+    } else {
+        self.orderNumLabel.text = @"订课人数: 已满";
+//        self.orderNumLabel.textColor = kRBGColor(253, 109, 127);
+        self.actionBtn.backgroundColor = kRBGColor(243, 165, 54);
+        [self.actionBtn setTitle:@"排队" forState:UIControlStateNormal];
+    }
+    // 级别
+    self.levelLabel.text = [NSString stringWithFormat:@"适用级别: %@", self.course.CourseLevel];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -122,6 +146,10 @@
         }
     }
     return valid;
+}
+
+- (IBAction)clickActionBtn {
+    NSLog(@"%s", __func__);
 }
 
 - (void)setCourse:(XHCourse *)course
