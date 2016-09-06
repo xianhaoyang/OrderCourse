@@ -32,6 +32,9 @@
     self.title = @"课程详情";
     self.actionBtn.layer.cornerRadius = 5.0f;
     self.actionBtn.clipsToBounds = YES;
+    // 老师图片点击事件
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapTeacherImageView)];
+    [self.teacherImageView addGestureRecognizer:tap];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -44,6 +47,11 @@
     self.courseNameLabel.text = [NSString stringWithFormat:@"课程名称:%@", self.course.CourseName];
     self.courseTopicLabel.text = [NSString stringWithFormat:@"课程主题:%@", self.course.Topic];
     self.classRoomLabel.text = [NSString stringWithFormat:@"上课地点:%@", self.course.ClassRoom];
+}
+
+- (void)tapTeacherImageView
+{
+    NSLog(@"%s", __func__);
 }
 
 - (void)setCourse:(XHCourse *)course
