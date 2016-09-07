@@ -7,6 +7,7 @@
 //
 
 #import "XHOrderRecordController.h"
+#import "HTMLParser.h"
 
 @interface XHOrderRecordController ()
 
@@ -16,8 +17,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.view.backgroundColor = [UIColor greenColor];
-//    self.title = @"订课记录";
+    
+    // HTMLParser
+    
 }
 
 @end

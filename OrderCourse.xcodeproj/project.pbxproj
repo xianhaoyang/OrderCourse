@@ -80,6 +80,9 @@
 		19CC875E1D7C70FF004BC7D6 /* Rachel陈畅2.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 19CC87521D7C70FF004BC7D6 /* Rachel陈畅2.JPG */; };
 		19CC875F1D7C70FF004BC7D6 /* William.HaytonWilliam Hayton.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 19CC87531D7C70FF004BC7D6 /* William.HaytonWilliam Hayton.JPG */; };
 		19CC87601D7C70FF004BC7D6 /* William.HaytonWilliam Hayton2.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 19CC87541D7C70FF004BC7D6 /* William.HaytonWilliam Hayton2.JPG */; };
+		74BEA54F1D7FE54700BF6030 /* HTMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BEA54C1D7FE54700BF6030 /* HTMLNode.m */; };
+		74BEA5501D7FE54700BF6030 /* HTMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BEA54E1D7FE54700BF6030 /* HTMLParser.m */; };
+		74BEA5521D7FE59300BF6030 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 74BEA5511D7FE59300BF6030 /* libxml2.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -231,6 +234,11 @@
 		19CC87521D7C70FF004BC7D6 /* Rachel陈畅2.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Rachel陈畅2.JPG"; sourceTree = "<group>"; };
 		19CC87531D7C70FF004BC7D6 /* William.HaytonWilliam Hayton.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "William.HaytonWilliam Hayton.JPG"; sourceTree = "<group>"; };
 		19CC87541D7C70FF004BC7D6 /* William.HaytonWilliam Hayton2.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "William.HaytonWilliam Hayton2.JPG"; sourceTree = "<group>"; };
+		74BEA54B1D7FE54700BF6030 /* HTMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLNode.h; sourceTree = "<group>"; };
+		74BEA54C1D7FE54700BF6030 /* HTMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLNode.m; sourceTree = "<group>"; };
+		74BEA54D1D7FE54700BF6030 /* HTMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLParser.h; sourceTree = "<group>"; };
+		74BEA54E1D7FE54700BF6030 /* HTMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLParser.m; sourceTree = "<group>"; };
+		74BEA5511D7FE59300BF6030 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,6 +246,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74BEA5521D7FE59300BF6030 /* libxml2.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,6 +284,7 @@
 		197350051D79BE0900524F9A = {
 			isa = PBXGroup;
 			children = (
+				74BEA5511D7FE59300BF6030 /* libxml2.tbd */,
 				197350101D79BE0A00524F9A /* OrderCourse */,
 				1973502A1D79BE0A00524F9A /* OrderCourseTests */,
 				197350351D79BE0A00524F9A /* OrderCourseUITests */,
@@ -414,6 +424,7 @@
 		1973504C1D79BF7F00524F9A /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				74BEA54A1D7FE54700BF6030 /* HTMLParser */,
 				198CEFC01D7BDF89005DF362 /* MBProgressHUD */,
 				198CEFBC1D7BCC09005DF362 /* NSDate-Escort */,
 				198CEFA51D7BBF41005DF362 /* AFNetworking */,
@@ -651,6 +662,17 @@
 			path = TeacherImage;
 			sourceTree = "<group>";
 		};
+		74BEA54A1D7FE54700BF6030 /* HTMLParser */ = {
+			isa = PBXGroup;
+			children = (
+				74BEA54B1D7FE54700BF6030 /* HTMLNode.h */,
+				74BEA54C1D7FE54700BF6030 /* HTMLNode.m */,
+				74BEA54D1D7FE54700BF6030 /* HTMLParser.h */,
+				74BEA54E1D7FE54700BF6030 /* HTMLParser.m */,
+			);
+			path = HTMLParser;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -838,6 +860,7 @@
 				197350611D79D14900524F9A /* XHCourse.m in Sources */,
 				198CF0071D7BEFFA005DF362 /* MJRefreshConst.m in Sources */,
 				196E870C1D7B266E00132BEA /* UIView+YXH.m in Sources */,
+				74BEA54F1D7FE54700BF6030 /* HTMLNode.m in Sources */,
 				198CEFB71D7BBF41005DF362 /* AFURLResponseSerialization.m in Sources */,
 				198CEFC81D7BDF89005DF362 /* MBProgressHUD.m in Sources */,
 				198CEFB61D7BBF41005DF362 /* AFURLRequestSerialization.m in Sources */,
@@ -850,6 +873,7 @@
 				198CEFFC1D7BEFFA005DF362 /* MJRefreshHeader.m in Sources */,
 				198CF0051D7BEFFA005DF362 /* MJRefreshStateHeader.m in Sources */,
 				198CEFB41D7BBF41005DF362 /* AFNetworkReachabilityManager.m in Sources */,
+				74BEA5501D7FE54700BF6030 /* HTMLParser.m in Sources */,
 				198CEFF81D7BEFFA005DF362 /* MJRefreshAutoFooter.m in Sources */,
 				197350791D79D7E900524F9A /* MJFoundation.m in Sources */,
 				198CEFFB1D7BEFFA005DF362 /* MJRefreshFooter.m in Sources */,
@@ -988,6 +1012,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = OrderCourse/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1001,6 +1026,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = OrderCourse/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
