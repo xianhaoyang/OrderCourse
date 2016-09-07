@@ -83,6 +83,7 @@
 		74BEA54F1D7FE54700BF6030 /* HTMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BEA54C1D7FE54700BF6030 /* HTMLNode.m */; };
 		74BEA5501D7FE54700BF6030 /* HTMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BEA54E1D7FE54700BF6030 /* HTMLParser.m */; };
 		74BEA5521D7FE59300BF6030 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 74BEA5511D7FE59300BF6030 /* libxml2.tbd */; };
+		74BEA5581D800D6700BF6030 /* XHOrderedCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BEA5571D800D6700BF6030 /* XHOrderedCourse.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -239,6 +240,8 @@
 		74BEA54D1D7FE54700BF6030 /* HTMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLParser.h; sourceTree = "<group>"; };
 		74BEA54E1D7FE54700BF6030 /* HTMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLParser.m; sourceTree = "<group>"; };
 		74BEA5511D7FE59300BF6030 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		74BEA5561D800D6700BF6030 /* XHOrderedCourse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHOrderedCourse.h; sourceTree = "<group>"; };
+		74BEA5571D800D6700BF6030 /* XHOrderedCourse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHOrderedCourse.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -368,6 +371,8 @@
 		197350461D79BF6700524F9A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				74BEA5561D800D6700BF6030 /* XHOrderedCourse.h */,
+				74BEA5571D800D6700BF6030 /* XHOrderedCourse.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -846,6 +851,7 @@
 				196E86D61D7AFE9400132BEA /* XHOrderCourseCell.m in Sources */,
 				197350511D79C17F00524F9A /* XHWantOrderCourseController.m in Sources */,
 				198CF0011D7BEFFA005DF362 /* MJRefreshBackNormalFooter.m in Sources */,
+				74BEA5581D800D6700BF6030 /* XHOrderedCourse.m in Sources */,
 				198CF0041D7BEFFA005DF362 /* MJRefreshNormalHeader.m in Sources */,
 				197350801D79D7E900524F9A /* NSObject+MJProperty.m in Sources */,
 				197350811D79D7E900524F9A /* NSString+MJExtension.m in Sources */,
