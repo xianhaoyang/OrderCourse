@@ -11,5 +11,6 @@
 @interface XHOrderedCourse : XHCourse
 
 @property (nonatomic, readwrite, copy) NSString *orderID;
+@property (nonatomic, copy, readwrite) NSString *state;
 
 @end
