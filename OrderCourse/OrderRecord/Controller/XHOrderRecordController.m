@@ -12,6 +12,7 @@
 #import "HTMLParser.h"
 
 #define kOrderIDLength 36
+#define kListCount     10
 
 @interface XHOrderRecordController ()
 
@@ -38,7 +39,7 @@
 - (void)requestMyOrderedCourse
 {
     // HTMLParser
-    NSString *urlStr = [NSString stringWithFormat:@"%@/wap/course/my_order/wid=1!openid=oXoOjt9tI9bAOy0TVyt4CvZLDwDQ", baseURL];
+    NSString *urlStr = [NSString stringWithFormat:@"%@/wap/course/my_order/wid=1!openid=%@", baseURL, openid];
     NSError *error = nil;
     HTMLParser *parser = [[HTMLParser alloc] initWithContentsOfURL:[NSURL URLWithString:urlStr] error:&error];
     if (error) {
@@ -46,7 +47,7 @@
         return;
     }
     // 创建10个XHOrderedCourse对象
-    for (NSInteger i = 0; i < 10; i++) {
+    for (NSInteger i = 0; i < kListCount; i++) {
         XHOrderedCourse *orderedCourse = [[XHOrderedCourse alloc] init];
         [self.orderedCourseList addObject:orderedCourse];
     }
