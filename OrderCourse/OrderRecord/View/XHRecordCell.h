@@ -10,4 +10,6 @@
 
 @interface XHRecordCell : UITableViewCell
 
++ (instancetype)cellWithTableView:(UITableView *)tableView;
+
 @end

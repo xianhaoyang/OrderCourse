@@ -7,6 +7,7 @@
 //
 
 #import "XHOrderRecordController.h"
+#import "XHRecordCell.h"
 #import "XHOrderedCourse.h"
 #import "XHConstant.h"
 #import "HTMLParser.h"
@@ -33,8 +34,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.backgroundView = nil;
+    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.rowHeight = 160;
+    
     [self requestMyOrderedCourse];
 }
 
@@ -99,17 +105,12 @@
 #pragma mark - UITableViewDelegate & UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 20;
+    return self.orderedCourseList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *ID = @"cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
-    }
-    cell.textLabel.text = [NSString stringWithFormat:@"测试文字==%zd", indexPath.row];
+    XHRecordCell *cell = [XHRecordCell cellWithTableView:tableView];
     return cell;
 }
 

@@ -10,9 +10,20 @@
 
 @implementation XHRecordCell
 
++ (instancetype)cellWithTableView:(UITableView *)tableView
+{
+    static NSString *ID = @"XHRecordCell";
+    XHRecordCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    if (!cell) {
+        cell = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil] firstObject];
+    }
+    return cell;
+}
+
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    self.backgroundView = nil;
+    self.backgroundColor = [UIColor clearColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
