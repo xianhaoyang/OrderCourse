@@ -191,7 +191,7 @@
         manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
         NSString *urlStr = nil;
         NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-        parameters[@"appUserId"] = userId;
+        parameters[@"appUserId"] = userid;
         parameters[@"courseGuid"] = self.course.CourseGuid;
         if ([self.actionBtn.currentTitle isEqualToString:@"预定"]) {
             urlStr = [NSString stringWithFormat:@"%@%@", baseURL, orderCourseURL];

@@ -15,7 +15,7 @@
 @end
 
 extern NSString *const openid;
-extern NSString *const userId;
+extern NSString *const userid;
 extern NSString *const contractGuid;
 extern NSString *const baseURL;
 extern NSString *const orderCourseURL;
