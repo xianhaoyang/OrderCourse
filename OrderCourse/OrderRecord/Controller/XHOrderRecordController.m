@@ -45,37 +45,52 @@
         NSLog(@"Error: %@", error);
         return;
     }
+    // 创建10个XHOrderedCourse对象
+    for (NSInteger i = 0; i < 10; i++) {
+        XHOrderedCourse *orderedCourse = [[XHOrderedCourse alloc] init];
+        [self.orderedCourseList addObject:orderedCourse];
+    }
     HTMLNode *bodyNode = [parser body];
     // 找出订课非orderid数据
     NSArray *spanNodes = [bodyNode findChildTags:@"div"];
+    NSInteger i = 0;
     for (HTMLNode *spanNode in spanNodes) {
-        XHOrderedCourse *orderedCourse = [[XHOrderedCourse alloc] init];
+        if (i >= self.orderedCourseList.count) break;
+        XHOrderedCourse *orderedCourse = self.orderedCourseList[i];
         if ([[spanNode getAttributeNamed:@"class"] isEqualToString:@"courseIcon"]) {
             orderedCourse.CourseType = [spanNode allContents];
         }
         if ([[spanNode getAttributeNamed:@"class"] isEqualToString:@"coureseRecordTitle"]) {
-            orderedCourse.CourseName = [[spanNode allContents] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            NSString *str = [[spanNode allContents] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+//            str = [str stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+//            str = [str stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+            orderedCourse.CourseName = str;
         }
         if ([[spanNode getAttributeNamed:@"class"] isEqualToString:@"courseRecordTime"]) {
-            orderedCourse.BeginTime = [[spanNode allContents] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            NSString *str = [[spanNode allContents] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+//            str = [str stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+//            str = [str stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+            orderedCourse.BeginTime = str;
         }
         if ([[spanNode getAttributeNamed:@"class"] isEqualToString:@"courseRecordState"]) {
-            orderedCourse.state = [[spanNode allContents] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            NSString *str = [[spanNode allContents] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+//            str = [str stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+//            str = [str stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+            orderedCourse.state = str;
+            i++;
         }
-        [self.orderedCourseList addObject:orderedCourse];
     }
     // 找出订课orderid数据
     NSArray *spanNodes1 = [bodyNode findChildTags:@"a"];
     NSInteger index = 0;
     for (HTMLNode *spanNode in spanNodes1) {
+        if (index >= self.orderedCourseList.count) break;
         NSString *valueStr = [spanNode getAttributeNamed:@"href"];
         NSString *orderid = [valueStr substringFromIndex:valueStr.length - kOrderIDLength];
         XHOrderedCourse *course = self.orderedCourseList[index];
         course.orderID = orderid;
         index++;
-        if (index > self.orderedCourseList.count) break;
     }
-    NSLog(@"---");
 }
 
 @end
