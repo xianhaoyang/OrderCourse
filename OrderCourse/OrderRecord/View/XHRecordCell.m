@@ -8,6 +8,13 @@
 
 #import "XHRecordCell.h"
 
+@interface XHRecordCell ()
+
+@property (weak, nonatomic) IBOutlet UIButton *courseTypeBtn;
+@property (weak, nonatomic) IBOutlet UIView *bgView;
+
+@end
+
 @implementation XHRecordCell
 
 + (instancetype)cellWithTableView:(UITableView *)tableView
@@ -24,12 +31,22 @@
     [super awakeFromNib];
     self.backgroundView = nil;
     self.backgroundColor = [UIColor clearColor];
+    
+    self.courseTypeBtn.layer.cornerRadius = 22.5f;
+    self.courseTypeBtn.clipsToBounds = YES;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    self.bgView.backgroundColor = [UIColor whiteColor];
+    self.bgView.layer.cornerRadius = 5;
+    //    self.bgView.clipsToBounds = YES;
+    self.bgView.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.bgView.layer.shadowOffset = CGSizeMake(10, 10);
+    self.bgView.layer.opacity = 0.8;
+    self.bgView.layer.shadowRadius = 5;
 }
 
 @end
