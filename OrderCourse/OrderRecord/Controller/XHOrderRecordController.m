@@ -14,8 +14,9 @@
 #define kOrderIDLength 36
 #define kListCount     10
 
-@interface XHOrderRecordController ()
+@interface XHOrderRecordController () <UITableViewDelegate, UITableViewDataSource>
 
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *orderedCourseList;
 
 @end
@@ -32,7 +33,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
     [self requestMyOrderedCourse];
 }
 
@@ -92,6 +94,23 @@
         course.orderID = orderid;
         index++;
     }
+}
+
+#pragma mark - UITableViewDelegate & UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 20;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *ID = @"cell123";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
+    }
+    cell.textLabel.text = [NSString stringWithFormat:@"测试文字==%zd", indexPath.row];
+    return cell;
 }
 
 @end
