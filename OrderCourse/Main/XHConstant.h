@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #define kRGBColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
+#define kNotificationCenter [NSNotificationCenter defaultCenter]
 
 @interface XHConstant : NSObject
 
@@ -21,3 +22,6 @@ extern NSString *const baseURL;
 extern NSString *const orderCourseURL;
 extern NSString *const reminderQueueURL;
 extern NSString *const cancelOrderURL;
+
+extern NSString *const kCourseDetailControllerReserveCourseSuccessNotification;
+extern NSString *const kResponseObjectKey;

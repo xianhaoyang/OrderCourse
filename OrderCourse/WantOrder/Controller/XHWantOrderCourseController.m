@@ -16,6 +16,7 @@
 #import "NSDate+Escort.h"
 #import "MBProgressHUD+XMG.h"
 #import "MJRefresh.h"
+#import "XHReservedCourse.h"
 
 #define kBtnW 80
 #define kBtnH 50
@@ -40,6 +41,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *applicationBtnH;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *btnTop;
 
+@property (nonatomic, strong) NSMutableArray *reservedList;
 @property (nonatomic, strong) NSMutableArray *privateList;
 @property (nonatomic, strong) NSMutableArray *solonList;
 @property (nonatomic, strong) NSMutableArray *appList;
@@ -55,6 +57,14 @@
 @implementation XHWantOrderCourseController
 
 #pragma mark - lazy load
+- (NSMutableArray *)reservedList
+{
+    if (!_reservedList) {
+        _reservedList = [NSMutableArray array];
+    }
+    return _reservedList;
+}
+
 - (NSMutableArray *)privateList
 {
     if (!_privateList) {
@@ -104,6 +114,8 @@
     
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshHomeData)];
     [self.tableView.mj_header beginRefreshing];
+    
+    [kNotificationCenter addObserver:self selector:@selector(saveOrderInfo:) name:kCourseDetailControllerReserveCourseSuccessNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -362,7 +374,7 @@
             urlStr = [NSString stringWithFormat:@"%@%@", baseURL, orderCourseURL];
             parameters[@"openId"] = openid;
             parameters[@"contractGuid"] = contractGuid;
-            [manager POST:urlStr parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            [manager POST:urlStr parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary  *_Nullable responseObject) {
                 NSLog(@"订课成功:%@", responseObject);
                 [MBProgressHUD hideHUD];
                 if ([responseObject[@"state"] integerValue] == 1) {
@@ -370,6 +382,8 @@
                     [MBProgressHUD showSuccess:@"预定成功!"];
                     // 刷新当前课程类型表格
                     [self refreshCurrentCourseTypeTableViewData];
+                    // 将订课成功的对象存入数组
+                    [self saveReserveInfoInArrayWithDict:responseObject];
                     // TODO:此处还可以查看订课详情
                 } else {
                     [MBProgressHUD showError:responseObject[@"message"]];
@@ -399,6 +413,25 @@
     }
 }
 
+#pragma mark - 课程详情页面订课成功发送过来的通知
+- (void)saveOrderInfo:(NSNotification *)note
+{
+    NSDictionary *responseObject = note.userInfo[kResponseObjectKey];
+    [self saveReserveInfoInArrayWithDict:responseObject];
+}
+
+#pragma mark - 将订课信息存入数组
+- (void)saveReserveInfoInArrayWithDict:(NSDictionary *)responseObject
+{
+    NSString *objectMsg = responseObject[@"message"];
+    NSString *reserveID = [objectMsg substringFromIndex:objectMsg.length - 36];
+    NSString *timeStr = [self.course.BeginTime stringByReplacingOccurrencesOfString:@"T" withString:@" "];
+    XHReservedCourse *reservedCourse = [[XHReservedCourse alloc] initWithReserveID:reserveID timeStr:timeStr];
+    [self.reservedList addObject:reservedCourse];
+    NSLog(@"reserveID:%@", reserveID);
+}
+
+#pragma mark - 重新刷新表格数据
 - (void)refreshCurrentCourseTypeTableViewData
 {
     NSLog(@"%s", __func__);

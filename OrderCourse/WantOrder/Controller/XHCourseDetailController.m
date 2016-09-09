@@ -212,13 +212,15 @@
             urlStr = [NSString stringWithFormat:@"%@%@", baseURL, orderCourseURL];
             parameters[@"openId"] = openid;
             parameters[@"contractGuid"] = contractGuid;
-            [manager POST:urlStr parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            [manager POST:urlStr parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary  *_Nullable responseObject) {
                 NSLog(@"订课成功:%@", responseObject);
                 [MBProgressHUD hideHUD];
                 if ([responseObject[@"state"] integerValue] == 1) {
                     self.course.Reserved = YES;
                     [MBProgressHUD showSuccess:@"预定成功!"];
                     [self disableActionBtn];
+                    // 将订课成功的对象存入已订课数组
+                    [self broadcastSaveReserveInfo:responseObject];
                     // TODO:此处还可以查看订课详情
                 } else {
                     [MBProgressHUD showError:responseObject[@"message"]];
@@ -253,6 +255,12 @@
     self.actionBtn.backgroundColor = [UIColor grayColor];
     [self.actionBtn setTitle:@"已预定" forState:UIControlStateNormal];
     self.actionBtn.enabled = NO;
+}
+
+- (void)broadcastSaveReserveInfo:(NSDictionary *)responseObject
+{
+    NSDictionary *dict = [NSDictionary dictionaryWithObject:responseObject forKey:kResponseObjectKey];
+    [kNotificationCenter postNotificationName:kCourseDetailControllerReserveCourseSuccessNotification object:self userInfo:dict];
 }
 
 - (void)setCourse:(XHCourse *)course
