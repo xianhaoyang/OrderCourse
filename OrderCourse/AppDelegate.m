@@ -10,6 +10,8 @@
 #import "XHNavigationController.h"
 #import "XHWantOrderCourseController.h"
 #import "XHOrderRecordController.h"
+#import "NSDate+Calculations.h"
+#import "NSDate+Escort.h"
 
 @interface AppDelegate ()
 
@@ -19,6 +21,21 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    // 程序已启动就在已订课数组中找出距离现在在3个小时之内的对象，并删除它
+    NSArray *reservedList = [NSKeyedUnarchiver unarchiveObjectWithFile:kReservedCourseSavePath];
+    if (reservedList.count) {
+        NSMutableArray *temp = [NSMutableArray arrayWithArray:reservedList];
+        for (XHReservedCourse *reservedcourse in reservedList) {
+            NSDate *beginDate = [NSDate dateFromString:reservedcourse.reserveTimeStr withFormatter:@"yyyy-MM-dd HH:mm:ss"];
+            NSInteger timeDiff = [[NSDate date] minutesBeforeDate:beginDate];
+            // 删除开课时间在3个小时之内的课程
+            if (timeDiff < 60 * 3) {
+                [temp removeObject:reservedcourse];
+            }
+        }
+        [NSKeyedArchiver archiveRootObject:temp toFile:kReservedCourseSavePath];
+    }
+    
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     // 创建UITabBarController

@@ -11,12 +11,10 @@
 #import "AFNetworking.h"
 #import "MJExtension.h"
 #import "XHCourse.h"
-#import "XHConstant.h"
 #import "XHOrderCourseCell.h"
 #import "NSDate+Escort.h"
 #import "MBProgressHUD+XMG.h"
 #import "MJRefresh.h"
-#import "XHReservedCourse.h"
 
 #define kBtnW 80
 #define kBtnH 50
@@ -104,7 +102,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    NSLog(@"kReservedCourseSavePath:%@", kReservedCourseSavePath);
     [self setupUI];
     
     UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
@@ -158,6 +156,13 @@
     NSArray *dictList = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
     NSArray *courseList = [XHCourse mj_objectArrayWithKeyValuesArray:dictList];
     for (XHCourse *course in courseList) {
+        NSArray *reservedCourseList = [NSKeyedUnarchiver unarchiveObjectWithFile:kReservedCourseSavePath];
+        for (XHReservedCourse *reservedCourse in reservedCourseList) {
+            if ([course.CourseGuid isEqualToString:reservedCourse.courseGuID]) {
+                course.Reserved = YES;
+                break;
+            }
+        }
         if ([course.CourseType isEqualToString:@"小班课"]) {
             [self.privateList addObject:course];
         } else if ([course.CourseType isEqualToString:@"沙龙课"]) {
@@ -306,6 +311,7 @@
     } else {
         course = self.appList[indexPath.row];
     }
+    NSLog(@"CourseGuid : %@", course.CourseGuid);
     detailController.course = course;
     [self.navigationController pushViewController:detailController animated:YES];
 }
@@ -425,9 +431,10 @@
 {
     NSString *objectMsg = responseObject[@"message"];
     NSString *reserveID = [objectMsg substringFromIndex:objectMsg.length - 36];
-    NSString *timeStr = [self.course.BeginTime stringByReplacingOccurrencesOfString:@"T" withString:@" "];
-    XHReservedCourse *reservedCourse = [[XHReservedCourse alloc] initWithReserveID:reserveID timeStr:timeStr];
+    NSString *reserveTimeStr = [self.course.BeginTime stringByReplacingOccurrencesOfString:@"T" withString:@" "];
+    XHReservedCourse *reservedCourse = [XHReservedCourse reservedCourseWithReserveID:reserveID courseGuID:self.course.CourseGuid reserveTimeStr:reserveTimeStr];
     [self.reservedList addObject:reservedCourse];
+    [NSKeyedArchiver archiveRootObject:self.reservedList toFile:kReservedCourseSavePath];
     NSLog(@"reserveID:%@", reserveID);
 }
 

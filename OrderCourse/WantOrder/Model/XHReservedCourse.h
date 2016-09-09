@@ -8,14 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-@interface XHReservedCourse : NSObject
+@interface XHReservedCourse : NSObject<NSCoding>
 
-- (instancetype)initWithReserveID:(NSString *)reserveID timeStr:(NSString *)timeStr;
-
++ (instancetype)reservedCourseWithReserveID:(NSString *)reserveID courseGuID:(NSString *)courseGuID reserveTimeStr:(NSString *)reserveTimeStr;
 /**
  *  就是orderID
  */
 @property (nonatomic, copy, readwrite) NSString *reserveID;
+/**
+ *  课程id
+ */
+@property (nonatomic, copy, readwrite) NSString *courseGuID;
 /**
  *  预订课程时间
  */
