@@ -73,11 +73,11 @@
     // 订课人数
     if ([self.course.OrderNumber integerValue] < [self.course.Capacity integerValue]) {
         self.orderNumLabel.text = [NSString stringWithFormat:@"订课人数: %@/%@", self.course.OrderNumber, self.course.Capacity];
-        self.actionBtn.backgroundColor = kRBGColor(67, 219, 212);
+        self.actionBtn.backgroundColor = kRGBColor(67, 219, 212);
         [self.actionBtn setTitle:@"预定" forState:UIControlStateNormal];
     } else {
         self.orderNumLabel.text = @"订课人数: 已满";
-        self.actionBtn.backgroundColor = kRBGColor(243, 165, 54);
+        self.actionBtn.backgroundColor = kRGBColor(243, 165, 54);
         [self.actionBtn setTitle:@"排队" forState:UIControlStateNormal];
     }
     // 级别

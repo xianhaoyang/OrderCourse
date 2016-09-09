@@ -36,33 +36,30 @@
                                     <constraint firstAttribute="bottom" secondItem="Utd-uP-zJx" secondAttribute="bottom" id="o1v-8p-0F2"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="时间: 2016年9月10日 (周六) 18:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yb6-65-mA6">
-                                <rect key="frame" x="10" y="50" width="290" height="16"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="地点: 武汉光谷中心" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ozi-BI-i6p">
-                                <rect key="frame" x="10" y="71" width="290" height="16"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="时间: 2016年9月10日 (周六) 18:00" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yb6-65-mA6">
+                                <rect key="frame" x="10" y="48" width="290" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="nLT-9D-pUb"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bmj-WV-uEt">
-                                <rect key="frame" x="0.0" y="97" width="300" height="1"/>
+                                <rect key="frame" x="0.0" y="96" width="300" height="1"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="EMl-78-nau"/>
+                                    <constraint firstAttribute="height" constant="1" id="FsA-42-TDk"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已预订" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aos-UN-35B">
-                                <rect key="frame" x="20" y="106" width="42" height="17"/>
+                                <rect key="frame" x="20" y="105" width="42" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.49411764705882355" green="0.83529411764705885" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="课程详情" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kM0-RW-e7E">
-                                <rect key="frame" x="224" y="106" width="56" height="17"/>
+                                <rect key="frame" x="224" y="105" width="56" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.34509803921568627" green="0.8784313725490196" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -70,21 +67,18 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Ozi-BI-i6p" firstAttribute="leading" secondItem="Yb6-65-mA6" secondAttribute="leading" id="27c-Da-B83"/>
-                            <constraint firstItem="Ozi-BI-i6p" firstAttribute="trailing" secondItem="Yb6-65-mA6" secondAttribute="trailing" id="5dm-CJ-ErE"/>
-                            <constraint firstItem="Aos-UN-35B" firstAttribute="leading" secondItem="mJx-rT-7kP" secondAttribute="leading" constant="20" id="Imk-qr-Wqm"/>
-                            <constraint firstItem="Ozi-BI-i6p" firstAttribute="top" secondItem="Yb6-65-mA6" secondAttribute="bottom" constant="5" id="NaA-cE-cd1"/>
+                            <constraint firstItem="Aos-UN-35B" firstAttribute="leading" secondItem="mJx-rT-7kP" secondAttribute="leading" constant="20" id="1vB-qi-HfE"/>
+                            <constraint firstItem="Aos-UN-35B" firstAttribute="top" secondItem="bmj-WV-uEt" secondAttribute="bottom" constant="8" id="7mb-4W-Uf8"/>
+                            <constraint firstItem="Yb6-65-mA6" firstAttribute="top" secondItem="ID6-Jq-vse" secondAttribute="bottom" constant="8" id="Exs-dX-Oos"/>
+                            <constraint firstItem="bmj-WV-uEt" firstAttribute="leading" secondItem="ID6-Jq-vse" secondAttribute="leading" id="KlN-f9-Vxl"/>
                             <constraint firstAttribute="trailing" secondItem="ID6-Jq-vse" secondAttribute="trailing" id="Qdl-HX-G9m"/>
-                            <constraint firstItem="Yb6-65-mA6" firstAttribute="top" secondItem="ID6-Jq-vse" secondAttribute="bottom" constant="10" id="RT1-Xr-abk"/>
-                            <constraint firstAttribute="trailing" secondItem="kM0-RW-e7E" secondAttribute="trailing" constant="20" id="S6N-XX-0Qr"/>
                             <constraint firstItem="ID6-Jq-vse" firstAttribute="leading" secondItem="mJx-rT-7kP" secondAttribute="leading" id="b5f-4z-fLg"/>
-                            <constraint firstItem="bmj-WV-uEt" firstAttribute="top" secondItem="Ozi-BI-i6p" secondAttribute="bottom" constant="10" id="ehP-yO-KH6"/>
-                            <constraint firstItem="Aos-UN-35B" firstAttribute="top" secondItem="bmj-WV-uEt" secondAttribute="bottom" constant="8" id="ehV-WA-Pcp"/>
-                            <constraint firstItem="bmj-WV-uEt" firstAttribute="leading" secondItem="mJx-rT-7kP" secondAttribute="leading" id="fsy-kb-jV0"/>
-                            <constraint firstItem="kM0-RW-e7E" firstAttribute="centerY" secondItem="Aos-UN-35B" secondAttribute="centerY" id="gDG-r6-GBc"/>
+                            <constraint firstItem="Yb6-65-mA6" firstAttribute="trailing" secondItem="ID6-Jq-vse" secondAttribute="trailing" id="bBG-wt-eUZ"/>
+                            <constraint firstItem="kM0-RW-e7E" firstAttribute="centerY" secondItem="Aos-UN-35B" secondAttribute="centerY" id="dwZ-wS-gy3"/>
                             <constraint firstItem="ID6-Jq-vse" firstAttribute="top" secondItem="mJx-rT-7kP" secondAttribute="top" id="opQ-5G-oJO"/>
-                            <constraint firstAttribute="trailing" secondItem="bmj-WV-uEt" secondAttribute="trailing" id="u8Z-U4-Drt"/>
-                            <constraint firstAttribute="trailing" secondItem="Yb6-65-mA6" secondAttribute="trailing" id="uZS-QF-0NT"/>
+                            <constraint firstItem="bmj-WV-uEt" firstAttribute="trailing" secondItem="ID6-Jq-vse" secondAttribute="trailing" id="rLl-Fn-Kyo"/>
+                            <constraint firstAttribute="trailing" secondItem="kM0-RW-e7E" secondAttribute="trailing" constant="20" id="vJd-hu-vjH"/>
+                            <constraint firstItem="bmj-WV-uEt" firstAttribute="top" secondItem="Yb6-65-mA6" secondAttribute="bottom" constant="8" id="yiT-BF-Duq"/>
                         </constraints>
                     </view>
                     <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n0V-Aw-9iV">
@@ -107,16 +101,19 @@
                     <constraint firstAttribute="bottom" secondItem="mJx-rT-7kP" secondAttribute="bottom" constant="10" id="GS6-oB-jhy"/>
                     <constraint firstItem="mJx-rT-7kP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="Udz-5I-T1L"/>
                     <constraint firstAttribute="trailing" secondItem="mJx-rT-7kP" secondAttribute="trailing" constant="10" id="XT5-P8-10I"/>
-                    <constraint firstItem="Yb6-65-mA6" firstAttribute="leading" secondItem="n0V-Aw-9iV" secondAttribute="leading" id="idG-u2-aqj"/>
+                    <constraint firstItem="Yb6-65-mA6" firstAttribute="leading" secondItem="n0V-Aw-9iV" secondAttribute="leading" id="iQ6-wV-JNE"/>
                     <constraint firstItem="n0V-Aw-9iV" firstAttribute="leading" secondItem="mJx-rT-7kP" secondAttribute="leading" constant="10" id="pbv-q9-tpQ"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="bgView" destination="mJx-rT-7kP" id="qph-al-G4I"/>
+                <outlet property="courseNameLabel" destination="Utd-uP-zJx" id="cKW-JF-WqU"/>
                 <outlet property="courseTypeBtn" destination="n0V-Aw-9iV" id="pAz-Tu-1sv"/>
+                <outlet property="statusLabel" destination="Aos-UN-35B" id="sWC-gy-RMy"/>
+                <outlet property="timeLabel" destination="Yb6-65-mA6" id="6eu-RZ-eE8"/>
                 <outlet property="titleBgView" destination="ID6-Jq-vse" id="HDl-SF-axE"/>
             </connections>
-            <point key="canvasLocation" x="392" y="540.5"/>
+            <point key="canvasLocation" x="392" y="540"/>
         </tableViewCell>
     </objects>
 </document>
