@@ -12,6 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *courseTypeBtn;
 @property (weak, nonatomic) IBOutlet UIView *bgView;
+@property (weak, nonatomic) IBOutlet UIView *titleBgView;
 
 @end
 
@@ -32,21 +33,17 @@
     self.backgroundView = nil;
     self.backgroundColor = [UIColor clearColor];
     
+    self.titleBgView.layer.cornerRadius = 5.0f;
+    self.titleBgView.clipsToBounds = YES;
+    
     self.courseTypeBtn.layer.cornerRadius = 22.5f;
     self.courseTypeBtn.clipsToBounds = YES;
-}
-
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
     
-    self.bgView.backgroundColor = [UIColor whiteColor];
-    self.bgView.layer.cornerRadius = 5;
-    //    self.bgView.clipsToBounds = YES;
+    self.bgView.layer.cornerRadius = 5.0f;
     self.bgView.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.bgView.layer.shadowOffset = CGSizeMake(10, 10);
-    self.bgView.layer.opacity = 0.8;
-    self.bgView.layer.shadowRadius = 5;
+    self.bgView.layer.shadowOffset = CGSizeMake(5, 5);
+    self.bgView.layer.shadowOpacity = 0.3;
+    self.bgView.layer.shadowRadius = 5.0f;
 }
 
 @end
