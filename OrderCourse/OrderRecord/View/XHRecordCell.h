@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+@class XHOrderedCourse;
 
 @interface XHRecordCell : UITableViewCell
 
 + (instancetype)cellWithTableView:(UITableView *)tableView;
+
+@property (nonatomic, strong) XHOrderedCourse *course;
 
 @end

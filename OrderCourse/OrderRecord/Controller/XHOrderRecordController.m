@@ -78,7 +78,8 @@
         if ([[spanNode getAttributeNamed:@"class"] isEqualToString:@"courseRecordTime"]) {
             NSString *str = [[spanNode allContents] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 //            str = [str stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-//            str = [str stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+            str = [str stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+            str = [str stringByReplacingOccurrencesOfString:@" " withString:@""];
             orderedCourse.BeginTime = str;
         }
         if ([[spanNode getAttributeNamed:@"class"] isEqualToString:@"courseRecordState"]) {
@@ -111,11 +112,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     XHRecordCell *cell = [XHRecordCell cellWithTableView:tableView];
+    cell.course = self.orderedCourseList[indexPath.row];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"%s--%zd", __func__, indexPath.row);
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
