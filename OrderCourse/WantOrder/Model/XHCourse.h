@@ -30,8 +30,14 @@
 //"Score": null,
 //"Comment": null,
 //"IsInvited": false
+/*******自己添加属性*******/
+//@"Reserve"
 
 @interface XHCourse : NSObject
+/**
+ *  是否预定了课程
+ */
+@property (nonatomic, assign, getter=isReserved) BOOL Reserved;
 /**
  *  中心id
  */

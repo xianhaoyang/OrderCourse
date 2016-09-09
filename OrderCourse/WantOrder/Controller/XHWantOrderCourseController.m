@@ -355,7 +355,10 @@
                 NSLog(@"订课成功:%@", responseObject);
                 [MBProgressHUD hideHUD];
                 if ([responseObject[@"state"] integerValue] == 1) {
+                    self.course.Reserved = YES;
                     [MBProgressHUD showSuccess:@"预定成功!"];
+                    // 刷新当前课程类型表格
+                    [self refreshCurrentCourseTypeTableViewData];
                     // TODO:此处还可以查看订课详情
                 } else {
                     [MBProgressHUD showError:responseObject[@"message"]];
@@ -383,6 +386,18 @@
             }];
         }
     }
+}
+
+- (void)refreshCurrentCourseTypeTableViewData
+{
+    if (!self.checkImage1.isHidden) {
+        self.dataList = self.privateList;
+    } else if (!self.checkImage2.isHidden) {
+        self.dataList = self.solonList;
+    } else {
+        self.dataList = self.appList;
+    }
+    [self.tableView reloadData];
 }
 
 @end
