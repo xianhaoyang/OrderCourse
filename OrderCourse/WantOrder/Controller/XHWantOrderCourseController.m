@@ -87,6 +87,11 @@
     return _dataList;
 }
 
+- (void)dealloc
+{
+    NSLog(@"%s", __func__);
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -99,6 +104,12 @@
     
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshHomeData)];
     [self.tableView.mj_header beginRefreshing];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self refreshCurrentCourseTypeTableViewData];
 }
 
 - (void)refreshHomeData
@@ -390,6 +401,7 @@
 
 - (void)refreshCurrentCourseTypeTableViewData
 {
+    NSLog(@"%s", __func__);
     if (!self.checkImage1.isHidden) {
         self.dataList = self.privateList;
     } else if (!self.checkImage2.isHidden) {

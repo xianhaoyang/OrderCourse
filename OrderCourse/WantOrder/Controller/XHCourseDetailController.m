@@ -35,6 +35,11 @@
 
 @implementation XHCourseDetailController
 
+- (void)dealloc
+{
+    NSLog(@"%s", __func__);
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -73,12 +78,22 @@
     // 订课人数
     if ([self.course.OrderNumber integerValue] < [self.course.Capacity integerValue]) {
         self.orderNumLabel.text = [NSString stringWithFormat:@"订课人数: %@/%@", self.course.OrderNumber, self.course.Capacity];
-        self.actionBtn.backgroundColor = kRGBColor(67, 219, 212);
-        [self.actionBtn setTitle:@"预定" forState:UIControlStateNormal];
+        if (self.course.isReserved) {
+            [self disableActionBtn];
+        } else {
+            self.actionBtn.backgroundColor = kRGBColor(67, 219, 212);
+            [self.actionBtn setTitle:@"预定" forState:UIControlStateNormal];
+            self.actionBtn.enabled = YES;
+        }
     } else {
         self.orderNumLabel.text = @"订课人数: 已满";
-        self.actionBtn.backgroundColor = kRGBColor(243, 165, 54);
-        [self.actionBtn setTitle:@"排队" forState:UIControlStateNormal];
+        if (self.course.isReserved) {
+            [self disableActionBtn];
+        } else {
+            self.actionBtn.backgroundColor = kRGBColor(243, 165, 54);
+            [self.actionBtn setTitle:@"排队" forState:UIControlStateNormal];
+            self.actionBtn.enabled = YES;
+        }
     }
     // 级别
     self.levelLabel.text = [NSString stringWithFormat:@"适用级别: %@", self.course.CourseLevel];
@@ -201,7 +216,9 @@
                 NSLog(@"订课成功:%@", responseObject);
                 [MBProgressHUD hideHUD];
                 if ([responseObject[@"state"] integerValue] == 1) {
+                    self.course.Reserved = YES;
                     [MBProgressHUD showSuccess:@"预定成功!"];
+                    [self disableActionBtn];
                     // TODO:此处还可以查看订课详情
                 } else {
                     [MBProgressHUD showError:responseObject[@"message"]];
@@ -229,6 +246,13 @@
             }];
         }
     }
+}
+
+- (void)disableActionBtn
+{
+    self.actionBtn.backgroundColor = [UIColor grayColor];
+    [self.actionBtn setTitle:@"已预定" forState:UIControlStateNormal];
+    self.actionBtn.enabled = NO;
 }
 
 - (void)setCourse:(XHCourse *)course

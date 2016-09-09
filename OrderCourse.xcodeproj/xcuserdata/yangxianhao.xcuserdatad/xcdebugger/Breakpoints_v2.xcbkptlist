@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OrderCourse/WantOrder/Controller/XHWantOrderCourseController.m"
-            timestampString = "495112035.723193"
+            timestampString = "495113607.018016"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "357"
-            endingLineNumber = "357"
+            startingLineNumber = "368"
+            endingLineNumber = "368"
             landmarkName = "-alertView:clickedButtonAtIndex:"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OrderCourse/WantOrder/Controller/XHWantOrderCourseController.m"
-            timestampString = "494667110.591678"
+            timestampString = "495113607.018016"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "210"
-            endingLineNumber = "210"
+            startingLineNumber = "221"
+            endingLineNumber = "221"
             landmarkName = "-clickSolonClassBtn"
             landmarkType = "5">
          </BreakpointContent>
