@@ -57,7 +57,7 @@
 - (NSMutableArray *)orderedCourseList
 {
     if (!_orderedCourseList) {
-        _orderedCourseList = [NSMutableArray array];
+        _orderedCourseList = [NSMutableArray arrayWithArray:[NSKeyedUnarchiver unarchiveObjectWithFile:kOrderedCourseSavePath]];
     }
     return _orderedCourseList;
 }
@@ -149,8 +149,7 @@
     NSArray *dictList = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
     NSArray *courseList = [XHCourse mj_objectArrayWithKeyValuesArray:dictList];
     for (XHCourse *course in courseList) {
-        NSArray *orderedCourseList = [NSKeyedUnarchiver unarchiveObjectWithFile:kOrderedCourseSavePath];
-        for (XHOrderedCourse *orderedCourse in orderedCourseList) {
+        for (XHOrderedCourse *orderedCourse in self.orderedCourseList) {
             if ([course.CourseGuid isEqualToString:orderedCourse.CourseGuid]) {
                 course.Reserved = YES;
                 break;
