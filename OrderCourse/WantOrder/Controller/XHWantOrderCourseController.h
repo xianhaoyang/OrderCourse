@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "XHConstant.h"
-#import "XHReservedCourse.h"
+#import "XHOrderedCourse.h"
 
 @interface XHWantOrderCourseController : UIViewController
 

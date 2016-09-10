@@ -10,7 +10,7 @@
 
 #define kRGBColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
 #define kNotificationCenter [NSNotificationCenter defaultCenter]
-#define kReservedCourseSavePath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:@"reservedCourse.data"]
+#define kOrderedCourseSavePath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:@"orderedCourse.data"]
 
 @interface XHConstant : NSObject
 

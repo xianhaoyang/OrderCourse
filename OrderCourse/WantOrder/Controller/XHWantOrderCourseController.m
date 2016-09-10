@@ -10,7 +10,6 @@
 #import "XHCourseDetailController.h"
 #import "AFNetworking.h"
 #import "MJExtension.h"
-#import "XHCourse.h"
 #import "XHOrderCourseCell.h"
 #import "NSDate+Escort.h"
 #import "MBProgressHUD+XMG.h"
@@ -39,7 +38,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *applicationBtnH;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *btnTop;
 
-@property (nonatomic, strong) NSMutableArray *reservedList;
+@property (nonatomic, strong) NSMutableArray *orderedCourseList;
 @property (nonatomic, strong) NSMutableArray *privateList;
 @property (nonatomic, strong) NSMutableArray *solonList;
 @property (nonatomic, strong) NSMutableArray *appList;
@@ -55,12 +54,12 @@
 @implementation XHWantOrderCourseController
 
 #pragma mark - lazy load
-- (NSMutableArray *)reservedList
+- (NSMutableArray *)orderedCourseList
 {
-    if (!_reservedList) {
-        _reservedList = [NSMutableArray array];
+    if (!_orderedCourseList) {
+        _orderedCourseList = [NSMutableArray array];
     }
-    return _reservedList;
+    return _orderedCourseList;
 }
 
 - (NSMutableArray *)privateList
@@ -102,7 +101,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"kReservedCourseSavePath:%@", kReservedCourseSavePath);
+    NSLog(@"kOrderedCourseSavePath:%@", kOrderedCourseSavePath);
     [self setupUI];
     
     UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
@@ -114,12 +113,6 @@
     [self.tableView.mj_header beginRefreshing];
     
     [kNotificationCenter addObserver:self selector:@selector(saveOrderInfo:) name:kCourseDetailControllerReserveCourseSuccessNotification object:nil];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self refreshCurrentCourseTypeTableViewData];
 }
 
 - (void)refreshHomeData
@@ -156,9 +149,9 @@
     NSArray *dictList = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
     NSArray *courseList = [XHCourse mj_objectArrayWithKeyValuesArray:dictList];
     for (XHCourse *course in courseList) {
-        NSArray *reservedCourseList = [NSKeyedUnarchiver unarchiveObjectWithFile:kReservedCourseSavePath];
-        for (XHReservedCourse *reservedCourse in reservedCourseList) {
-            if ([course.CourseGuid isEqualToString:reservedCourse.courseGuID]) {
+        NSArray *orderedCourseList = [NSKeyedUnarchiver unarchiveObjectWithFile:kOrderedCourseSavePath];
+        for (XHOrderedCourse *orderedCourse in orderedCourseList) {
+            if ([course.CourseGuid isEqualToString:orderedCourse.CourseGuid]) {
                 course.Reserved = YES;
                 break;
             }
@@ -422,6 +415,9 @@
 #pragma mark - 课程详情页面订课成功发送过来的通知
 - (void)saveOrderInfo:(NSNotification *)note
 {
+    // 刷新表格
+    [self refreshCurrentCourseTypeTableViewData];
+    // 存入数组
     NSDictionary *responseObject = note.userInfo[kResponseObjectKey];
     [self saveReserveInfoInArrayWithDict:responseObject];
 }
@@ -430,12 +426,12 @@
 - (void)saveReserveInfoInArrayWithDict:(NSDictionary *)responseObject
 {
     NSString *objectMsg = responseObject[@"message"];
-    NSString *reserveID = [objectMsg substringFromIndex:objectMsg.length - 36];
-    NSString *reserveTimeStr = [self.course.BeginTime stringByReplacingOccurrencesOfString:@"T" withString:@" "];
-    XHReservedCourse *reservedCourse = [XHReservedCourse reservedCourseWithReserveID:reserveID courseGuID:self.course.CourseGuid reserveTimeStr:reserveTimeStr];
-    [self.reservedList addObject:reservedCourse];
-    [NSKeyedArchiver archiveRootObject:self.reservedList toFile:kReservedCourseSavePath];
-    NSLog(@"reserveID:%@", reserveID);
+    NSString *orderedID = [objectMsg substringFromIndex:objectMsg.length - 36];
+    NSString *beginTimeStr = [self.course.BeginTime stringByReplacingOccurrencesOfString:@"T" withString:@" "];
+    XHOrderedCourse *orderedCourse = [XHOrderedCourse orderedCourseWithOrderedID:orderedID courseGuID:self.course.CourseGuid beginTimeStr:beginTimeStr];
+    [self.orderedCourseList addObject:orderedCourse];
+    [NSKeyedArchiver archiveRootObject:self.orderedCourseList toFile:kOrderedCourseSavePath];
+    NSLog(@"orderedID:%@", orderedID);
 }
 
 #pragma mark - 重新刷新表格数据

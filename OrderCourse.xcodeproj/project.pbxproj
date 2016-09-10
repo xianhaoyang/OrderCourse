@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		190EFE091D82DAA000D2F448 /* XHReservedCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = 190EFE081D82DAA000D2F448 /* XHReservedCourse.m */; };
 		190EFE0C1D82FE7500D2F448 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 190EFE0B1D82FE7500D2F448 /* AppDelegate.m */; };
 		196E86D21D7AE59A00132BEA /* XHConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = 196E86D11D7AE59A00132BEA /* XHConstant.m */; };
 		196E86D61D7AFE9400132BEA /* XHOrderCourseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 196E86D41D7AFE9400132BEA /* XHOrderCourseCell.m */; };
@@ -107,8 +106,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		190EFE071D82DAA000D2F448 /* XHReservedCourse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHReservedCourse.h; sourceTree = "<group>"; };
-		190EFE081D82DAA000D2F448 /* XHReservedCourse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHReservedCourse.m; sourceTree = "<group>"; };
 		190EFE0A1D82FE7500D2F448 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = OrderCourse/AppDelegate.h; sourceTree = SOURCE_ROOT; };
 		190EFE0B1D82FE7500D2F448 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = OrderCourse/AppDelegate.m; sourceTree = SOURCE_ROOT; };
 		196E86D01D7AE59A00132BEA /* XHConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHConstant.h; sourceTree = "<group>"; };
@@ -423,8 +420,6 @@
 			children = (
 				1973505F1D79D14900524F9A /* XHCourse.h */,
 				197350601D79D14900524F9A /* XHCourse.m */,
-				190EFE071D82DAA000D2F448 /* XHReservedCourse.h */,
-				190EFE081D82DAA000D2F448 /* XHReservedCourse.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -864,7 +859,6 @@
 				196E86D61D7AFE9400132BEA /* XHOrderCourseCell.m in Sources */,
 				197350511D79C17F00524F9A /* XHWantOrderCourseController.m in Sources */,
 				198CF0011D7BEFFA005DF362 /* MJRefreshBackNormalFooter.m in Sources */,
-				190EFE091D82DAA000D2F448 /* XHReservedCourse.m in Sources */,
 				74BEA5581D800D6700BF6030 /* XHOrderedCourse.m in Sources */,
 				198CF0041D7BEFFA005DF362 /* MJRefreshNormalHeader.m in Sources */,
 				197350801D79D7E900524F9A /* NSObject+MJProperty.m in Sources */,
