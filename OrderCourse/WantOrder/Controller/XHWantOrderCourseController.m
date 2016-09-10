@@ -306,6 +306,8 @@
     }
     NSLog(@"CourseGuid : %@", course.CourseGuid);
     detailController.course = course;
+    // 此处一定需要这句话，因为用户可能在课程详情里预定课程，而在加入数组方法里有self.course.BeginTime取出课程开始时间，而此时的self.course是XHOrderCourseCellDelegate里取到的course，所以此处要覆盖
+    self.course = course;
     [self.navigationController pushViewController:detailController animated:YES];
 }
 
