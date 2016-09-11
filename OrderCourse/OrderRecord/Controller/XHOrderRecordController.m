@@ -59,6 +59,7 @@
         return;
     }
     // 创建10个XHOrderedCourse对象
+    [self.orderedCourseList removeAllObjects];
     for (NSInteger i = 0; i < kListCount; i++) {
         XHOrderedCourse *orderedCourse = [[XHOrderedCourse alloc] init];
         [self.orderedCourseList addObject:orderedCourse];
@@ -94,12 +95,14 @@
             i++;
         }
     }
+    [self.tableView reloadData];
     // 找出订课orderid数据
     NSArray *spanNodes1 = [bodyNode findChildTags:@"a"];
     NSInteger index = 0;
     for (HTMLNode *spanNode in spanNodes1) {
         if (index >= self.orderedCourseList.count) break;
         NSString *valueStr = [spanNode getAttributeNamed:@"href"];
+        NSLog(@"valueStr:%@", valueStr);
         NSString *orderID = [valueStr substringFromIndex:valueStr.length - kOrderIDLength];
         NSRange rang = [valueStr rangeOfString:openid];
         NSString *courseID = [valueStr substringWithRange:NSMakeRange(rang.location + rang.length + 1, kCourseIDLength)];
@@ -165,6 +168,10 @@
             [MBProgressHUD hideHUD];
             if ([responseObject[@"state"] integerValue] == 1) {
                 [MBProgressHUD showSuccess:@"取消成功!"];
+                // 更新界面数据
+                [self requestMyOrderedCourse];
+                // 更新本地订课数组记录, 删除取消的课程
+                [self refreshLocalOrderedCourseArray];
             } else {
                 [MBProgressHUD showError:responseObject[@"message"]];
             }
@@ -174,6 +181,20 @@
             [MBProgressHUD showError:@"当前网络不好，请检查网络"];
         }];
     }
+}
+
+#pragma mark - 更新本地订课数组记录
+- (void)refreshLocalOrderedCourseArray
+{
+    NSArray *orderedCourseList = [NSKeyedUnarchiver unarchiveObjectWithFile:kOrderedCourseSavePath];
+    NSMutableArray *temp = [NSMutableArray arrayWithArray:orderedCourseList];
+    for (XHOrderedCourse *orderedcourse in orderedCourseList) {
+        if ([orderedcourse.orderID isEqualToString:self.selectedOrderCourse.orderID]) {
+            [temp removeObject:orderedcourse];
+            break;
+        }
+    }
+    [NSKeyedArchiver archiveRootObject:temp toFile:kOrderedCourseSavePath];
 }
 
 @end

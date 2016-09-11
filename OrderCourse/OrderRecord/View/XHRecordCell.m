@@ -74,7 +74,6 @@
         self.statusLabel.textColor = kRGBColor(255, 145, 0);
         self.cancelOrderBtn.hidden = YES;
     }
-    
 }
 
 - (IBAction)clickCancelOrder {
