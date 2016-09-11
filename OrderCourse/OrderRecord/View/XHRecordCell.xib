@@ -58,12 +58,14 @@
                                 <color key="textColor" red="0.49411764705882355" green="0.83529411764705885" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="课程详情" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kM0-RW-e7E">
-                                <rect key="frame" x="224" y="105" width="56" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.34509803921568627" green="0.8784313725490196" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CCq-Ai-1kR">
+                                <rect key="frame" x="232" y="97" width="60" height="32"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="取消预订"/>
+                                <connections>
+                                    <action selector="clickCancelOrder" destination="KGk-i7-Jjw" eventType="touchUpInside" id="qcp-fx-9oV"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -72,12 +74,13 @@
                             <constraint firstItem="Yb6-65-mA6" firstAttribute="top" secondItem="ID6-Jq-vse" secondAttribute="bottom" constant="8" id="Exs-dX-Oos"/>
                             <constraint firstItem="bmj-WV-uEt" firstAttribute="leading" secondItem="ID6-Jq-vse" secondAttribute="leading" id="KlN-f9-Vxl"/>
                             <constraint firstAttribute="trailing" secondItem="ID6-Jq-vse" secondAttribute="trailing" id="Qdl-HX-G9m"/>
+                            <constraint firstAttribute="bottom" secondItem="CCq-Ai-1kR" secondAttribute="bottom" id="SEs-iA-U5y"/>
                             <constraint firstItem="ID6-Jq-vse" firstAttribute="leading" secondItem="mJx-rT-7kP" secondAttribute="leading" id="b5f-4z-fLg"/>
                             <constraint firstItem="Yb6-65-mA6" firstAttribute="trailing" secondItem="ID6-Jq-vse" secondAttribute="trailing" id="bBG-wt-eUZ"/>
-                            <constraint firstItem="kM0-RW-e7E" firstAttribute="centerY" secondItem="Aos-UN-35B" secondAttribute="centerY" id="dwZ-wS-gy3"/>
+                            <constraint firstAttribute="trailing" secondItem="CCq-Ai-1kR" secondAttribute="trailing" constant="8" id="d1L-vh-CNS"/>
                             <constraint firstItem="ID6-Jq-vse" firstAttribute="top" secondItem="mJx-rT-7kP" secondAttribute="top" id="opQ-5G-oJO"/>
                             <constraint firstItem="bmj-WV-uEt" firstAttribute="trailing" secondItem="ID6-Jq-vse" secondAttribute="trailing" id="rLl-Fn-Kyo"/>
-                            <constraint firstAttribute="trailing" secondItem="kM0-RW-e7E" secondAttribute="trailing" constant="20" id="vJd-hu-vjH"/>
+                            <constraint firstItem="CCq-Ai-1kR" firstAttribute="top" secondItem="bmj-WV-uEt" secondAttribute="bottom" id="wMh-p6-JN3"/>
                             <constraint firstItem="bmj-WV-uEt" firstAttribute="top" secondItem="Yb6-65-mA6" secondAttribute="bottom" constant="8" id="yiT-BF-Duq"/>
                         </constraints>
                     </view>
@@ -107,6 +110,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="bgView" destination="mJx-rT-7kP" id="qph-al-G4I"/>
+                <outlet property="cancelOrderBtn" destination="CCq-Ai-1kR" id="UXc-bn-Zrb"/>
                 <outlet property="courseNameLabel" destination="Utd-uP-zJx" id="cKW-JF-WqU"/>
                 <outlet property="courseTypeBtn" destination="n0V-Aw-9iV" id="pAz-Tu-1sv"/>
                 <outlet property="statusLabel" destination="Aos-UN-35B" id="sWC-gy-RMy"/>

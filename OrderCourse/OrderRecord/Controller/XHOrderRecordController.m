@@ -11,14 +11,18 @@
 #import "XHOrderedCourse.h"
 #import "XHConstant.h"
 #import "HTMLParser.h"
+#import "MBProgressHUD+XMG.h"
+#import "AFNetworking.h"
 
 #define kOrderIDLength 36
+#define kCourseIDLength kOrderIDLength
 #define kListCount     10
 
-@interface XHOrderRecordController () <UITableViewDelegate, UITableViewDataSource>
+@interface XHOrderRecordController () <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, XHRecordCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *orderedCourseList;
+@property (nonatomic, strong) XHOrderedCourse *selectedOrderCourse;
 
 @end
 
@@ -96,9 +100,12 @@
     for (HTMLNode *spanNode in spanNodes1) {
         if (index >= self.orderedCourseList.count) break;
         NSString *valueStr = [spanNode getAttributeNamed:@"href"];
-        NSString *orderid = [valueStr substringFromIndex:valueStr.length - kOrderIDLength];
+        NSString *orderID = [valueStr substringFromIndex:valueStr.length - kOrderIDLength];
+        NSRange rang = [valueStr rangeOfString:openid];
+        NSString *courseID = [valueStr substringWithRange:NSMakeRange(rang.location + rang.length + 1, kCourseIDLength)];
         XHOrderedCourse *course = self.orderedCourseList[index];
-        course.orderID = orderid;
+        course.orderID = orderID;
+        course.CourseGuid = courseID;
         index++;
     }
 }
@@ -112,6 +119,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     XHRecordCell *cell = [XHRecordCell cellWithTableView:tableView];
+    cell.delegate = self;
     cell.course = self.orderedCourseList[indexPath.row];
     return cell;
 }
@@ -120,6 +128,52 @@
 {
     NSLog(@"%s--%zd", __func__, indexPath.row);
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark - XHRecordCellDelegate
+- (void)recordCellDidClickCancelOrderBtn:(XHRecordCell *)recordCell
+{
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:recordCell];
+    XHOrderedCourse *orderedCourse = self.orderedCourseList[indexPath.row];
+    self.selectedOrderCourse = orderedCourse;
+    NSString *title = [NSString stringWithFormat:@"您确定要取消该课程的预订吗?\n%@:%@\n%@", orderedCourse.CourseType, orderedCourse.CourseName, orderedCourse.BeginTime];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"确定" otherButtonTitles:nil, nil];
+    [actionSheet showInView:self.view];
+}
+
+#pragma mark - UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"%s--%zd", __func__, buttonIndex);
+    if (buttonIndex == 0) {
+        [MBProgressHUD showMessage:@"取消中，请稍等..."];
+        // 发送预定请求
+        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+        [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+        manager.requestSerializer.timeoutInterval = 3.0f;
+        [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+        manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+        NSString *urlStr = [NSString stringWithFormat:@"%@%@", baseURL, cancelOrderURL];
+        NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+        parameters[@"appUserId"] = userid;
+        parameters[@"openId"] = openid;
+        parameters[@"orderGuid"] = self.selectedOrderCourse.orderID;
+        parameters[@"courseGuid"] = self.selectedOrderCourse.CourseGuid;
+        parameters[@"contractGuid"] = contractGuid;
+        [manager POST:urlStr parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary  *_Nullable responseObject) {
+            NSLog(@"取消成功:%@", responseObject);
+            [MBProgressHUD hideHUD];
+            if ([responseObject[@"state"] integerValue] == 1) {
+                [MBProgressHUD showSuccess:@"取消成功!"];
+            } else {
+                [MBProgressHUD showError:responseObject[@"message"]];
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"取消失败:%@", error);
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showError:@"当前网络不好，请检查网络"];
+        }];
+    }
 }
 
 @end
