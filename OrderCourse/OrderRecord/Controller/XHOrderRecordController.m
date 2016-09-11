@@ -46,6 +46,8 @@
     self.tableView.rowHeight = 160;
     
     [self requestMyOrderedCourse];
+    
+    [kNotificationCenter addObserver:self selector:@selector(requestMyOrderedCourse) name:kOrderCourseSuccessNotification object:nil];
 }
 
 - (void)requestMyOrderedCourse

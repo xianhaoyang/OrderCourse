@@ -29,4 +29,5 @@ extern NSString *const kResponseObjectKey;
 extern NSString *const kCancelCourseSuccessNotification;
 extern NSString *const kCancelCourseIDKey;
 extern NSString *const kCancelCourseTypeKey;
+extern NSString *const kOrderCourseSuccessNotification;
 

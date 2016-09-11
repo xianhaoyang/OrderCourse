@@ -57,7 +57,7 @@
 - (NSMutableArray *)orderedCourseList
 {
     if (!_orderedCourseList) {
-        _orderedCourseList = [NSMutableArray arrayWithArray:[NSKeyedUnarchiver unarchiveObjectWithFile:kOrderedCourseSavePath]];
+        _orderedCourseList = [NSMutableArray array];
     }
     return _orderedCourseList;
 }
@@ -149,6 +149,7 @@
     NSData *data = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
     NSArray *dictList = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
     NSArray *courseList = [XHCourse mj_objectArrayWithKeyValuesArray:dictList];
+    self.orderedCourseList = [NSKeyedUnarchiver unarchiveObjectWithFile:kOrderedCourseSavePath];
     for (XHCourse *course in courseList) {
         for (XHOrderedCourse *orderedCourse in self.orderedCourseList) {
             if ([course.CourseGuid isEqualToString:orderedCourse.CourseGuid]) {
@@ -424,6 +425,7 @@
     [self saveReserveInfoInArrayWithDict:responseObject];
 }
 
+//不管是在XHWantOrderCourseController页面订课还是在XHCourseDetailController页面订课，最终都会来到这里
 #pragma mark - 将订课信息存入数组
 - (void)saveReserveInfoInArrayWithDict:(NSDictionary *)responseObject
 {
@@ -434,6 +436,8 @@
     [self.orderedCourseList addObject:orderedCourse];
     [NSKeyedArchiver archiveRootObject:self.orderedCourseList toFile:kOrderedCourseSavePath];
     NSLog(@"orderedID:%@", orderedID);
+    // 更新订课记录页面数据
+    [kNotificationCenter postNotificationName:kOrderCourseSuccessNotification object:self];
 }
 
 #pragma mark - 重新刷新表格数据
