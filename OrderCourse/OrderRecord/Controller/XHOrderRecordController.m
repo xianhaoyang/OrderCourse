@@ -172,6 +172,8 @@
                 [self requestMyOrderedCourse];
                 // 更新本地订课数组记录, 删除取消的课程
                 [self refreshLocalOrderedCourseArray];
+                // 通知首页更新订课状态UI
+                [self updateHomeStateUI];
             } else {
                 [MBProgressHUD showError:responseObject[@"message"]];
             }
@@ -181,6 +183,15 @@
             [MBProgressHUD showError:@"当前网络不好，请检查网络"];
         }];
     }
+}
+
+#pragma mark - 通知首页更新订课状态UI
+- (void)updateHomeStateUI
+{
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    dict[kCancelCourseIDKey] = self.selectedOrderCourse.CourseGuid;
+    dict[kCancelCourseTypeKey] = self.selectedOrderCourse.CourseType;
+    [kNotificationCenter postNotificationName:kCancelCourseSuccessNotification object:self userInfo:dict];
 }
 
 #pragma mark - 更新本地订课数组记录

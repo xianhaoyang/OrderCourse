@@ -113,6 +113,7 @@
     [self.tableView.mj_header beginRefreshing];
     
     [kNotificationCenter addObserver:self selector:@selector(saveOrderInfo:) name:kCourseDetailControllerReserveCourseSuccessNotification object:nil];
+    [kNotificationCenter addObserver:self selector:@selector(updateBtnStateUI:) name:kCancelCourseSuccessNotification object:nil];
 }
 
 - (void)refreshHomeData
@@ -447,6 +448,31 @@
         self.dataList = self.appList;
     }
     [self.tableView reloadData];
+}
+
+#pragma mark - 订课记录页面取消课程发送过来的通知，更新本页面的订课按钮状态
+- (void)updateBtnStateUI:(NSNotification *)note
+{
+    NSString *cancelCourseID = note.userInfo[kCancelCourseIDKey];
+    NSString *cancelCourseType = note.userInfo[kCancelCourseTypeKey];
+    if ([cancelCourseType isEqualToString:@"小班课"]) {
+        [self exchangeCourseStatus:cancelCourseID withTargetList:self.privateList];
+    } else if ([cancelCourseType isEqualToString:@"沙龙课"]) {
+        [self exchangeCourseStatus:cancelCourseID withTargetList:self.solonList];
+    } else {
+        [self exchangeCourseStatus:cancelCourseID withTargetList:self.appList];
+    }
+}
+
+- (void)exchangeCourseStatus:(NSString *)courseID withTargetList:(NSMutableArray *)targetList
+{
+    for (XHCourse *course in targetList) {
+        if ([course.CourseGuid isEqualToString:courseID]) {
+            course.Reserved = NO;
+            break;
+        }
+    }
+    [self refreshCurrentCourseTypeTableViewData];
 }
 
 @end
