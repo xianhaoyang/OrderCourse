@@ -13,6 +13,7 @@
 @interface XHOrderCourseCell ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *statusImg;
+@property (weak, nonatomic) IBOutlet UIImageView *conflictIcon;
 @property (weak, nonatomic) IBOutlet UILabel *courseNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *startTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *topicLabel;

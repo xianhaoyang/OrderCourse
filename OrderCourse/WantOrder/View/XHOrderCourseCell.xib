@@ -116,6 +116,13 @@
                                     <constraint firstAttribute="height" constant="1" id="rKr-FV-Tmf"/>
                                 </constraints>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="warning" translatesAutoresizingMaskIntoConstraints="NO" id="dol-8f-u0X">
+                                <rect key="frame" x="245" y="51" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="Lb7-AN-xrS"/>
+                                    <constraint firstAttribute="height" constant="30" id="wK9-kX-cK3"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -136,8 +143,10 @@
                             <constraint firstAttribute="trailing" secondItem="II2-r2-A9n" secondAttribute="trailing" constant="8" id="ZKZ-kS-8JQ"/>
                             <constraint firstItem="wvF-zc-d8y" firstAttribute="centerY" secondItem="5gi-rG-ObT" secondAttribute="centerY" id="bLS-bz-d2c"/>
                             <constraint firstAttribute="trailing" secondItem="gDE-ey-fVj" secondAttribute="trailing" id="bNm-3L-Ztk"/>
+                            <constraint firstItem="dol-8f-u0X" firstAttribute="centerX" secondItem="w2u-pm-6pB" secondAttribute="centerX" id="brT-OL-Ksf"/>
                             <constraint firstItem="w2u-pm-6pB" firstAttribute="centerY" secondItem="wvF-zc-d8y" secondAttribute="centerY" id="fol-Py-XK8"/>
                             <constraint firstItem="C7M-qi-rXG" firstAttribute="leading" secondItem="aiK-rY-6dQ" secondAttribute="trailing" constant="5" id="l66-wA-tHj"/>
+                            <constraint firstItem="dol-8f-u0X" firstAttribute="centerY" secondItem="w2u-pm-6pB" secondAttribute="centerY" id="oXO-0h-CKw"/>
                             <constraint firstItem="bmm-tC-W7Z" firstAttribute="leading" secondItem="aiK-rY-6dQ" secondAttribute="leading" id="sbx-aL-9Ul"/>
                             <constraint firstItem="aiK-rY-6dQ" firstAttribute="centerY" secondItem="5gi-rG-ObT" secondAttribute="centerY" constant="-12" id="xQd-Ba-gYe"/>
                             <constraint firstItem="AKV-CB-ERw" firstAttribute="top" secondItem="KTA-g6-eYv" secondAttribute="top" constant="10" id="xp0-3l-FWb"/>
@@ -155,6 +164,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="btn" destination="w2u-pm-6pB" id="kYn-qA-wG5"/>
+                <outlet property="conflictIcon" destination="dol-8f-u0X" id="FM6-J1-QX3"/>
                 <outlet property="courseNameLabel" destination="AKV-CB-ERw" id="bgO-BX-pVJ"/>
                 <outlet property="levelLabel" destination="a1S-6H-Lgc" id="scD-JF-ZPP"/>
                 <outlet property="orderNumLabel" destination="C7M-qi-rXG" id="pGX-3J-JQR"/>
@@ -166,10 +176,11 @@
                 <outlet property="topicBgView" destination="II2-r2-A9n" id="ToS-yB-5h5"/>
                 <outlet property="topicLabel" destination="O5Y-Ab-scQ" id="Ux7-Ix-49b"/>
             </connections>
-            <point key="canvasLocation" x="-45" y="351"/>
+            <point key="canvasLocation" x="132" y="373"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="sun" width="16" height="16"/>
+        <image name="warning" width="32" height="32"/>
     </resources>
 </document>
