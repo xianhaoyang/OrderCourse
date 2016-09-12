@@ -97,6 +97,14 @@
         self.timeTopicMargin.constant = 10;
         self.topicLabel.text = [NSString stringWithFormat:@"Topic:%@", course.Topic];
     }
+    // 时间是否冲突
+    if (course.EnableOrder) {
+        self.btn.hidden = YES;
+        self.conflictIcon.hidden = NO;
+    } else {
+        self.btn.hidden = NO;
+        self.conflictIcon.hidden = YES;
+    }
 }
 
 - (IBAction)clickBtn {

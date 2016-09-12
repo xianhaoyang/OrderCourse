@@ -21,20 +21,20 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // 程序已启动就在已订课数组中找出距离现在在3个小时之内的对象，并删除它
-    NSArray *orderedCourseList = [NSKeyedUnarchiver unarchiveObjectWithFile:kOrderedCourseSavePath];
-    if (orderedCourseList.count) {
-        NSMutableArray *temp = [NSMutableArray arrayWithArray:orderedCourseList];
-        for (XHOrderedCourse *orderedcourse in orderedCourseList) {
-            NSDate *beginDate = [NSDate dateFromString:orderedcourse.BeginTime withFormatter:@"yyyy-MM-dd HH:mm:ss"];
-            NSInteger timeDiff = [[NSDate date] minutesBeforeDate:beginDate];
-            // 删除开课时间在3个小时之内的课程
-            if (timeDiff < 60 * 3) {
-                [temp removeObject:orderedcourse];
-            }
-        }
-        [NSKeyedArchiver archiveRootObject:temp toFile:kOrderedCourseSavePath];
-    }
+//    // 程序已启动就在已订课数组中找出距离现在在3个小时之内的对象，并删除它
+//    NSArray *orderedCourseList = [NSKeyedUnarchiver unarchiveObjectWithFile:kOrderedCourseSavePath];
+//    if (orderedCourseList.count) {
+//        NSMutableArray *temp = [NSMutableArray arrayWithArray:orderedCourseList];
+//        for (XHOrderedCourse *orderedcourse in orderedCourseList) {
+//            NSDate *beginDate = [NSDate dateFromString:orderedcourse.BeginTime withFormatter:@"yyyy-MM-dd HH:mm:ss"];
+//            NSInteger timeDiff = [[NSDate date] minutesBeforeDate:beginDate];
+//            // 删除开课时间在3个小时之内的课程
+//            if (timeDiff < 60 * 3) {
+//                [temp removeObject:orderedcourse];
+//            }
+//        }
+//        [NSKeyedArchiver archiveRootObject:temp toFile:kOrderedCourseSavePath];
+//    }
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];

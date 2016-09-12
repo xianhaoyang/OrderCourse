@@ -162,7 +162,11 @@
         for (XHOrderedCourse *orderedCourse in self.orderedCourseList) {
             if ([course.CourseGuid isEqualToString:orderedCourse.CourseGuid]) {
                 course.Reserved = YES;
-                break;
+//                break;
+            } else {
+                if ([orderedCourse.BeginTime isEqualToString:course.BeginTime]) {
+                    course.EnableOrder = YES;
+                }
             }
         }
         if ([course.CourseType isEqualToString:@"小班课"]) {
@@ -315,7 +319,7 @@
     } else {
         course = self.appList[indexPath.row];
     }
-    NSLog(@"CourseGuid : %@", course.CourseGuid);
+    NSLog(@"CourseGuid : %@, %@", course.CourseGuid, course.BeginTime);
     detailController.course = course;
     // 此处一定需要这句话，因为用户可能在课程详情里预定课程，而在加入数组方法里有self.course.BeginTime取出课程开始时间，而此时的self.course是XHOrderCourseCellDelegate里取到的course，所以此处要覆盖
     self.course = course;
@@ -392,6 +396,10 @@
                 if ([responseObject[@"state"] integerValue] == 1) {
                     self.course.Reserved = YES;
                     [MBProgressHUD showSuccess:@"预定成功!"];
+                    // 修改时间是否冲突状态
+                    [self findSameTimeCourseWithArray:self.privateList targetValue:YES];
+                    [self findSameTimeCourseWithArray:self.solonList targetValue:YES];
+                    [self findSameTimeCourseWithArray:self.appList targetValue:YES];
                     // 刷新当前课程类型表格
                     [self refreshCurrentCourseTypeTableViewData];
                     // 将订课成功的对象存入数组
@@ -428,6 +436,10 @@
 #pragma mark - 课程详情页面订课成功发送过来的通知
 - (void)saveOrderInfo:(NSNotification *)note
 {
+    // 修改时间是否冲突状态
+    [self findSameTimeCourseWithArray:self.privateList targetValue:YES];
+    [self findSameTimeCourseWithArray:self.solonList targetValue:YES];
+    [self findSameTimeCourseWithArray:self.appList targetValue:YES];
     // 刷新表格
     [self refreshCurrentCourseTypeTableViewData];
     // 存入数组
@@ -464,6 +476,15 @@
     [self.tableView reloadData];
 }
 
+- (void)findSameTimeCourseWithArray:(NSMutableArray *)Array targetValue:(BOOL)value
+{
+    for (XHCourse *course in Array) {
+        if ([course.BeginTime isEqualToString:self.course.BeginTime] && course != self.course && course.EnableOrder == !value) {
+            course.EnableOrder = value;
+        }
+    }
+}
+
 #pragma mark - 订课记录页面取消课程发送过来的通知，更新本页面的订课按钮状态
 - (void)updateBtnStateUI:(NSNotification *)note
 {
@@ -482,10 +503,15 @@
 {
     for (XHCourse *course in targetList) {
         if ([course.CourseGuid isEqualToString:courseID]) {
+            self.course = course;
             course.Reserved = NO;
             break;
         }
     }
+    // 修改时间是否冲突状态
+    [self findSameTimeCourseWithArray:self.privateList targetValue:NO];
+    [self findSameTimeCourseWithArray:self.solonList targetValue:NO];
+    [self findSameTimeCourseWithArray:self.appList targetValue:NO];
     [self refreshCurrentCourseTypeTableViewData];
 }
 

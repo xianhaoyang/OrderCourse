@@ -31,13 +31,18 @@
 //"Comment": null,
 //"IsInvited": false
 /*******自己添加属性*******/
-//@"Reserve"
+//"Reserve"
+//"EnableOrder"
 
 @interface XHCourse : NSObject
 /**
- *  是否预定了课程
+ *  是否预定了该课程
  */
 @property (nonatomic, assign, getter=isReserved) BOOL Reserved;
+/**
+ *  是否可预定该课程
+ */
+@property (nonatomic, assign, getter=isEnableOrder) BOOL EnableOrder;
 /**
  *  中心id
  */
