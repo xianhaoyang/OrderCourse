@@ -24,3 +24,13 @@ NSString *const orderCourseURL = @"/api/course/confirm_order";
 NSString *const reminderQueueURL = @"/api/course/add_reminder_queue";
 // 取消订课
 NSString *const cancelOrderURL = @"/api/course/cancle_order";
+
+
+NSString *const kCourseDetailControllerReserveCourseSuccessNotification = @"kCourseDetailControllerReserveCourseSuccessNotification";
+NSString *const kResponseObjectKey = @"kResponseObjectKey";
+NSString *const kCancelCourseSuccessNotification = @"kCancelCourseSuccessNotification";
+NSString *const kCancelCourseIDKey = @"kCancelCourseIDKey";
+NSString *const kCancelCourseTypeKey = @"kCancelCourseTypeKey";
+NSString *const kOrderCourseSuccessNotification = @"kOrderCourseSuccessNotification";
+
+

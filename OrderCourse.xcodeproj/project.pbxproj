@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		190EFE0C1D82FE7500D2F448 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 190EFE0B1D82FE7500D2F448 /* AppDelegate.m */; };
 		196E86D21D7AE59A00132BEA /* XHConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = 196E86D11D7AE59A00132BEA /* XHConstant.m */; };
 		196E86D61D7AFE9400132BEA /* XHOrderCourseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 196E86D41D7AFE9400132BEA /* XHOrderCourseCell.m */; };
 		196E86D71D7AFE9400132BEA /* XHOrderCourseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 196E86D51D7AFE9400132BEA /* XHOrderCourseCell.xib */; };
@@ -15,7 +16,6 @@
 		196E870B1D7B266E00132BEA /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 196E87001D7B266E00132BEA /* UIView+AutoLayout.m */; };
 		196E870C1D7B266E00132BEA /* UIView+YXH.m in Sources */ = {isa = PBXBuildFile; fileRef = 196E87021D7B266E00132BEA /* UIView+YXH.m */; };
 		197350131D79BE0A00524F9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 197350121D79BE0A00524F9A /* main.m */; };
-		197350161D79BE0A00524F9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 197350151D79BE0A00524F9A /* AppDelegate.m */; };
 		1973501E1D79BE0A00524F9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1973501D1D79BE0A00524F9A /* Assets.xcassets */; };
 		197350211D79BE0A00524F9A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1973501F1D79BE0A00524F9A /* LaunchScreen.storyboard */; };
 		1973502C1D79BE0A00524F9A /* OrderCourseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1973502B1D79BE0A00524F9A /* OrderCourseTests.m */; };
@@ -106,6 +106,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		190EFE0A1D82FE7500D2F448 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = OrderCourse/AppDelegate.h; sourceTree = SOURCE_ROOT; };
+		190EFE0B1D82FE7500D2F448 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = OrderCourse/AppDelegate.m; sourceTree = SOURCE_ROOT; };
 		196E86D01D7AE59A00132BEA /* XHConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHConstant.h; sourceTree = "<group>"; };
 		196E86D11D7AE59A00132BEA /* XHConstant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHConstant.m; sourceTree = "<group>"; };
 		196E86D31D7AFE9400132BEA /* XHOrderCourseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHOrderCourseCell.h; sourceTree = "<group>"; };
@@ -120,8 +122,6 @@
 		196E87021D7B266E00132BEA /* UIView+YXH.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+YXH.m"; sourceTree = "<group>"; };
 		1973500E1D79BE0900524F9A /* OrderCourse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrderCourse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		197350121D79BE0A00524F9A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		197350141D79BE0A00524F9A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../AppDelegate.h; sourceTree = "<group>"; };
-		197350151D79BE0A00524F9A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = ../AppDelegate.m; sourceTree = "<group>"; };
 		1973501D1D79BE0A00524F9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		197350201D79BE0A00524F9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		197350221D79BE0A00524F9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -450,8 +450,8 @@
 		1973504D1D79BF7F00524F9A /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				197350141D79BE0A00524F9A /* AppDelegate.h */,
-				197350151D79BE0A00524F9A /* AppDelegate.m */,
+				190EFE0A1D82FE7500D2F448 /* AppDelegate.h */,
+				190EFE0B1D82FE7500D2F448 /* AppDelegate.m */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -841,7 +841,6 @@
 				198CEFFA1D7BEFFA005DF362 /* MJRefreshComponent.m in Sources */,
 				196E87051D7B266E00132BEA /* Foundation+Log.m in Sources */,
 				196E86D21D7AE59A00132BEA /* XHConstant.m in Sources */,
-				197350161D79BE0A00524F9A /* AppDelegate.m in Sources */,
 				198CF00A1D7BEFFA005DF362 /* UIScrollView+MJRefresh.m in Sources */,
 				198CEFF91D7BEFFA005DF362 /* MJRefreshBackFooter.m in Sources */,
 				1973505E1D79C4EF00524F9A /* XHNavigationController.m in Sources */,
@@ -875,6 +874,7 @@
 				197350611D79D14900524F9A /* XHCourse.m in Sources */,
 				198CF0071D7BEFFA005DF362 /* MJRefreshConst.m in Sources */,
 				74BEA55C1D81467B00BF6030 /* XHRecordCell.m in Sources */,
+				190EFE0C1D82FE7500D2F448 /* AppDelegate.m in Sources */,
 				196E870C1D7B266E00132BEA /* UIView+YXH.m in Sources */,
 				74BEA54F1D7FE54700BF6030 /* HTMLNode.m in Sources */,
 				198CEFB71D7BBF41005DF362 /* AFURLResponseSerialization.m in Sources */,

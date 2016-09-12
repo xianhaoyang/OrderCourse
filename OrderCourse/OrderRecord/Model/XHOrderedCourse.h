@@ -8,8 +8,12 @@
 
 #import "XHCourse.h"
 
-@interface XHOrderedCourse : XHCourse
+@interface XHOrderedCourse : XHCourse<NSCoding>
 
++ (instancetype)orderedCourseWithOrderedID:(NSString *)orderedID courseGuID:(NSString *)courseGuID beginTimeStr:(NSString *)beginTimeStr;
+/**
+ *  预定成功返回的orderID
+ */
 @property (nonatomic, readwrite, copy) NSString *orderID;
 @property (nonatomic, copy, readwrite) NSString *state;
 

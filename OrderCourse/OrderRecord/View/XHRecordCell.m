@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 @property (weak, nonatomic) IBOutlet UIView *bgView;
 @property (weak, nonatomic) IBOutlet UIView *titleBgView;
+@property (weak, nonatomic) IBOutlet UIButton *cancelOrderBtn;
 
 @end
 
@@ -68,10 +69,18 @@
     self.statusLabel.text = stateStr;
     if ([stateStr isEqualToString:@"已预订"]) {
         self.statusLabel.textColor = kRGBColor(108, 209, 0);
+        self.cancelOrderBtn.hidden = NO;
     } else {
         self.statusLabel.textColor = kRGBColor(255, 145, 0);
+        self.cancelOrderBtn.hidden = YES;
     }
-    
+}
+
+- (IBAction)clickCancelOrder {
+    NSLog(@"%s", __func__);
+    if ([self.delegate respondsToSelector:@selector(recordCellDidClickCancelOrderBtn:)]) {
+        [self.delegate recordCellDidClickCancelOrderBtn:self];
+    }
 }
 
 @end

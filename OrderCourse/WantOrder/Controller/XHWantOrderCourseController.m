@@ -10,8 +10,6 @@
 #import "XHCourseDetailController.h"
 #import "AFNetworking.h"
 #import "MJExtension.h"
-#import "XHCourse.h"
-#import "XHConstant.h"
 #import "XHOrderCourseCell.h"
 #import "NSDate+Escort.h"
 #import "MBProgressHUD+XMG.h"
@@ -40,6 +38,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *applicationBtnH;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *btnTop;
 
+@property (nonatomic, strong) NSMutableArray *orderedCourseList;
 @property (nonatomic, strong) NSMutableArray *privateList;
 @property (nonatomic, strong) NSMutableArray *solonList;
 @property (nonatomic, strong) NSMutableArray *appList;
@@ -55,6 +54,14 @@
 @implementation XHWantOrderCourseController
 
 #pragma mark - lazy load
+- (NSMutableArray *)orderedCourseList
+{
+    if (!_orderedCourseList) {
+        _orderedCourseList = [NSMutableArray array];
+    }
+    return _orderedCourseList;
+}
+
 - (NSMutableArray *)privateList
 {
     if (!_privateList) {
@@ -87,9 +94,14 @@
     return _dataList;
 }
 
+- (void)dealloc
+{
+    NSLog(@"%s", __func__);
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    NSLog(@"kOrderedCourseSavePath:%@", kOrderedCourseSavePath);
     [self setupUI];
     
     UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
@@ -99,6 +111,9 @@
     
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshHomeData)];
     [self.tableView.mj_header beginRefreshing];
+    
+    [kNotificationCenter addObserver:self selector:@selector(saveOrderInfo:) name:kCourseDetailControllerReserveCourseSuccessNotification object:nil];
+    [kNotificationCenter addObserver:self selector:@selector(updateBtnStateUI:) name:kCancelCourseSuccessNotification object:nil];
 }
 
 - (void)refreshHomeData
@@ -134,7 +149,14 @@
     NSData *data = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
     NSArray *dictList = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
     NSArray *courseList = [XHCourse mj_objectArrayWithKeyValuesArray:dictList];
+    self.orderedCourseList = [NSKeyedUnarchiver unarchiveObjectWithFile:kOrderedCourseSavePath];
     for (XHCourse *course in courseList) {
+        for (XHOrderedCourse *orderedCourse in self.orderedCourseList) {
+            if ([course.CourseGuid isEqualToString:orderedCourse.CourseGuid]) {
+                course.Reserved = YES;
+                break;
+            }
+        }
         if ([course.CourseType isEqualToString:@"小班课"]) {
             [self.privateList addObject:course];
         } else if ([course.CourseType isEqualToString:@"沙龙课"]) {
@@ -283,7 +305,10 @@
     } else {
         course = self.appList[indexPath.row];
     }
+    NSLog(@"CourseGuid : %@", course.CourseGuid);
     detailController.course = course;
+    // 此处一定需要这句话，因为用户可能在课程详情里预定课程，而在加入数组方法里有self.course.BeginTime取出课程开始时间，而此时的self.course是XHOrderCourseCellDelegate里取到的course，所以此处要覆盖
+    self.course = course;
     [self.navigationController pushViewController:detailController animated:YES];
 }
 
@@ -351,11 +376,16 @@
             urlStr = [NSString stringWithFormat:@"%@%@", baseURL, orderCourseURL];
             parameters[@"openId"] = openid;
             parameters[@"contractGuid"] = contractGuid;
-            [manager POST:urlStr parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            [manager POST:urlStr parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary  *_Nullable responseObject) {
                 NSLog(@"订课成功:%@", responseObject);
                 [MBProgressHUD hideHUD];
                 if ([responseObject[@"state"] integerValue] == 1) {
+                    self.course.Reserved = YES;
                     [MBProgressHUD showSuccess:@"预定成功!"];
+                    // 刷新当前课程类型表格
+                    [self refreshCurrentCourseTypeTableViewData];
+                    // 将订课成功的对象存入数组
+                    [self saveReserveInfoInArrayWithDict:responseObject];
                     // TODO:此处还可以查看订课详情
                 } else {
                     [MBProgressHUD showError:responseObject[@"message"]];
@@ -383,6 +413,70 @@
             }];
         }
     }
+}
+
+#pragma mark - 课程详情页面订课成功发送过来的通知
+- (void)saveOrderInfo:(NSNotification *)note
+{
+    // 刷新表格
+    [self refreshCurrentCourseTypeTableViewData];
+    // 存入数组
+    NSDictionary *responseObject = note.userInfo[kResponseObjectKey];
+    [self saveReserveInfoInArrayWithDict:responseObject];
+}
+
+//不管是在XHWantOrderCourseController页面订课还是在XHCourseDetailController页面订课，最终都会来到这里
+#pragma mark - 将订课信息存入数组
+- (void)saveReserveInfoInArrayWithDict:(NSDictionary *)responseObject
+{
+    NSString *objectMsg = responseObject[@"message"];
+    NSString *orderedID = [objectMsg substringFromIndex:objectMsg.length - 36];
+    NSString *beginTimeStr = [self.course.BeginTime stringByReplacingOccurrencesOfString:@"T" withString:@" "];
+    XHOrderedCourse *orderedCourse = [XHOrderedCourse orderedCourseWithOrderedID:orderedID courseGuID:self.course.CourseGuid beginTimeStr:beginTimeStr];
+    [self.orderedCourseList addObject:orderedCourse];
+    [NSKeyedArchiver archiveRootObject:self.orderedCourseList toFile:kOrderedCourseSavePath];
+    NSLog(@"orderedID:%@", orderedID);
+    // 更新订课记录页面数据
+    [kNotificationCenter postNotificationName:kOrderCourseSuccessNotification object:self];
+}
+
+#pragma mark - 重新刷新表格数据
+- (void)refreshCurrentCourseTypeTableViewData
+{
+    NSLog(@"%s", __func__);
+    if (!self.checkImage1.isHidden) {
+        self.dataList = self.privateList;
+    } else if (!self.checkImage2.isHidden) {
+        self.dataList = self.solonList;
+    } else {
+        self.dataList = self.appList;
+    }
+    [self.tableView reloadData];
+}
+
+#pragma mark - 订课记录页面取消课程发送过来的通知，更新本页面的订课按钮状态
+- (void)updateBtnStateUI:(NSNotification *)note
+{
+    NSString *cancelCourseID = note.userInfo[kCancelCourseIDKey];
+    NSString *cancelCourseType = note.userInfo[kCancelCourseTypeKey];
+    if ([cancelCourseType isEqualToString:@"小班课"]) {
+        [self exchangeCourseStatus:cancelCourseID withTargetList:self.privateList];
+    } else if ([cancelCourseType isEqualToString:@"沙龙课"]) {
+        [self exchangeCourseStatus:cancelCourseID withTargetList:self.solonList];
+    } else {
+        [self exchangeCourseStatus:cancelCourseID withTargetList:self.appList];
+    }
+}
+
+- (void)exchangeCourseStatus:(NSString *)courseID withTargetList:(NSMutableArray *)targetList
+{
+    for (XHCourse *course in targetList) {
+        if ([course.CourseGuid isEqualToString:courseID]) {
+            course.Reserved = NO;
+            break;
+        }
+    }
+    [self refreshCurrentCourseTypeTableViewData];
 }
 
 @end
