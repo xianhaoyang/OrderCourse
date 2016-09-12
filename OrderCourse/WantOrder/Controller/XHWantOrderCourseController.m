@@ -94,6 +94,7 @@
     return _dataList;
 }
 
+#pragma mark - life cycle
 - (void)dealloc
 {
     NSLog(@"%s", __func__);
@@ -116,6 +117,7 @@
     [kNotificationCenter addObserver:self selector:@selector(updateBtnStateUI:) name:kCancelCourseSuccessNotification object:nil];
 }
 
+#pragma mark - 请求数据
 - (void)refreshHomeData
 {
     NSString *urlStr = [NSString stringWithFormat:@"%@/wap/course/index/wid=1!openid=%@", baseURL, openid];
@@ -132,6 +134,12 @@
     [self handleDataWithTargetStr:jsCodeStr];
 }
 
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    [MBProgressHUD showError:@"当前网络状态不佳，请稍后再试..."];
+}
+
+#pragma mark - 从网页元素中截取数据信息
 - (void)handleDataWithTargetStr:(NSString *)targetStr
 {
     // 先清除旧数据
@@ -194,12 +202,14 @@
     self.checkImage3.hidden = YES;
 }
 
+#pragma mark - 初始化按钮UI
 - (void)cornerRadiusWithBtn:(UIButton *)btn
 {
     btn.layer.cornerRadius = 5.0f;
     btn.clipsToBounds = YES;
 }
 
+#pragma mark - xib action
 - (IBAction)clickPrivateClassBtn {
     self.checkImage1.hidden = NO;
     self.checkImage2.hidden = YES;

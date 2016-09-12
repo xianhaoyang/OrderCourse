@@ -37,6 +37,7 @@
     return _orderedCourseList;
 }
 
+#pragma mark - life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -48,6 +49,7 @@
     [kNotificationCenter addObserver:self selector:@selector(requestMyOrderedCourse) name:kOrderCourseSuccessNotification object:nil];
 }
 
+#pragma mark - 初始化tableViewUI
 - (void)setupTableviewUI
 {
     self.tableView.delegate = self;
@@ -57,6 +59,7 @@
     self.tableView.rowHeight = 160;
 }
 
+#pragma mark - 截取数据
 - (void)requestMyOrderedCourse
 {
     // HTMLParser
@@ -64,6 +67,7 @@
     NSError *error = nil;
     HTMLParser *parser = [[HTMLParser alloc] initWithContentsOfURL:[NSURL URLWithString:urlStr] error:&error];
     if (error) {
+        [MBProgressHUD showError:@"当前网络状态不佳，请稍后再试..."];
         NSLog(@"Error: %@", error);
         return;
     }
