@@ -164,7 +164,10 @@
                 course.Reserved = YES;
 //                break;
             } else {
-                if ([orderedCourse.BeginTime isEqualToString:course.BeginTime]) {
+                NSString *orderedBeginTime = orderedCourse.BeginTime;
+                NSString *courseBeginTime = [course.BeginTime stringByReplacingOccurrencesOfString:@"T" withString:@" "];
+//                NSLog(@"-----");
+                if ([orderedBeginTime isEqualToString:courseBeginTime]) {
                     course.EnableOrder = YES;
                 }
             }
