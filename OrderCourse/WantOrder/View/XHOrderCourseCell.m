@@ -13,6 +13,7 @@
 @interface XHOrderCourseCell ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *statusImg;
+@property (weak, nonatomic) IBOutlet UIImageView *conflictIcon;
 @property (weak, nonatomic) IBOutlet UILabel *courseNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *startTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *topicLabel;
@@ -95,6 +96,14 @@
         self.topicBgH.constant = 35;
         self.timeTopicMargin.constant = 10;
         self.topicLabel.text = [NSString stringWithFormat:@"Topic:%@", course.Topic];
+    }
+    // 时间是否冲突
+    if (course.EnableOrder) {
+        self.btn.hidden = YES;
+        self.conflictIcon.hidden = NO;
+    } else {
+        self.btn.hidden = NO;
+        self.conflictIcon.hidden = YES;
     }
 }
 

@@ -13,6 +13,7 @@
 #import "HTMLParser.h"
 #import "MBProgressHUD+XMG.h"
 #import "AFNetworking.h"
+#import "MJRefresh.h"
 
 #define kOrderIDLength 36
 #define kCourseIDLength kOrderIDLength
@@ -36,20 +37,29 @@
     return _orderedCourseList;
 }
 
+#pragma mark - life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self setupTableviewUI];
+    
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestMyOrderedCourse)];
+    [self.tableView.mj_header beginRefreshing];
+    
+    [kNotificationCenter addObserver:self selector:@selector(requestMyOrderedCourse) name:kOrderCourseSuccessNotification object:nil];
+}
+
+#pragma mark - 初始化tableViewUI
+- (void)setupTableviewUI
+{
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.rowHeight = 160;
-    
-    [self requestMyOrderedCourse];
-    
-    [kNotificationCenter addObserver:self selector:@selector(requestMyOrderedCourse) name:kOrderCourseSuccessNotification object:nil];
 }
 
+#pragma mark - 截取数据
 - (void)requestMyOrderedCourse
 {
     // HTMLParser
@@ -57,6 +67,7 @@
     NSError *error = nil;
     HTMLParser *parser = [[HTMLParser alloc] initWithContentsOfURL:[NSURL URLWithString:urlStr] error:&error];
     if (error) {
+        [MBProgressHUD showError:@"当前网络状态不佳，请稍后再试..."];
         NSLog(@"Error: %@", error);
         return;
     }
@@ -97,6 +108,7 @@
             i++;
         }
     }
+    [self.tableView.mj_header endRefreshing];
     [self.tableView reloadData];
     // 找出订课orderid数据
     NSArray *spanNodes1 = [bodyNode findChildTags:@"a"];
@@ -104,7 +116,7 @@
     for (HTMLNode *spanNode in spanNodes1) {
         if (index >= self.orderedCourseList.count) break;
         NSString *valueStr = [spanNode getAttributeNamed:@"href"];
-        NSLog(@"valueStr:%@", valueStr);
+//        NSLog(@"valueStr:%@", valueStr);
         NSString *orderID = [valueStr substringFromIndex:valueStr.length - kOrderIDLength];
         NSRange rang = [valueStr rangeOfString:openid];
         NSString *courseID = [valueStr substringWithRange:NSMakeRange(rang.location + rang.length + 1, kCourseIDLength)];
