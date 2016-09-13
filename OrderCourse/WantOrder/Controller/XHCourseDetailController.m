@@ -58,10 +58,14 @@
 {
     [super viewWillAppear:animated];
     // 设置数据
-    UIImage *img = [[UIImage alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:self.course.Teacher ofType:@"JPG"]];
-    if (img) {
-        self.teacherImageView.image = img;
+    BOOL existTeacher = [self isValidTeacher];
+    UIImage *img = nil;
+    if (existTeacher) {
+        img = [[UIImage alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:self.course.Teacher ofType:@"JPG"]];
+    } else {
+        img = [UIImage imageNamed:@"Person"];
     }
+    self.teacherImageView.image = img;
     self.teacherLabel.text = [NSString stringWithFormat:@"授课老师: %@", self.course.Teacher];
     self.courseTypeLabel.text = [NSString stringWithFormat:@"课程类型: %@", self.course.CourseType];
     self.courseNameLabel.text = [NSString stringWithFormat:@"课程名称: %@", self.course.CourseName];
