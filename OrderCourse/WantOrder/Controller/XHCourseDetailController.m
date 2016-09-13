@@ -71,7 +71,7 @@
     NSString *dateStr = [self.course.BeginTime substringWithRange:NSMakeRange(5, 5)];
     dateStr = [[dateStr stringByReplacingOccurrencesOfString:@"-" withString:@"月"] stringByAppendingString:@"日"];
     NSString *weekStr = [self.course.BeginTime substringToIndex:10];
-    NSDate *date = [NSDate dateFromString:weekStr withFormatter:@"yyyy-MM-dd"];
+    NSDate *date = [NSDate dateFromString:weekStr format:@"yyyy-MM-dd"];
     NSString *weekDay = [NSDate weekdayStringFromDate:date];
     NSString *timeStr = [self.course.BeginTime substringWithRange:NSMakeRange(11, 5)];
     self.startTimeLabel.text = [NSString stringWithFormat:@"开始时间: %@ %@ %@", dateStr, weekDay, timeStr];
@@ -182,7 +182,7 @@
         NSString *alertMsg = @"预订后可提前6小时取消";
         // 处理时间
         NSString *beginTimeStr = [self.course.BeginTime stringByReplacingOccurrencesOfString:@"T" withString:@" "];
-        NSDate *beginTimeDate = [NSDate dateFromString:beginTimeStr withFormatter:@"yyyy-MM-dd HH:mm:ss"];
+        NSDate *beginTimeDate = [NSDate dateFromString:beginTimeStr format:@"yyyy-MM-dd HH:mm:ss"];
         NSInteger timeDiff = [[NSDate date] minutesBeforeDate:beginTimeDate];
         if (timeDiff < 60 * 6) {
             alertMsg = @"6小时内即将开始的课程\n预订后不可取消";

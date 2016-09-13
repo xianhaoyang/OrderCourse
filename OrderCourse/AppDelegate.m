@@ -26,7 +26,7 @@
     if (orderedCourseList.count) {
         NSMutableArray *temp = [NSMutableArray arrayWithArray:orderedCourseList];
         for (XHOrderedCourse *orderedcourse in orderedCourseList) {
-            NSDate *beginDate = [NSDate dateFromString:orderedcourse.BeginTime withFormatter:@"yyyy-MM-dd HH:mm:ss"];
+            NSDate *beginDate = [NSDate dateFromString:orderedcourse.BeginTime format:@"yyyy-MM-dd HH:mm:ss"];
             // 删除已完成的课程
             if ([beginDate isInPast]) {
                 [temp removeObject:orderedcourse];

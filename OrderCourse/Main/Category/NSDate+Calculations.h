@@ -10,14 +10,25 @@
 
 
 @interface NSDate (Calculations)
-///**
-// *  将一个形如“12月03日”的字符串转换成当前年形如“2015-12-3”的日期类型
-// */
-//+ (NSDate *)dateFromString:(NSString *)dateStr;
+
 /**
- *  将一个形如“2015-12-3”的字符串转化成一个日期类型
+ *  字符串转NSDate
+ *
+ *  @param theTime 字符串时间
+ *  @param format  转化格式 如yyyy-MM-dd HH:mm:ss,即2015-07-15 15:00:00
+ *
+ *  @return <#return value description#>
  */
-+ (NSDate *)dateFromString:(NSString *)dateStr withFormatter:(NSString *)fmr;
++ (NSDate *)dateFromString:(NSString *)timeStr format:(NSString *)format;
+/**
+ *  NSDate转字符串
+ *
+ *  @param date   NSDate时间
+ *  @param format 转化格式 如yyyy-MM-dd HH:mm:ss,即2015-07-15 15:00:00
+ *
+ *  @return 返回字符串格式时间
+ */
++ (NSString *)datestrFromDate:(NSDate *)date withDateFormat:(NSString *)format;
 /**
  *  计算特定日期是周几
  */

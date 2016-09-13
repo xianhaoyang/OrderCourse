@@ -358,7 +358,7 @@
         NSString *alertMsg = @"预订后可提前6小时取消";
         // 处理时间
         NSString *beginTimeStr = [course.BeginTime stringByReplacingOccurrencesOfString:@"T" withString:@" "];
-        NSDate *beginTimeDate = [NSDate dateFromString:beginTimeStr withFormatter:@"yyyy-MM-dd HH:mm:ss"];
+        NSDate *beginTimeDate = [NSDate dateFromString:beginTimeStr format:@"yyyy-MM-dd HH:mm:ss"];
         NSInteger timeDiff = [[NSDate date] minutesBeforeDate:beginTimeDate];
         if (timeDiff < 60 * 6) {
             alertMsg = @"6小时内即将开始的课程\n预订后不可取消";

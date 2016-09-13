@@ -8,34 +8,33 @@
 
 #import "NSDate+Calculations.h"
 
+static NSDateFormatter *dateFormatter;
 
 @implementation NSDate (Calculations)
 
-+ (NSDate *)dateFromString:(NSString *)dateStr withFormatter:(NSString *)fmr
++(NSDateFormatter *)defaultFormatter
 {
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"]];
-    [dateFormat setDateFormat:fmr];
-    return [dateFormat dateFromString:dateStr];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        dateFormatter = [[NSDateFormatter alloc]init];
+    });
+    return dateFormatter;
 }
 
-//+ (NSDate *)dateFromString:(NSString *)dateStr
-//{
-//    // 获得当前年份
-//    NSString *nowDate = [NSString stringFromNowDateWithFormatterStr:@"yyyy-MM-dd"];
-//    int year = [[nowDate substringToIndex:4] intValue];
-//    
-//    // 获取给定字符串中的月份
-//    int month = [[dateStr substringToIndex:2] intValue];
-//    
-//    // 获取给定字符串中的日份
-//    int day = [[dateStr substringWithRange:NSMakeRange(3, 2)] intValue];
-//    
-//    // 生成一个零时区时间
-//    NSDate *date = [self dateWithYear:year month:month day:day hour:0 minute:0 second:0];
-//    // 加8小时生成一个本地时间
-//    return [date advance:0 months:0 weeks:0 days:0 hours:8 minutes:0 seconds:0];
-//}
++ (NSDate *)dateFromString:(NSString *)timeStr format:(NSString *)format
+{
+    NSDateFormatter *dateFormatter = [NSDate defaultFormatter];
+    [dateFormatter setDateFormat:format];
+    NSDate *date = [dateFormatter dateFromString:timeStr];
+    return date;
+}
+
++ (NSString *)datestrFromDate:(NSDate *)date withDateFormat:(NSString *)format
+{
+    NSDateFormatter* dateFormat = [NSDate defaultFormatter];
+    [dateFormat setDateFormat:format];
+    return [dateFormat stringFromDate:date];
+}
 
 /**
  *  计算特定日期是周几
