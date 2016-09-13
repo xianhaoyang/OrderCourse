@@ -75,24 +75,29 @@
     NSString *weekDay = [NSDate weekdayStringFromDate:date];
     NSString *timeStr = [self.course.BeginTime substringWithRange:NSMakeRange(11, 5)];
     self.startTimeLabel.text = [NSString stringWithFormat:@"开始时间: %@ %@ %@", dateStr, weekDay, timeStr];
-    // 订课人数
-    if ([self.course.OrderNumber integerValue] < [self.course.Capacity integerValue]) {
-        self.orderNumLabel.text = [NSString stringWithFormat:@"订课人数: %@/%@", self.course.OrderNumber, self.course.Capacity];
-        if (self.course.isReserved) {
-            [self disableActionBtn];
-        } else {
-            self.actionBtn.backgroundColor = kRGBColor(67, 219, 212);
-            [self.actionBtn setTitle:@"预定" forState:UIControlStateNormal];
-            self.actionBtn.enabled = YES;
-        }
+    // 时间是否有冲突
+    if (self.course.isEnableOrder) {
+        [self disableActionBtnWithTitle:@"您已预订的课程与此课程的时间有冲突"];
     } else {
-        self.orderNumLabel.text = @"订课人数: 已满";
-        if (self.course.isReserved) {
-            [self disableActionBtn];
+        // 订课人数
+        if ([self.course.OrderNumber integerValue] < [self.course.Capacity integerValue]) {
+            self.orderNumLabel.text = [NSString stringWithFormat:@"订课人数: %@/%@", self.course.OrderNumber, self.course.Capacity];
+            if (self.course.isReserved) {
+                [self disableActionBtnWithTitle:@"已预订"];
+            } else {
+                self.actionBtn.backgroundColor = kRGBColor(67, 219, 212);
+                [self.actionBtn setTitle:@"预定" forState:UIControlStateNormal];
+                self.actionBtn.enabled = YES;
+            }
         } else {
-            self.actionBtn.backgroundColor = kRGBColor(243, 165, 54);
-            [self.actionBtn setTitle:@"排队" forState:UIControlStateNormal];
-            self.actionBtn.enabled = YES;
+            self.orderNumLabel.text = @"订课人数: 已满";
+            if (self.course.isReserved) {
+                [self disableActionBtnWithTitle:@"已预订"];
+            } else {
+                self.actionBtn.backgroundColor = kRGBColor(243, 165, 54);
+                [self.actionBtn setTitle:@"排队" forState:UIControlStateNormal];
+                self.actionBtn.enabled = YES;
+            }
         }
     }
     // 级别
@@ -218,7 +223,7 @@
                 if ([responseObject[@"state"] integerValue] == 1) {
                     self.course.Reserved = YES;
                     [MBProgressHUD showSuccess:@"预定成功!"];
-                    [self disableActionBtn];
+                    [self disableActionBtnWithTitle:@"已预订"];
                     // 将订课成功的对象存入已订课数组
                     [self broadcastSaveReserveInfo:responseObject];
                     // TODO:此处还可以查看订课详情
@@ -250,10 +255,10 @@
     }
 }
 
-- (void)disableActionBtn
+- (void)disableActionBtnWithTitle:(NSString *)title
 {
     self.actionBtn.backgroundColor = [UIColor grayColor];
-    [self.actionBtn setTitle:@"已预定" forState:UIControlStateNormal];
+    [self.actionBtn setTitle:title forState:UIControlStateNormal];
     self.actionBtn.enabled = NO;
 }
 

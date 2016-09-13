@@ -98,7 +98,7 @@
         self.topicLabel.text = [NSString stringWithFormat:@"Topic:%@", course.Topic];
     }
     // 时间是否冲突
-    if (course.EnableOrder) {
+    if (course.isEnableOrder) {
         self.btn.hidden = YES;
         self.conflictIcon.hidden = NO;
     } else {
