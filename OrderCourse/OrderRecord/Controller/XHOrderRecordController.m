@@ -68,6 +68,7 @@
     HTMLParser *parser = [[HTMLParser alloc] initWithContentsOfURL:[NSURL URLWithString:urlStr] error:&error];
     if (error) {
         [MBProgressHUD showError:@"当前网络状态不佳，请稍后再试..."];
+        [self.tableView.mj_header endRefreshing];
         NSLog(@"Error: %@", error);
         return;
     }

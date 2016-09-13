@@ -9,6 +9,8 @@
 #import "XHRecordCell.h"
 #import "XHOrderedCourse.h"
 #import "XHConstant.h"
+#import "NSDate+Escort.h"
+#import "NSDate+Calculations.h"
 
 @interface XHRecordCell ()
 
@@ -68,9 +70,23 @@
     NSString *stateStr = [course.state substringToIndex:3];
     self.statusLabel.text = stateStr;
     if ([stateStr isEqualToString:@"已预订"]) {
+        NSString *str = [course.BeginTime substringWithRange:NSMakeRange(3, 10)];
+        NSDate *date = [NSDate dateFromString:str format:@"yyyy年MM月dd日"];
+        NSString *dateStr = [NSDate datestrFromDate:date withDateFormat:@"yyyy-MM-dd"];
+        dateStr = [dateStr stringByAppendingString:@" "];
+        NSRange rang = [course.BeginTime rangeOfString:@"\n"];
+        NSString *timeStr = [course.BeginTime substringWithRange:NSMakeRange(rang.location - 5, 5)];
+        NSString *beginStr = [dateStr stringByAppendingString:timeStr];
+        NSDate *beginDate = [NSDate dateFromString:beginStr format:@"yyyy-MM-dd HH:mm"];
+        NSInteger timeDiff = [[NSDate date] minutesBeforeDate:beginDate];
+//         开课时间在6个小时以内就不能取消课程
+        if (timeDiff < 60 * 6) {
+            self.cancelOrderBtn.hidden = YES;
+        } else {
+            self.cancelOrderBtn.hidden = NO;
+        }
         self.statusLabel.textColor = kRGBColor(108, 209, 0);
-        self.cancelOrderBtn.hidden = NO;
-    } else {
+    } else { // 已完成
         self.statusLabel.textColor = kRGBColor(255, 145, 0);
         self.cancelOrderBtn.hidden = YES;
     }

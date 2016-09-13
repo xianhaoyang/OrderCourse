@@ -51,7 +51,7 @@
     NSString *dateStr = [course.BeginTime substringWithRange:NSMakeRange(5, 5)];
     dateStr = [[dateStr stringByReplacingOccurrencesOfString:@"-" withString:@"月"] stringByAppendingString:@"日"];
     NSString *weekStr = [course.BeginTime substringToIndex:10];
-    NSDate *date = [NSDate dateFromString:weekStr withFormatter:@"yyyy-MM-dd"];
+    NSDate *date = [NSDate dateFromString:weekStr format:@"yyyy-MM-dd"];
     NSString *weekDay = [NSDate weekdayStringFromDate:date];
     NSString *timeStr = [course.BeginTime substringWithRange:NSMakeRange(11, 5)];
     self.startTimeLabel.text = [NSString stringWithFormat:@"%@\n%@ %@", dateStr, weekDay, timeStr];
@@ -98,7 +98,7 @@
         self.topicLabel.text = [NSString stringWithFormat:@"Topic:%@", course.Topic];
     }
     // 时间是否冲突
-    if (course.EnableOrder) {
+    if (course.isEnableOrder) {
         self.btn.hidden = YES;
         self.conflictIcon.hidden = NO;
     } else {

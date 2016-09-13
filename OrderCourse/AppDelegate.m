@@ -26,7 +26,7 @@
     if (orderedCourseList.count) {
         NSMutableArray *temp = [NSMutableArray arrayWithArray:orderedCourseList];
         for (XHOrderedCourse *orderedcourse in orderedCourseList) {
-            NSDate *beginDate = [NSDate dateFromString:orderedcourse.BeginTime withFormatter:@"yyyy-MM-dd HH:mm:ss"];
+            NSDate *beginDate = [NSDate dateFromString:orderedcourse.BeginTime format:@"yyyy-MM-dd HH:mm:ss"];
             // 删除已完成的课程
             if ([beginDate isInPast]) {
                 [temp removeObject:orderedcourse];
@@ -50,11 +50,13 @@
     XHNavigationController *orderNavController = [[XHNavigationController alloc] initWithRootViewController:orderController];
 //    orderController.view.backgroundColor = [UIColor yellowColor];
     orderController.title = @"我要订课";
+    orderController.tabBarItem.image = [UIImage imageNamed:@"order"];
     // 创建订课记录控制器
     XHOrderRecordController *recordController = [[XHOrderRecordController alloc] init];
     XHNavigationController *recordNavController = [[XHNavigationController alloc] initWithRootViewController:recordController];
 //    recordController.view.backgroundColor = [UIColor greenColor];
     recordController.title = @"订课记录";
+    recordController.tabBarItem.image = [UIImage imageNamed:@"record"];
     // 将两个主控制器添加到tabBarController中
     tabBarController.viewControllers = @[orderNavController, recordNavController];
     // 显示tabBarController为根控制器
