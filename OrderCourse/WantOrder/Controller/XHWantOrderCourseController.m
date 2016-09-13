@@ -137,6 +137,7 @@
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
     [MBProgressHUD showError:@"当前网络状态不佳，请稍后再试..."];
+    [self.tableView.mj_header endRefreshing];
 }
 
 #pragma mark - 从网页元素中截取数据信息
