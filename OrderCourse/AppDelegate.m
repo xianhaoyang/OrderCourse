@@ -22,19 +22,24 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 //    // 程序已启动就在已订课数组中找出距离现在在3个小时之内的对象，并删除它
-//    NSArray *orderedCourseList = [NSKeyedUnarchiver unarchiveObjectWithFile:kOrderedCourseSavePath];
-//    if (orderedCourseList.count) {
-//        NSMutableArray *temp = [NSMutableArray arrayWithArray:orderedCourseList];
-//        for (XHOrderedCourse *orderedcourse in orderedCourseList) {
-//            NSDate *beginDate = [NSDate dateFromString:orderedcourse.BeginTime withFormatter:@"yyyy-MM-dd HH:mm:ss"];
+    NSArray *orderedCourseList = [NSKeyedUnarchiver unarchiveObjectWithFile:kOrderedCourseSavePath];
+    if (orderedCourseList.count) {
+        NSMutableArray *temp = [NSMutableArray arrayWithArray:orderedCourseList];
+        for (XHOrderedCourse *orderedcourse in orderedCourseList) {
+            NSDate *beginDate = [NSDate dateFromString:orderedcourse.BeginTime withFormatter:@"yyyy-MM-dd HH:mm:ss"];
+            // 删除已完成的课程
+            if ([beginDate isInPast]) {
+                [temp removeObject:orderedcourse];
+            }
+//            注释一下代码的原因是：如果已预订某课程的开始时间是19点，而当我在距离上课3个小时之内启动APP，那么已预订数组就会将此课程删除，而当我在首页对比时间冲突的时候就会忽略此课程的时间，从而用户将可以再次预订与此课程时间冲突的课程
 //            NSInteger timeDiff = [[NSDate date] minutesBeforeDate:beginDate];
-//            // 删除开课时间在3个小时之内的课程
+//             删除开课时间在3个小时之内的课程
 //            if (timeDiff < 60 * 3) {
 //                [temp removeObject:orderedcourse];
 //            }
-//        }
-//        [NSKeyedArchiver archiveRootObject:temp toFile:kOrderedCourseSavePath];
-//    }
+        }
+        [NSKeyedArchiver archiveRootObject:temp toFile:kOrderedCourseSavePath];
+    }
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
