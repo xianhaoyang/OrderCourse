@@ -54,28 +54,28 @@
     self.bgView.layer.shadowRadius = 5.0f;
 }
 
-- (void)setCourse:(XHOrderedCourse *)course
+- (void)setOrderedCourse:(XHOrderedCourse *)orderedCourse
 {
-    _course = course;
-    if ([course.CourseType isEqualToString:@"小班课"]) {
+    _orderedCourse = orderedCourse;
+    if ([orderedCourse.course.CourseType isEqualToString:@"小班课"]) {
         self.courseTypeBtn.backgroundColor = kRGBColor(245, 131, 193);
-    } else if ([course.CourseType isEqualToString:@"沙龙课"]) {
+    } else if ([orderedCourse.course.CourseType isEqualToString:@"沙龙课"]) {
         self.courseTypeBtn.backgroundColor = kRGBColor(250, 168, 136);
     } else { // 应用课
         self.courseTypeBtn.backgroundColor = kRGBColor(53, 185, 190);
     }
-    [self.courseTypeBtn setTitle:course.CourseType forState:UIControlStateNormal];
-    self.courseNameLabel.text = course.CourseName;
-    self.timeLabel.text = course.BeginTime;
-    NSString *stateStr = [course.state substringToIndex:3];
+    [self.courseTypeBtn setTitle:orderedCourse.course.CourseType forState:UIControlStateNormal];
+    self.courseNameLabel.text = orderedCourse.course.CourseName;
+    self.timeLabel.text = orderedCourse.course.BeginTime;
+    NSString *stateStr = [orderedCourse.state substringToIndex:3];
     self.statusLabel.text = stateStr;
     if ([stateStr isEqualToString:@"已预订"]) {
-        NSString *str = [course.BeginTime substringWithRange:NSMakeRange(3, 10)];
+        NSString *str = [orderedCourse.course.BeginTime substringWithRange:NSMakeRange(3, 10)];
         NSDate *date = [NSDate dateFromString:str format:@"yyyy年MM月dd日"];
         NSString *dateStr = [NSDate datestrFromDate:date withDateFormat:@"yyyy-MM-dd"];
         dateStr = [dateStr stringByAppendingString:@" "];
-        NSRange rang = [course.BeginTime rangeOfString:@"\n"];
-        NSString *timeStr = [course.BeginTime substringWithRange:NSMakeRange(rang.location - 5, 5)];
+        NSRange rang = [orderedCourse.course.BeginTime rangeOfString:@"\n"];
+        NSString *timeStr = [orderedCourse.course.BeginTime substringWithRange:NSMakeRange(rang.location - 5, 5)];
         NSString *beginStr = [dateStr stringByAppendingString:timeStr];
         NSDate *beginDate = [NSDate dateFromString:beginStr format:@"yyyy-MM-dd HH:mm"];
         NSInteger timeDiff = [[NSDate date] minutesBeforeDate:beginDate];

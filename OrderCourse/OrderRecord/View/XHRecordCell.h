@@ -20,7 +20,7 @@
 
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 
-@property (nonatomic, strong) XHOrderedCourse *course;
+@property (nonatomic, strong) XHOrderedCourse *orderedCourse;
 @property (nonatomic, weak) id<XHRecordCellDelegate> delegate;
 
 @end

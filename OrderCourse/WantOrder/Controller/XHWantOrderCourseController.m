@@ -161,11 +161,11 @@
     self.orderedCourseList = [NSKeyedUnarchiver unarchiveObjectWithFile:kOrderedCourseSavePath];
     for (XHCourse *course in courseList) {
         for (XHOrderedCourse *orderedCourse in self.orderedCourseList) {
-            if ([course.CourseGuid isEqualToString:orderedCourse.CourseGuid]) {
+            if ([course.CourseGuid isEqualToString:orderedCourse.course.CourseGuid]) {
                 course.Reserved = YES;
 //                break;
             } else {
-                NSString *orderedBeginTime = orderedCourse.BeginTime;
+                NSString *orderedBeginTime = orderedCourse.course.BeginTime;
                 NSString *courseBeginTime = [course.BeginTime stringByReplacingOccurrencesOfString:@"T" withString:@" "];
 //                NSLog(@"-----");
                 if ([orderedBeginTime isEqualToString:courseBeginTime]) {
@@ -457,8 +457,7 @@
 {
     NSString *objectMsg = responseObject[@"message"];
     NSString *orderedID = [objectMsg substringFromIndex:objectMsg.length - 36];
-    NSString *beginTimeStr = [self.course.BeginTime stringByReplacingOccurrencesOfString:@"T" withString:@" "];
-    XHOrderedCourse *orderedCourse = [XHOrderedCourse orderedCourseWithOrderedID:orderedID courseGuID:self.course.CourseGuid beginTimeStr:beginTimeStr];
+    XHOrderedCourse *orderedCourse = [XHOrderedCourse orderedCourseWithOrderedID:orderedID course:self.course];
     [self.orderedCourseList addObject:orderedCourse];
     [NSKeyedArchiver archiveRootObject:self.orderedCourseList toFile:kOrderedCourseSavePath];
     NSLog(@"orderedID:%@", orderedID);

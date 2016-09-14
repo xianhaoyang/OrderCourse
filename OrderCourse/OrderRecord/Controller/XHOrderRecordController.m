@@ -86,20 +86,20 @@
         if (i >= self.orderedCourseList.count) break;
         XHOrderedCourse *orderedCourse = self.orderedCourseList[i];
         if ([[spanNode getAttributeNamed:@"class"] isEqualToString:@"courseIcon"]) {
-            orderedCourse.CourseType = [spanNode allContents];
+            orderedCourse.course.CourseType = [spanNode allContents];
         }
         if ([[spanNode getAttributeNamed:@"class"] isEqualToString:@"coureseRecordTitle"]) {
             NSString *str = [[spanNode allContents] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 //            str = [str stringByReplacingOccurrencesOfString:@"\n" withString:@""];
 //            str = [str stringByReplacingOccurrencesOfString:@"\r" withString:@""];
-            orderedCourse.CourseName = str;
+            orderedCourse.course.CourseName = str;
         }
         if ([[spanNode getAttributeNamed:@"class"] isEqualToString:@"courseRecordTime"]) {
             NSString *str = [[spanNode allContents] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 //            str = [str stringByReplacingOccurrencesOfString:@"\n" withString:@""];
             str = [str stringByReplacingOccurrencesOfString:@"\r" withString:@""];
             str = [str stringByReplacingOccurrencesOfString:@" " withString:@""];
-            orderedCourse.BeginTime = str;
+            orderedCourse.course.BeginTime = str;
         }
         if ([[spanNode getAttributeNamed:@"class"] isEqualToString:@"courseRecordState"]) {
             NSString *str = [[spanNode allContents] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -121,9 +121,9 @@
         NSString *orderID = [valueStr substringFromIndex:valueStr.length - kOrderIDLength];
         NSRange rang = [valueStr rangeOfString:openid];
         NSString *courseID = [valueStr substringWithRange:NSMakeRange(rang.location + rang.length + 1, kCourseIDLength)];
-        XHOrderedCourse *course = self.orderedCourseList[index];
-        course.orderID = orderID;
-        course.CourseGuid = courseID;
+        XHOrderedCourse *orderedCourse = self.orderedCourseList[index];
+        orderedCourse.orderID = orderID;
+        orderedCourse.course.CourseGuid = courseID;
         index++;
     }
 }
@@ -138,7 +138,7 @@
 {
     XHRecordCell *cell = [XHRecordCell cellWithTableView:tableView];
     cell.delegate = self;
-    cell.course = self.orderedCourseList[indexPath.row];
+    cell.orderedCourse = self.orderedCourseList[indexPath.row];
     return cell;
 }
 
@@ -154,7 +154,7 @@
     NSIndexPath *indexPath = [self.tableView indexPathForCell:recordCell];
     XHOrderedCourse *orderedCourse = self.orderedCourseList[indexPath.row];
     self.selectedOrderCourse = orderedCourse;
-    NSString *title = [NSString stringWithFormat:@"您确定要取消该课程的预订吗?\n%@:%@\n%@", orderedCourse.CourseType, orderedCourse.CourseName, orderedCourse.BeginTime];
+    NSString *title = [NSString stringWithFormat:@"您确定要取消该课程的预订吗?\n%@:%@\n%@", orderedCourse.course.CourseType, orderedCourse.course.CourseName, orderedCourse.course.BeginTime];
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"确定" otherButtonTitles:nil, nil];
     [actionSheet showInView:self.view];
 }
@@ -176,7 +176,7 @@
         parameters[@"appUserId"] = userid;
         parameters[@"openId"] = openid;
         parameters[@"orderGuid"] = self.selectedOrderCourse.orderID;
-        parameters[@"courseGuid"] = self.selectedOrderCourse.CourseGuid;
+        parameters[@"courseGuid"] = self.selectedOrderCourse.course.CourseGuid;
         parameters[@"contractGuid"] = contractGuid;
         [manager POST:urlStr parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary  *_Nullable responseObject) {
             NSLog(@"取消成功:%@", responseObject);
@@ -204,8 +204,8 @@
 - (void)updateHomeStateUI
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    dict[kCancelCourseIDKey] = self.selectedOrderCourse.CourseGuid;
-    dict[kCancelCourseTypeKey] = self.selectedOrderCourse.CourseType;
+    dict[kCancelCourseIDKey] = self.selectedOrderCourse.course.CourseGuid;
+    dict[kCancelCourseTypeKey] = self.selectedOrderCourse.course.CourseType;
     [kNotificationCenter postNotificationName:kCancelCourseSuccessNotification object:self userInfo:dict];
 }
 

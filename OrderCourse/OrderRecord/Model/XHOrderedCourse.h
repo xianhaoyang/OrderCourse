@@ -6,15 +6,17 @@
 //  Copyright © 2016年 yangxianhao. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import "XHCourse.h"
 
-@interface XHOrderedCourse : XHCourse<NSCoding>
+@interface XHOrderedCourse : NSObject
 
-+ (instancetype)orderedCourseWithOrderedID:(NSString *)orderedID courseGuID:(NSString *)courseGuID beginTimeStr:(NSString *)beginTimeStr;
++ (instancetype)orderedCourseWithOrderedID:(NSString *)orderedID course:(XHCourse *)course;
 /**
  *  预定成功返回的orderID
  */
 @property (nonatomic, readwrite, copy) NSString *orderID;
 @property (nonatomic, copy, readwrite) NSString *state;
+@property (nonatomic, strong) XHCourse *course;
 
 @end
