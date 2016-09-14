@@ -76,6 +76,8 @@
     [self.orderedCourseList removeAllObjects];
     for (NSInteger i = 0; i < kListCount; i++) {
         XHOrderedCourse *orderedCourse = [[XHOrderedCourse alloc] init];
+        XHCourse *course = [[XHCourse alloc] init];
+        orderedCourse.course = course;
         [self.orderedCourseList addObject:orderedCourse];
     }
     HTMLNode *bodyNode = [parser body];
@@ -86,7 +88,8 @@
         if (i >= self.orderedCourseList.count) break;
         XHOrderedCourse *orderedCourse = self.orderedCourseList[i];
         if ([[spanNode getAttributeNamed:@"class"] isEqualToString:@"courseIcon"]) {
-            orderedCourse.course.CourseType = [spanNode allContents];
+            NSString *str = [spanNode allContents];
+            orderedCourse.course.CourseType = str;
         }
         if ([[spanNode getAttributeNamed:@"class"] isEqualToString:@"coureseRecordTitle"]) {
             NSString *str = [[spanNode allContents] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
