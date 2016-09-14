@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "XHCourse.h"
 
-@interface XHOrderedCourse : NSObject
+@interface XHOrderedCourse : NSObject <NSCoding>
 
 + (instancetype)orderedCourseWithOrderedID:(NSString *)orderedID course:(XHCourse *)course;
 /**

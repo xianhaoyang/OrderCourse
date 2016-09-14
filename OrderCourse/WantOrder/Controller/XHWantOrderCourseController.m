@@ -166,7 +166,7 @@
 //                break;
             } else {
                 NSString *orderedBeginTime = orderedCourse.course.BeginTime;
-                NSString *courseBeginTime = [course.BeginTime stringByReplacingOccurrencesOfString:@"T" withString:@" "];
+                NSString *courseBeginTime = course.BeginTime;
 //                NSLog(@"-----");
                 if ([orderedBeginTime isEqualToString:courseBeginTime]) {
                     course.EnableOrder = YES;

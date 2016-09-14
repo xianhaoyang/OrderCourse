@@ -34,7 +34,7 @@
 //"Reserve"
 //"EnableOrder"
 
-@interface XHCourse : NSObject
+@interface XHCourse : NSObject <NSCoding>
 /**
  *  是否预定了该课程
  */
