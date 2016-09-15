@@ -14,6 +14,7 @@
 #import "MBProgressHUD+XMG.h"
 #import "AFNetworking.h"
 #import "MJRefresh.h"
+#import "XHCourseDetailController.h"
 
 #define kOrderIDLength 36
 #define kCourseIDLength kOrderIDLength
@@ -149,6 +150,18 @@
 {
     NSLog(@"%s--%zd", __func__, indexPath.row);
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    XHOrderedCourse *orderedCourse = self.orderedCourseList[indexPath.row];
+    if ([orderedCourse.state containsString:@"已完成"]) return;
+    NSArray *localOrderList = [NSKeyedUnarchiver unarchiveObjectWithFile:kOrderedCourseSavePath];
+    for (XHOrderedCourse *localOrderCourse in localOrderList) {
+        if ([localOrderCourse.course.CourseGuid isEqualToString:orderedCourse.course.CourseGuid]) {
+            orderedCourse = localOrderCourse;
+            break;
+        }
+    }
+    XHCourseDetailController *detaileController = [[XHCourseDetailController alloc] init];
+    detaileController.course = orderedCourse.course;
+    [self.navigationController pushViewController:detaileController animated:YES];
 }
 
 #pragma mark - XHRecordCellDelegate
