@@ -85,30 +85,29 @@
     
     
     if (self.fromControllerType) return;
+    // 订课人数
+    if ([self.course.OrderNumber integerValue] < [self.course.Capacity integerValue]) {
+        self.orderNumLabel.text = [NSString stringWithFormat:@"订课人数: %@/%@", self.course.OrderNumber, self.course.Capacity];
+        if (self.course.isReserved) {
+            [self disableActionBtnWithTitle:@"已预订"];
+        } else {
+            self.actionBtn.backgroundColor = kRGBColor(67, 219, 212);
+            [self.actionBtn setTitle:@"预定" forState:UIControlStateNormal];
+            self.actionBtn.enabled = YES;
+        }
+    } else {
+        self.orderNumLabel.text = @"订课人数: 已满";
+        if (self.course.isReserved) {
+            [self disableActionBtnWithTitle:@"已预订"];
+        } else {
+            self.actionBtn.backgroundColor = kRGBColor(243, 165, 54);
+            [self.actionBtn setTitle:@"排队" forState:UIControlStateNormal];
+            self.actionBtn.enabled = YES;
+        }
+    }
     // 时间是否有冲突
     if (self.course.isEnableOrder) {
         [self disableActionBtnWithTitle:@"您已预订的课程与此课程的时间有冲突"];
-    } else {
-        // 订课人数
-        if ([self.course.OrderNumber integerValue] < [self.course.Capacity integerValue]) {
-            self.orderNumLabel.text = [NSString stringWithFormat:@"订课人数: %@/%@", self.course.OrderNumber, self.course.Capacity];
-            if (self.course.isReserved) {
-                [self disableActionBtnWithTitle:@"已预订"];
-            } else {
-                self.actionBtn.backgroundColor = kRGBColor(67, 219, 212);
-                [self.actionBtn setTitle:@"预定" forState:UIControlStateNormal];
-                self.actionBtn.enabled = YES;
-            }
-        } else {
-            self.orderNumLabel.text = @"订课人数: 已满";
-            if (self.course.isReserved) {
-                [self disableActionBtnWithTitle:@"已预订"];
-            } else {
-                self.actionBtn.backgroundColor = kRGBColor(243, 165, 54);
-                [self.actionBtn setTitle:@"排队" forState:UIControlStateNormal];
-                self.actionBtn.enabled = YES;
-            }
-        }
     }
 }
 
