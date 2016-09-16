@@ -15,7 +15,7 @@
 #import "MBProgressHUD+XMG.h"
 #import "AFNetworking.h"
 
-@interface XHCourseDetailController () <UIAlertViewDelegate>
+@interface XHCourseDetailController () <UIAlertViewDelegate, UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *teacherImageView;
 @property (weak, nonatomic) IBOutlet UIButton *actionBtn;
@@ -30,6 +30,7 @@
 
 @property (nonatomic, strong) NSArray *teacherList;
 @property (nonatomic, weak) UIScrollView *scrollView;
+@property (nonatomic, weak) UIPageControl *pageControl;
 
 @end
 
@@ -117,12 +118,22 @@
     // 创建图片浏览器
     NSInteger imageCount = [self isValidTeacher] ? 2 : 1;
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+    scrollView.delegate = self;
     scrollView.hidden = YES;
     scrollView.backgroundColor = [UIColor blackColor];
     scrollView.pagingEnabled = YES;
     scrollView.contentSize = CGSizeMake(self.view.width * imageCount, 0);
     [self.view.window addSubview:scrollView];
     self.scrollView = scrollView;
+    // 创建pageControl
+    if (imageCount == 2) {
+        UIPageControl *pageControl = [[UIPageControl alloc] init];
+        pageControl.numberOfPages = imageCount;
+        pageControl.hidden = YES;
+        pageControl.center = CGPointMake(self.view.window.centerX, self.view.window.height * 0.9);
+        [self.view.window addSubview:pageControl];
+        self.pageControl = pageControl;
+    }
     for (NSInteger i = 0; i < imageCount; i++) {
         UIImageView *imageView = [[UIImageView alloc] init];
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBigTeacherImageView)];
@@ -149,6 +160,8 @@
     self.scrollView.hidden = NO;
     [UIView animateWithDuration:0.25 animations:^{
         self.scrollView.frame = self.view.bounds;
+    } completion:^(BOOL finished) {
+        self.pageControl.hidden = NO;
     }];
     
 }
@@ -160,7 +173,15 @@
     } completion:^(BOOL finished) {
         self.scrollView.hidden = YES;
         self.scrollView.contentOffset = CGPointZero;
+        self.pageControl.hidden = YES;
     }];
+}
+
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    NSLog(@"%s", __func__);
+    self.pageControl.currentPage = scrollView.contentOffset.x / scrollView.width;
 }
 
 #pragma mark - 验证教师名称是否合法
