@@ -399,8 +399,11 @@
                 NSLog(@"订课成功:%@", responseObject);
                 [MBProgressHUD hideHUD];
                 if ([responseObject[@"state"] integerValue] == 1) {
-                    self.course.Reserved = YES;
                     [MBProgressHUD showSuccess:@"预定成功!"];
+                    // 修改此课程订课状态
+                    self.course.Reserved = YES;
+                    // 订课人数+1
+                    self.course.OrderNumber = [NSString stringWithFormat:@"%zd", [self.course.OrderNumber integerValue] + 1];
                     // 修改时间是否冲突状态
                     [self findSameTimeCourseWithArray:self.privateList targetValue:YES];
                     [self findSameTimeCourseWithArray:self.solonList targetValue:YES];

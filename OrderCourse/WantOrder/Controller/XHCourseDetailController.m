@@ -229,8 +229,9 @@
                 NSLog(@"订课成功:%@", responseObject);
                 [MBProgressHUD hideHUD];
                 if ([responseObject[@"state"] integerValue] == 1) {
-                    self.course.Reserved = YES;
                     [MBProgressHUD showSuccess:@"预定成功!"];
+                    self.course.Reserved = YES;
+                    [self refreshOrderNumber];
                     [self disableActionBtnWithTitle:@"已预订"];
                     // 将订课成功的对象存入已订课数组
                     [self broadcastSaveReserveInfo:responseObject];
@@ -274,6 +275,18 @@
 {
     NSDictionary *dict = [NSDictionary dictionaryWithObject:responseObject forKey:kResponseObjectKey];
     [kNotificationCenter postNotificationName:kCourseDetailControllerReserveCourseSuccessNotification object:self userInfo:dict];
+}
+
+#pragma mark - 刷新订课人数
+- (void)refreshOrderNumber
+{
+    // 订课人数+1
+    self.course.OrderNumber = [NSString stringWithFormat:@"%zd", [self.course.OrderNumber integerValue] + 1];
+    if ([self.course.OrderNumber integerValue] < [self.course.Capacity integerValue]) {
+        self.orderNumLabel.text = [NSString stringWithFormat:@"订课人数: %@/%@", self.course.OrderNumber, self.course.Capacity];
+    } else {
+        self.orderNumLabel.text = @"订课人数: 已满";
+    }
 }
 
 - (void)setCourse:(XHCourse *)course
