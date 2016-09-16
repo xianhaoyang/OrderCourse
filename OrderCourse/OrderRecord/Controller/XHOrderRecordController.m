@@ -159,9 +159,10 @@
             break;
         }
     }
-    XHCourseDetailController *detaileController = [[XHCourseDetailController alloc] init];
-    detaileController.course = orderedCourse.course;
-    [self.navigationController pushViewController:detaileController animated:YES];
+    XHCourseDetailController *detailController = [[XHCourseDetailController alloc] init];
+    detailController.course = orderedCourse.course;
+    detailController.fromControllerType = XHFromControllerTypeOrderRecord;
+    [self.navigationController pushViewController:detailController animated:YES];
 }
 
 #pragma mark - XHRecordCellDelegate

@@ -49,6 +49,7 @@
     self.title = @"课程详情";
     self.actionBtn.layer.cornerRadius = 5.0f;
     self.actionBtn.clipsToBounds = YES;
+    self.actionBtn.hidden = self.fromControllerType;
     // 老师图片点击事件
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapSmallTeacherImageView)];
     [self.teacherImageView addGestureRecognizer:tap];
@@ -71,6 +72,8 @@
     self.courseNameLabel.text = [NSString stringWithFormat:@"课程名称: %@", self.course.CourseName];
     self.courseTopicLabel.text = [NSString stringWithFormat:@"课程主题: %@", self.course.Topic];
     self.classRoomLabel.text = [NSString stringWithFormat:@"上课地点: %@", self.course.ClassRoom];
+    // 级别
+    self.levelLabel.text = [NSString stringWithFormat:@"适用级别: %@", self.course.CourseLevel];
     // 开始时间
     NSString *dateStr = [self.course.BeginTime substringWithRange:NSMakeRange(5, 5)];
     dateStr = [[dateStr stringByReplacingOccurrencesOfString:@"-" withString:@"月"] stringByAppendingString:@"日"];
@@ -79,6 +82,9 @@
     NSString *weekDay = [NSDate weekdayStringFromDate:date];
     NSString *timeStr = [self.course.BeginTime substringWithRange:NSMakeRange(11, 5)];
     self.startTimeLabel.text = [NSString stringWithFormat:@"开始时间: %@ %@ %@", dateStr, weekDay, timeStr];
+    
+    
+    if (self.fromControllerType) return;
     // 时间是否有冲突
     if (self.course.isEnableOrder) {
         [self disableActionBtnWithTitle:@"您已预订的课程与此课程的时间有冲突"];
@@ -104,8 +110,6 @@
             }
         }
     }
-    // 级别
-    self.levelLabel.text = [NSString stringWithFormat:@"适用级别: %@", self.course.CourseLevel];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -275,6 +279,11 @@
 - (void)setCourse:(XHCourse *)course
 {
     _course = course;
+}
+
+- (void)setFromControllerType:(XHFromControllerType)fromControllerType
+{
+    _fromControllerType = fromControllerType;
 }
 
 @end
