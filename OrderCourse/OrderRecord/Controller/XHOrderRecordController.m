@@ -151,7 +151,8 @@
     NSLog(@"%s--%zd", __func__, indexPath.row);
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     XHOrderedCourse *orderedCourse = self.orderedCourseList[indexPath.row];
-    if ([orderedCourse.state containsString:@"已完成"]) return;
+    NSString *stateStr = [orderedCourse.state substringToIndex:3];
+    if ([stateStr isEqualToString:@"已完成"]) return;
     NSArray *localOrderList = [NSKeyedUnarchiver unarchiveObjectWithFile:kOrderedCourseSavePath];
     for (XHOrderedCourse *localOrderCourse in localOrderList) {
         if ([localOrderCourse.course.CourseGuid isEqualToString:orderedCourse.course.CourseGuid]) {

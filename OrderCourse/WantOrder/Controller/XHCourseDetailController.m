@@ -168,12 +168,12 @@
 
 - (void)tapBigTeacherImageView
 {
+    self.pageControl.hidden = YES;
     [UIView animateWithDuration:0.25 animations:^{
         self.scrollView.frame = self.teacherImageView.frame;
     } completion:^(BOOL finished) {
         self.scrollView.hidden = YES;
         self.scrollView.contentOffset = CGPointZero;
-        self.pageControl.hidden = YES;
     }];
 }
 
