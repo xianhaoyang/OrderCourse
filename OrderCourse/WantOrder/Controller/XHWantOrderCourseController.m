@@ -309,7 +309,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //NSLog(@"%s", __func__);
-    return self.checkImage1.isHidden == NO ? 105 : 150;
+    return self.checkImage1.isHidden == NO ? 90 : 120;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

@@ -158,6 +158,7 @@
     NSLog(@"%s", __func__);
     self.scrollView.frame = self.teacherImageView.frame;
     self.scrollView.hidden = NO;
+    self.pageControl.currentPage = 0;
     [UIView animateWithDuration:0.25 animations:^{
         self.scrollView.frame = self.view.bounds;
     } completion:^(BOOL finished) {
