@@ -97,12 +97,12 @@
 #pragma mark - life cycle
 - (void)dealloc
 {
-    NSLog(@"%s", __func__);
+    XHLog(@"%s", __func__);
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"kOrderedCourseSavePath:%@", kOrderedCourseSavePath);
+    XHLog(@"kOrderedCourseSavePath:%@", kOrderedCourseSavePath);
     [self setupUI];
     
     UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
@@ -167,7 +167,7 @@
             } else {
                 NSString *orderedBeginTime = orderedCourse.course.BeginTime;
                 NSString *courseBeginTime = course.BeginTime;
-//                NSLog(@"-----");
+//                XHLog(@"-----");
                 if ([orderedBeginTime isEqualToString:courseBeginTime]) {
                     course.EnableOrder = YES;
                 }
@@ -294,12 +294,12 @@
 #pragma mark - UITableViewDelegate & UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    //NSLog(@"%s", __func__);
+    //XHLog(@"%s", __func__);
     return self.dataList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    //NSLog(@"%s", __func__);
+    //XHLog(@"%s", __func__);
     XHOrderCourseCell *cell = [XHOrderCourseCell cellWithTableView:tableView];
     cell.delegate = self;
     cell.course = self.dataList[indexPath.row];
@@ -308,7 +308,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //NSLog(@"%s", __func__);
+    //XHLog(@"%s", __func__);
     return self.checkImage1.isHidden == NO ? 105 : 150;
 }
 
@@ -323,7 +323,7 @@
     } else {
         course = self.appList[indexPath.row];
     }
-    NSLog(@"CourseGuid : %@, %@", course.CourseGuid, course.BeginTime);
+    XHLog(@"CourseGuid : %@, %@", course.CourseGuid, course.BeginTime);
     detailController.course = course;
     // 此处一定需要这句话，因为用户可能在课程详情里预定课程，而在加入数组方法里有self.course.BeginTime取出课程开始时间，而此时的self.course是XHOrderCourseCellDelegate里取到的course，所以此处要覆盖
     self.course = course;
@@ -336,13 +336,13 @@
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     XHCourse *course = nil;
     if (!self.checkImage1.isHidden) {
-        NSLog(@"private");
+        XHLog(@"private");
         course = self.privateList[indexPath.row];
     } else if (!self.checkImage2.isHidden) {
-        NSLog(@"solon");
+        XHLog(@"solon");
         course = self.solonList[indexPath.row];
     } else {
-        NSLog(@"application");
+        XHLog(@"application");
         course = self.appList[indexPath.row];
     }
     // 存储btn和course，alertview的代理里会用到
@@ -377,7 +377,7 @@
 #pragma mark - UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    NSLog(@"%zd--%@", buttonIndex, self.btn.currentTitle);
+    XHLog(@"%zd--%@", buttonIndex, self.btn.currentTitle);
     if (buttonIndex == 1) {
         [MBProgressHUD showMessage:@"预定中，请稍等..."];
         // 发送预定请求
@@ -395,7 +395,7 @@
             parameters[@"openId"] = openid;
             parameters[@"contractGuid"] = contractGuid;
             [manager POST:urlStr parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary  *_Nullable responseObject) {
-                NSLog(@"订课成功:%@", responseObject);
+                XHLog(@"订课成功:%@", responseObject);
                 [MBProgressHUD hideHUD];
                 if ([responseObject[@"state"] integerValue] == 1) {
                     self.course.Reserved = YES;
@@ -413,7 +413,7 @@
                     [MBProgressHUD showError:responseObject[@"message"]];
                 }
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                NSLog(@"订课失败:%@", error);
+                XHLog(@"订课失败:%@", error);
                 [MBProgressHUD hideHUD];
                 [MBProgressHUD showError:@"当前网络不好，请检查网络"];
             }];
@@ -421,7 +421,7 @@
             // 发送排队请求
             urlStr = [NSString stringWithFormat:@"%@%@", baseURL, reminderQueueURL];
             [manager POST:urlStr parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                NSLog(@"排队成功:%@", responseObject);
+                XHLog(@"排队成功:%@", responseObject);
                 [MBProgressHUD hideHUD];
                 if ([responseObject[@"state"] integerValue] == 1) {
                     [MBProgressHUD showSuccess:@"排队成功!"];
@@ -429,7 +429,7 @@
                     [MBProgressHUD showError:responseObject[@"message"]];
                 }
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                NSLog(@"排队失败:%@", error);
+                XHLog(@"排队失败:%@", error);
                 [MBProgressHUD hideHUD];
                 [MBProgressHUD showError:@"当前网络不好，请检查网络"];
             }];
@@ -460,7 +460,7 @@
     XHOrderedCourse *orderedCourse = [XHOrderedCourse orderedCourseWithOrderedID:orderedID course:self.course];
     [self.orderedCourseList addObject:orderedCourse];
     [NSKeyedArchiver archiveRootObject:self.orderedCourseList toFile:kOrderedCourseSavePath];
-    NSLog(@"orderedID:%@", orderedID);
+    XHLog(@"orderedID:%@", orderedID);
     // 更新订课记录页面数据
     [kNotificationCenter postNotificationName:kOrderCourseSuccessNotification object:self];
 }
@@ -468,7 +468,7 @@
 #pragma mark - 重新刷新表格数据
 - (void)refreshCurrentCourseTypeTableViewData
 {
-    NSLog(@"%s", __func__);
+    XHLog(@"%s", __func__);
     if (!self.checkImage1.isHidden) {
         self.dataList = self.privateList;
     } else if (!self.checkImage2.isHidden) {

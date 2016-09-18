@@ -1,2 +1,2 @@
 # ordercourse
-This is a order course system on iPhone.
+This is an order course system on iPhone.

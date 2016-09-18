@@ -69,7 +69,7 @@
     if (error) {
         [MBProgressHUD showError:@"当前网络状态不佳，请稍后再试..."];
         [self.tableView.mj_header endRefreshing];
-        NSLog(@"Error: %@", error);
+        XHLog(@"Error: %@", error);
         return;
     }
     // 创建10个XHOrderedCourse对象
@@ -120,7 +120,7 @@
     for (HTMLNode *spanNode in spanNodes1) {
         if (index >= self.orderedCourseList.count) break;
         NSString *valueStr = [spanNode getAttributeNamed:@"href"];
-//        NSLog(@"valueStr:%@", valueStr);
+//        XHLog(@"valueStr:%@", valueStr);
         NSString *orderID = [valueStr substringFromIndex:valueStr.length - kOrderIDLength];
         NSRange rang = [valueStr rangeOfString:openid];
         NSString *courseID = [valueStr substringWithRange:NSMakeRange(rang.location + rang.length + 1, kCourseIDLength)];
@@ -147,7 +147,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"%s--%zd", __func__, indexPath.row);
+    XHLog(@"%s--%zd", __func__, indexPath.row);
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
@@ -165,7 +165,7 @@
 #pragma mark - UIActionSheetDelegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    NSLog(@"%s--%zd", __func__, buttonIndex);
+    XHLog(@"%s--%zd", __func__, buttonIndex);
     if (buttonIndex == 0) {
         [MBProgressHUD showMessage:@"取消中，请稍等..."];
         // 发送预定请求
@@ -182,7 +182,7 @@
         parameters[@"courseGuid"] = self.selectedOrderCourse.course.CourseGuid;
         parameters[@"contractGuid"] = contractGuid;
         [manager POST:urlStr parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary  *_Nullable responseObject) {
-            NSLog(@"取消成功:%@", responseObject);
+            XHLog(@"取消成功:%@", responseObject);
             [MBProgressHUD hideHUD];
             if ([responseObject[@"state"] integerValue] == 1) {
                 [MBProgressHUD showSuccess:@"取消成功!"];
@@ -196,7 +196,7 @@
                 [MBProgressHUD showError:responseObject[@"message"]];
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            NSLog(@"取消失败:%@", error);
+            XHLog(@"取消失败:%@", error);
             [MBProgressHUD hideHUD];
             [MBProgressHUD showError:@"当前网络不好，请检查网络"];
         }];

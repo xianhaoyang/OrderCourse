@@ -8,9 +8,6 @@
 
 #import "XHConstant.h"
 
-@implementation XHConstant
-
-@end
 // 可变常量
 NSString *const openid = @"oXoOjt9tI9bAOy0TVyt4CvZLDwDQ";
 NSString *const userid = @"660aaf5e-b7ab-4157-b333-ae2e3328ab02";

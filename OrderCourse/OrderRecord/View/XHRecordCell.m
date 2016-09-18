@@ -93,7 +93,7 @@
 }
 
 - (IBAction)clickCancelOrder {
-    NSLog(@"%s", __func__);
+    XHLog(@"%s", __func__);
     if ([self.delegate respondsToSelector:@selector(recordCellDidClickCancelOrderBtn:)]) {
         [self.delegate recordCellDidClickCancelOrderBtn:self];
     }

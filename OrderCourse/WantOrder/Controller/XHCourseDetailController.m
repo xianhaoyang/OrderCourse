@@ -37,7 +37,7 @@
 
 - (void)dealloc
 {
-    NSLog(@"%s", __func__);
+    XHLog(@"%s", __func__);
 }
 
 - (void)viewDidLoad {
@@ -141,7 +141,7 @@
 
 - (void)tapSmallTeacherImageView
 {
-    NSLog(@"%s", __func__);
+    XHLog(@"%s", __func__);
     self.scrollView.frame = self.teacherImageView.frame;
     self.scrollView.hidden = NO;
     [UIView animateWithDuration:0.25 animations:^{
@@ -174,7 +174,7 @@
 }
 
 - (IBAction)clickActionBtn {
-    NSLog(@"%s", __func__);
+    XHLog(@"%s", __func__);
     // 显示会话框
     UIAlertView *alertView = [[UIAlertView alloc] init];
     alertView.delegate = self;
@@ -204,7 +204,7 @@
 #pragma mark - UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    NSLog(@"%zd--%@", buttonIndex, self.actionBtn.currentTitle);
+    XHLog(@"%zd--%@", buttonIndex, self.actionBtn.currentTitle);
     if (buttonIndex == 1) {
         [MBProgressHUD showMessage:@"预定中，请稍等..."];
         // 发送预定请求
@@ -222,7 +222,7 @@
             parameters[@"openId"] = openid;
             parameters[@"contractGuid"] = contractGuid;
             [manager POST:urlStr parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary  *_Nullable responseObject) {
-                NSLog(@"订课成功:%@", responseObject);
+                XHLog(@"订课成功:%@", responseObject);
                 [MBProgressHUD hideHUD];
                 if ([responseObject[@"state"] integerValue] == 1) {
                     self.course.Reserved = YES;
@@ -235,7 +235,7 @@
                     [MBProgressHUD showError:responseObject[@"message"]];
                 }
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                NSLog(@"订课失败:%@", error);
+                XHLog(@"订课失败:%@", error);
                 [MBProgressHUD hideHUD];
                 [MBProgressHUD showError:@"当前网络不好，请检查网络"];
             }];
@@ -243,7 +243,7 @@
             // 发送排队请求
             urlStr = [NSString stringWithFormat:@"%@%@", baseURL, reminderQueueURL];
             [manager POST:urlStr parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                NSLog(@"排队成功:%@", responseObject);
+                XHLog(@"排队成功:%@", responseObject);
                 [MBProgressHUD hideHUD];
                 if ([responseObject[@"state"] integerValue] == 1) {
                     [MBProgressHUD showSuccess:@"排队成功!"];
@@ -251,7 +251,7 @@
                     [MBProgressHUD showError:responseObject[@"message"]];
                 }
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                NSLog(@"排队失败:%@", error);
+                XHLog(@"排队失败:%@", error);
                 [MBProgressHUD hideHUD];
                 [MBProgressHUD showError:@"当前网络不好，请检查网络"];
             }];

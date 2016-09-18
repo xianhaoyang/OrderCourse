@@ -108,7 +108,7 @@
 }
 
 - (IBAction)clickBtn {
-    NSLog(@"%s--%@", __func__, self.btn.currentTitle);
+    XHLog(@"%s--%@", __func__, self.btn.currentTitle);
     if ([self.delegate respondsToSelector:@selector(orderCourseCell:didClickBtn:)]) {
         [self.delegate orderCourseCell:self didClickBtn:self.btn];
     }

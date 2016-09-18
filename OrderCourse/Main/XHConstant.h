@@ -12,9 +12,11 @@
 #define kNotificationCenter [NSNotificationCenter defaultCenter]
 #define kOrderedCourseSavePath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:@"orderedCourse.data"]
 
-@interface XHConstant : NSObject
-
-@end
+#ifdef DEBUG
+#define XHLog(...)  NSLog(__VA_ARGS__);
+#else
+#define XHLog(...)
+#endif
 
 extern NSString *const openid;
 extern NSString *const userid;
