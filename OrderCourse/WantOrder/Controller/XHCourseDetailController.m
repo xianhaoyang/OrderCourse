@@ -15,7 +15,7 @@
 #import "MBProgressHUD+XMG.h"
 #import "AFNetworking.h"
 
-@interface XHCourseDetailController () <UIAlertViewDelegate>
+@interface XHCourseDetailController () <UIAlertViewDelegate, UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *teacherImageView;
 @property (weak, nonatomic) IBOutlet UIButton *actionBtn;
@@ -30,6 +30,7 @@
 
 @property (nonatomic, strong) NSArray *teacherList;
 @property (nonatomic, weak) UIScrollView *scrollView;
+@property (nonatomic, weak) UIPageControl *pageControl;
 
 @end
 
@@ -49,6 +50,7 @@
     self.title = @"课程详情";
     self.actionBtn.layer.cornerRadius = 5.0f;
     self.actionBtn.clipsToBounds = YES;
+    self.actionBtn.hidden = self.fromControllerType;
     // 老师图片点击事件
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapSmallTeacherImageView)];
     [self.teacherImageView addGestureRecognizer:tap];
@@ -71,6 +73,8 @@
     self.courseNameLabel.text = [NSString stringWithFormat:@"课程名称: %@", self.course.CourseName];
     self.courseTopicLabel.text = [NSString stringWithFormat:@"课程主题: %@", self.course.Topic];
     self.classRoomLabel.text = [NSString stringWithFormat:@"上课地点: %@", self.course.ClassRoom];
+    // 级别
+    self.levelLabel.text = [NSString stringWithFormat:@"适用级别: %@", self.course.CourseLevel];
     // 开始时间
     NSString *dateStr = [self.course.BeginTime substringWithRange:NSMakeRange(5, 5)];
     dateStr = [[dateStr stringByReplacingOccurrencesOfString:@"-" withString:@"月"] stringByAppendingString:@"日"];
@@ -79,33 +83,33 @@
     NSString *weekDay = [NSDate weekdayStringFromDate:date];
     NSString *timeStr = [self.course.BeginTime substringWithRange:NSMakeRange(11, 5)];
     self.startTimeLabel.text = [NSString stringWithFormat:@"开始时间: %@ %@ %@", dateStr, weekDay, timeStr];
+    
+    
+    if (self.fromControllerType) return;
+    // 订课人数
+    if ([self.course.OrderNumber integerValue] < [self.course.Capacity integerValue]) {
+        self.orderNumLabel.text = [NSString stringWithFormat:@"订课人数: %@/%@", self.course.OrderNumber, self.course.Capacity];
+        if (self.course.isReserved) {
+            [self disableActionBtnWithTitle:@"已预订"];
+        } else {
+            self.actionBtn.backgroundColor = kRGBColor(67, 219, 212);
+            [self.actionBtn setTitle:@"预定" forState:UIControlStateNormal];
+            self.actionBtn.enabled = YES;
+        }
+    } else {
+        self.orderNumLabel.text = @"订课人数: 已满";
+        if (self.course.isReserved) {
+            [self disableActionBtnWithTitle:@"已预订"];
+        } else {
+            self.actionBtn.backgroundColor = kRGBColor(243, 165, 54);
+            [self.actionBtn setTitle:@"排队" forState:UIControlStateNormal];
+            self.actionBtn.enabled = YES;
+        }
+    }
     // 时间是否有冲突
     if (self.course.isEnableOrder) {
         [self disableActionBtnWithTitle:@"您已预订的课程与此课程的时间有冲突"];
-    } else {
-        // 订课人数
-        if ([self.course.OrderNumber integerValue] < [self.course.Capacity integerValue]) {
-            self.orderNumLabel.text = [NSString stringWithFormat:@"订课人数: %@/%@", self.course.OrderNumber, self.course.Capacity];
-            if (self.course.isReserved) {
-                [self disableActionBtnWithTitle:@"已预订"];
-            } else {
-                self.actionBtn.backgroundColor = kRGBColor(67, 219, 212);
-                [self.actionBtn setTitle:@"预定" forState:UIControlStateNormal];
-                self.actionBtn.enabled = YES;
-            }
-        } else {
-            self.orderNumLabel.text = @"订课人数: 已满";
-            if (self.course.isReserved) {
-                [self disableActionBtnWithTitle:@"已预订"];
-            } else {
-                self.actionBtn.backgroundColor = kRGBColor(243, 165, 54);
-                [self.actionBtn setTitle:@"排队" forState:UIControlStateNormal];
-                self.actionBtn.enabled = YES;
-            }
-        }
     }
-    // 级别
-    self.levelLabel.text = [NSString stringWithFormat:@"适用级别: %@", self.course.CourseLevel];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -114,12 +118,22 @@
     // 创建图片浏览器
     NSInteger imageCount = [self isValidTeacher] ? 2 : 1;
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+    scrollView.delegate = self;
     scrollView.hidden = YES;
     scrollView.backgroundColor = [UIColor blackColor];
     scrollView.pagingEnabled = YES;
     scrollView.contentSize = CGSizeMake(self.view.width * imageCount, 0);
     [self.view.window addSubview:scrollView];
     self.scrollView = scrollView;
+    // 创建pageControl
+    if (imageCount == 2) {
+        UIPageControl *pageControl = [[UIPageControl alloc] init];
+        pageControl.numberOfPages = imageCount;
+        pageControl.hidden = YES;
+        pageControl.center = CGPointMake(self.view.window.centerX, self.view.window.height * 0.9);
+        [self.view.window addSubview:pageControl];
+        self.pageControl = pageControl;
+    }
     for (NSInteger i = 0; i < imageCount; i++) {
         UIImageView *imageView = [[UIImageView alloc] init];
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBigTeacherImageView)];
@@ -144,20 +158,31 @@
     XHLog(@"%s", __func__);
     self.scrollView.frame = self.teacherImageView.frame;
     self.scrollView.hidden = NO;
+    self.pageControl.currentPage = 0;
     [UIView animateWithDuration:0.25 animations:^{
         self.scrollView.frame = self.view.bounds;
+    } completion:^(BOOL finished) {
+        self.pageControl.hidden = NO;
     }];
     
 }
 
 - (void)tapBigTeacherImageView
 {
+    self.pageControl.hidden = YES;
     [UIView animateWithDuration:0.25 animations:^{
         self.scrollView.frame = self.teacherImageView.frame;
     } completion:^(BOOL finished) {
         self.scrollView.hidden = YES;
         self.scrollView.contentOffset = CGPointZero;
     }];
+}
+
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    NSLog(@"%s", __func__);
+    self.pageControl.currentPage = scrollView.contentOffset.x / scrollView.width;
 }
 
 #pragma mark - 验证教师名称是否合法
@@ -225,8 +250,9 @@
                 XHLog(@"订课成功:%@", responseObject);
                 [MBProgressHUD hideHUD];
                 if ([responseObject[@"state"] integerValue] == 1) {
-                    self.course.Reserved = YES;
                     [MBProgressHUD showSuccess:@"预定成功!"];
+                    self.course.Reserved = YES;
+                    [self refreshOrderNumber];
                     [self disableActionBtnWithTitle:@"已预订"];
                     // 将订课成功的对象存入已订课数组
                     [self broadcastSaveReserveInfo:responseObject];
@@ -272,9 +298,26 @@
     [kNotificationCenter postNotificationName:kCourseDetailControllerReserveCourseSuccessNotification object:self userInfo:dict];
 }
 
+#pragma mark - 刷新订课人数
+- (void)refreshOrderNumber
+{
+    // 订课人数+1
+    self.course.OrderNumber = [NSString stringWithFormat:@"%zd", [self.course.OrderNumber integerValue] + 1];
+    if ([self.course.OrderNumber integerValue] < [self.course.Capacity integerValue]) {
+        self.orderNumLabel.text = [NSString stringWithFormat:@"订课人数: %@/%@", self.course.OrderNumber, self.course.Capacity];
+    } else {
+        self.orderNumLabel.text = @"订课人数: 已满";
+    }
+}
+
 - (void)setCourse:(XHCourse *)course
 {
     _course = course;
+}
+
+- (void)setFromControllerType:(XHFromControllerType)fromControllerType
+{
+    _fromControllerType = fromControllerType;
 }
 
 @end

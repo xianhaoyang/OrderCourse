@@ -93,8 +93,8 @@
     if (course.Topic.length == 0) {
         self.topicBgH.constant = self.timeTopicMargin.constant = 0;
     } else {
-        self.topicBgH.constant = 35;
-        self.timeTopicMargin.constant = 10;
+        self.topicBgH.constant = 25;
+        self.timeTopicMargin.constant = 5;
         self.topicLabel.text = [NSString stringWithFormat:@"Topic:%@", course.Topic];
     }
     // 时间是否冲突

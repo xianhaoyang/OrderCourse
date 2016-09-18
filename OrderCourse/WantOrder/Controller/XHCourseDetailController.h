@@ -9,8 +9,13 @@
 #import <UIKit/UIKit.h>
 @class XHCourse;
 
+typedef NS_ENUM(NSUInteger, XHFromControllerType) {
+    XHFromControllerTypeWantOrder = 0,
+    XHFromControllerTypeOrderRecord = 1,
+};
 @interface XHCourseDetailController : UIViewController
 
 @property (nonatomic, strong) XHCourse *course;
+@property (nonatomic, assign) XHFromControllerType fromControllerType;
 
 @end

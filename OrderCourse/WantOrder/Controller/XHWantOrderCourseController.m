@@ -309,7 +309,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //XHLog(@"%s", __func__);
-    return self.checkImage1.isHidden == NO ? 105 : 150;
+    return self.checkImage1.isHidden == NO ? 90 : 120;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -325,6 +325,7 @@
     }
     XHLog(@"CourseGuid : %@, %@", course.CourseGuid, course.BeginTime);
     detailController.course = course;
+    detailController.fromControllerType = XHFromControllerTypeWantOrder;
     // 此处一定需要这句话，因为用户可能在课程详情里预定课程，而在加入数组方法里有self.course.BeginTime取出课程开始时间，而此时的self.course是XHOrderCourseCellDelegate里取到的course，所以此处要覆盖
     self.course = course;
     [self.navigationController pushViewController:detailController animated:YES];
@@ -398,8 +399,11 @@
                 XHLog(@"订课成功:%@", responseObject);
                 [MBProgressHUD hideHUD];
                 if ([responseObject[@"state"] integerValue] == 1) {
-                    self.course.Reserved = YES;
                     [MBProgressHUD showSuccess:@"预定成功!"];
+                    // 修改此课程订课状态
+                    self.course.Reserved = YES;
+                    // 订课人数+1
+                    self.course.OrderNumber = [NSString stringWithFormat:@"%zd", [self.course.OrderNumber integerValue] + 1];
                     // 修改时间是否冲突状态
                     [self findSameTimeCourseWithArray:self.privateList targetValue:YES];
                     [self findSameTimeCourseWithArray:self.solonList targetValue:YES];
@@ -506,8 +510,9 @@
 {
     for (XHCourse *course in targetList) {
         if ([course.CourseGuid isEqualToString:courseID]) {
-            self.course = course;
             course.Reserved = NO;
+            course.OrderNumber = [NSString stringWithFormat:@"%zd", [self.course.OrderNumber integerValue] - 1];
+            self.course = course;
             break;
         }
     }
