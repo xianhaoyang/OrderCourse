@@ -29,5 +29,3 @@ NSString *const kCancelCourseSuccessNotification = @"kCancelCourseSuccessNotific
 NSString *const kCancelCourseIDKey = @"kCancelCourseIDKey";
 NSString *const kCancelCourseTypeKey = @"kCancelCourseTypeKey";
 NSString *const kOrderCourseSuccessNotification = @"kOrderCourseSuccessNotification";
-
-
