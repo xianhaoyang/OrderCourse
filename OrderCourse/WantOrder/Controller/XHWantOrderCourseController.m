@@ -511,7 +511,9 @@
     for (XHCourse *course in targetList) {
         if ([course.CourseGuid isEqualToString:courseID]) {
             course.Reserved = NO;
-            course.OrderNumber = [NSString stringWithFormat:@"%zd", [self.course.OrderNumber integerValue] - 1];
+            if ([course.OrderNumber integerValue] > 0) {
+                course.OrderNumber = [NSString stringWithFormat:@"%zd", [self.course.OrderNumber integerValue] - 1];
+            }
             self.course = course;
             break;
         }

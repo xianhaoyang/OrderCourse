@@ -18,7 +18,7 @@
 
 #define kOrderIDLength 36
 #define kCourseIDLength kOrderIDLength
-#define kListCount     10
+#define kListCount     20
 
 @interface XHOrderRecordController () <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, XHRecordCellDelegate>
 
